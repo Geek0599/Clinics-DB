@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Frame 9</title>
+    <defs>
+        <path d="M12,0 C18.627417,-1.77635684e-15 24,5.372583 24,12 C24,18.627417 18.627417,24 12,24 C5.372583,24 0,18.627417 0,12 C0,5.372583 5.372583,0 12,0 Z" id="path-1"></path>
+    </defs>
+    <g id="Frame-9" stroke="none" fill="none" opacity="0.5" transform="translate(0, 0)" xlink:href="#path-1" fill-rule="evenodd">
+        <g id="Logo/X(Twitter)/_Black-Square" stroke-width="1">
+            <g id="Blue-Square">
+                <rect id="Background" fill="#000000" x="0" y="0" width="24" height="24"></rect>
+                <g id="s/Twitter/White" transform="translate(5.1429, 5.1429)" fill="#FFFFFF">
+                    <g id="X_logo_2023" transform="translate(1.7143, 2.1429)">
+                        <path d="M8.26,0 L9.87,0 L6.335,4.0010543 L10.465,9.42857143 L7.224,9.42857143 L4.6865,6.13031102 L1.7815,9.42857143 L0.1715,9.42857143 L3.9165,5.14918292 L-0.0385,0 L3.283,0 L5.5755,3.01296784 L8.26,0 Z M7.6965,8.48919346 L8.589,8.48919346 L2.814,0.904586189 L1.855,0.904586189 L7.6965,8.48919346 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+        <rect id="Rectangle-9" fill="#4A60B2" style="mix-blend-mode: color;" x="0" y="0" width="24" height="24"></rect>
+    </g>
+</svg>

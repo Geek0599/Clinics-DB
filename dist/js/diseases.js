@@ -3917,10 +3917,20 @@
     }
     function scrollToBlock() {
         const btns = document.querySelectorAll("[data-go-to]");
-        if (btns.length > 0) btns.forEach((btn => {
-            btn.addEventListener("click", (e => {
+        if (btns.length > 0) {
+            btns.forEach((btn => {
+                btn.addEventListener("click", (e => {
+                    handleGoTo(e, btn);
+                }));
+                btn.addEventListener("keydown", (e => {
+                    if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        handleGoTo(e, btn);
+                    }
+                }));
+            }));
+            function handleGoTo(e, btn) {
                 const params = btn.dataset.goTo.split(",");
-                console.log(params[0]);
                 const isMobileHeader = false;
                 const offsetTop = params[1] && params[2] && window.innerWidth <= 479.98 ? params[2] : params[1] ? params[1] : 20;
                 const speed = params[3] ? params[3] : 500;
@@ -3930,8 +3940,8 @@
                     offsetTop,
                     speed
                 });
-            }));
-        }));
+            }
+        }
     }
     function mobilePlaceholder(breakpoint = 479.98) {
         const inputs = document.querySelectorAll("[data-mobile-placeholder]");

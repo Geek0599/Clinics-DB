@@ -59,7 +59,7 @@
 			font-style: normal
 		}
 	</style>
-	<link rel="stylesheet" href="css/homepage.min.css?_v=20251127170349">
+	<link rel="stylesheet" href="css/homepage.min.css?_v=20251127230043">
 </head>
 
 <body>
@@ -103,9 +103,11 @@
 					</div>
 				</div>
 				<picture>
-					<source type="image/webp" srcset="img/backgrounds/main-bg-mobile.webp, img/backgrounds/main-bg-mobile@2x.webp 2x" media="(max-width: 600px)">
+					<source type="image/webp" srcset="img/backgrounds/main-bg-mobile.webp, img/backgrounds/main-bg-mobile@2x.webp 2x" media="(max-width: 490)">
+					<source type="image/webp" srcset="img/backgrounds/main-bg-tablet.webp, img/backgrounds/main-bg-tablet@2x.webp 2x" media="(max-width: 600px)">
 					<source type="image/webp" srcset="img/backgrounds/main-bg.webp, img/backgrounds/main-bg@2x.webp 2x" media="(min-width: 601px)">
-					<source srcset="img/backgrounds/main-bg-mobile.png, img/backgrounds/main-bg-mobile@2x.png 2x" media="(max-width: 600px)">
+					<source srcset="img/backgrounds/main-bg-mobile.png, img/backgrounds/main-bg-mobile@2x.png 2x" media="(max-width: 490px)">
+					<source srcset="img/backgrounds/main-bg-tablet.png, img/backgrounds/main-bg-tablet@2x.png 2x" media="(max-width: 600px)">
 					<source srcset="img/backgrounds/main-bg.png, img/backgrounds/main-bg@2x.png 2x" media="(min-width: 601px)"> <img class="w-full__img-bg" width="1888" height="613" src="img/backgrounds/main-bg.png" alt="main background" loading="eager" decoding="async">
 				</picture>
 			</section>
@@ -147,6 +149,10 @@
 										<div class="action-card__img-ibg"> <img width="64" height="64" loading="lazy" decoding="async" src="img/treatment/rejuvenation.svg" alt="Омоложение"> </div>
 										<div class="action-card__title text text--semibold text-center">Омоложение</div>
 									</a> </li>
+								<li class="catalog-nav-action__item"> <a href="#" class="action-card action-card--vertical action-card--target">
+										<div class="action-card__img-ibg"> <img width="32" height="32" loading="lazy" decoding="async" src="img/icons/grid-dotts.svg" alt="grid dotts"> </div>
+										<div class="action-card__title text text--semibold text-center">Все <br> направления</div>
+									</a> </li>
 							</ul> <a href="#" class="catalog-nav-action__link-all title-sm _icon-arrow-right">Все направления</a>
 						</div>
 						<div class="catalog-nav-actions__column catalog-nav-action">
@@ -183,6 +189,10 @@
 								<li class="catalog-nav-action__item"> <a href="#" class="action-card action-card--vertical">
 										<div class="action-card__img-ibg action-card__img-ibg--round"> <img width="64" height="64" loading="lazy" decoding="async" src="img/country-flags/tr.svg" alt="Турция флаг"> </div>
 										<div class="action-card__title text text--semibold text-center">Турция</div>
+									</a> </li>
+								<li class="catalog-nav-action__item"> <a href="#" class="action-card action-card--vertical action-card--target">
+										<div class="action-card__img-ibg"> <img width="32" height="32" loading="lazy" decoding="async" src="img/icons/grid-dotts.svg" alt="grid dotts"> </div>
+										<div class="action-card__title text text--semibold text-center">Все <br> cтраны</div>
 									</a> </li>
 							</ul> <a href="#" class="catalog-nav-action__link-all title-sm _icon-arrow-right">Все страны</a>
 						</div>
@@ -264,7 +274,14 @@
 								<div class="cta-section__img-ibg-contain"> <picture><source srcset="img/backgrounds/woman.webp, img/backgrounds/woman@2x.webp 2x" type="image/webp"><img width="161" height="240" loading="lazy" decoding="async" src="img/backgrounds/woman.png" srcset="img/backgrounds/woman@2x.png 2x" alt="Woman"></picture> </div>
 								<div class="cta-section__actions"> <a href="tel:+180034234234" class="cta-section__btn btn btn--lg btn--light">+1(800)342-342-34</a> <a href="#" class="cta-section__btn btn btn--lg btn--dark">Free Consultation</a> </div>
 							</div>
-							<div class="cta-section__img-ibg"> <picture><source srcset="img/backgrounds/abstraction-bg.webp" type="image/webp"><img width="1376" height="200" loading="lazy" decoding="async" src="img/backgrounds/abstraction-bg.png" alt="Abstraction background"></picture> </div>
+							<div class="cta-section__img-ibg">
+								<picture>
+									<source type="image/webp" srcset="img/backgrounds/abstraction-bg-mobile.webp," media="(max-width: 600px)">
+									<source type="image/webp" srcset="img/backgrounds/abstraction-bg.webp," media="(min-width: 601px)">
+									<source srcset="img/backgrounds/abstraction-bg-mobile.png," media="(max-width: 600px)">
+									<source srcset="img/backgrounds/abstraction-bg.png," media="(min-width: 601px)"> <img width="1376" height="200" loading="lazy" decoding="async" src="img/backgrounds/abstraction-bg.png" alt="Abstraction background">
+								</picture>
+							</div>
 						</div>
 					</div>
 				</section>
@@ -601,30 +618,37 @@
 					</div>
 				</section>
 				<section class="page__articles articles">
-					<div class="articles__container">
+					<div data-slider="articles" class="articles__container">
 						<h2 class="articles__title title">Новости</h2>
-						<ul class="articles__items">
-							<li class="articles__item"> <a href="#" class="article-card">
-									<div class="article-card__img-ibg"> <picture><source srcset="img/articles/article-1.webp" type="image/webp"><img width="308" height="308" loading="lazy" decoding="async" src="img/articles/article-1.png" alt="article-1"></picture> </div>
-									<div class="article-card__content">
-										<div class="article-card__date text text--semibold c-gray-x-dark">10 октября 2025</div>
-										<div class="article-card__title title-sm">В Израиле начали применять новую методику лечения артрита с помощью стволовых клеток</div>
-										<div class="article-card__text text">
-											<p>Исследователи сообщают о значительном снижении боли и воспаления у пациентов после курса терапии. Новая технология уже доступна в нескольких клиниках-партнёрах и показывает высокий уровень безопасности.</p>
-										</div>
-									</div>
-								</a> </li>
-							<li class="articles__item"> <a href="#" class="article-card">
-									<div class="article-card__img-ibg"> <picture><source srcset="img/articles/article-1.webp" type="image/webp"><img width="308" height="308" loading="lazy" decoding="async" src="img/articles/article-1.png" alt="article-1"></picture> </div>
-									<div class="article-card__content">
-										<div class="article-card__date text text--semibold c-gray-x-dark">4 октября 2025</div>
-										<div class="article-card__title title-sm">Платформа запустила онлайн-консультации с ведущими специалистами по регенеративной медицине</div>
-										<div class="article-card__text text">
-											<p>Теперь пользователи могут получить предварительную оценку состояния и рекомендации по лечению без необходимости выезда за границу. Услуга доступна на английском и украинском языках.</p>
-										</div>
-									</div>
-								</a> </li>
-						</ul> <a href="#" class="articles__btn-all btn btn--gray">Показать все</a>
+						<div class="articles__slider-body">
+							<div data-slider class="articles__slider swiper">
+								<ul class="articles__wrapper swiper-wrapper">
+									<li class="articles__slide swiper-slide"> <a href="#" class="article-card">
+											<div class="article-card__img-ibg"> <picture><source srcset="img/articles/article-1.webp" type="image/webp"><img width="308" height="308" loading="lazy" decoding="async" src="img/articles/article-1.png" alt="article-1"></picture> </div>
+											<div class="article-card__content">
+												<div class="article-card__date text text--semibold c-gray-x-dark">10 октября 2025</div>
+												<div class="article-card__title title-sm">В Израиле начали применять новую методику лечения артрита с помощью стволовых клеток</div>
+												<div class="article-card__text text">
+													<p>Исследователи сообщают о значительном снижении боли и воспаления у пациентов после курса терапии. Новая технология уже доступна в нескольких клиниках-партнёрах и показывает высокий уровень безопасности.</p>
+												</div>
+											</div>
+										</a> </li>
+									<li class="articles__slide swiper-slide"> <a href="#" class="article-card">
+											<div class="article-card__img-ibg"> <picture><source srcset="img/articles/article-1.webp" type="image/webp"><img width="308" height="308" loading="lazy" decoding="async" src="img/articles/article-1.png" alt="article-1"></picture> </div>
+											<div class="article-card__content">
+												<div class="article-card__date text text--semibold c-gray-x-dark">4 октября 2025</div>
+												<div class="article-card__title title-sm">Платформа запустила онлайн-консультации с ведущими специалистами по регенеративной медицине</div>
+												<div class="article-card__text text">
+													<p>Теперь пользователи могут получить предварительную оценку состояния и рекомендации по лечению без необходимости выезда за границу. Услуга доступна на английском и украинском языках. </p>
+												</div>
+											</div>
+										</a> </li>
+								</ul>
+							</div>
+						</div>
+						<div class="articles__actions">
+							<div data-slider-pagination class="articles__pagination slider-pagination"></div> <a href="#" class="articles__btn-all btn btn--gray">Показать все</a>
+						</div>
 					</div>
 				</section>
 				<section class="page__reviews-companies reviews-companies">
@@ -660,16 +684,16 @@
 						<div class="footer-menu__title title-sm">Соц сети</div>
 						<ul class="footer-menu__list">
 							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">
-									<div class="social-icon"> <img width="24" height="24" loading="lazy" decoding="async" src="img/icons/socials/facebook.svg" alt="facebook"> </div> Facebook
+									<div class="social-icon"> <img width="24" height="24" loading="lazy" decoding="async" src="img/icons/socials/facebook-fade.svg" alt="facebook"> </div> Facebook
 								</a> </li>
 							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">
-									<div class="social-icon"> <img width="24" height="24" loading="lazy" decoding="async" src="img/icons/socials/youtube.svg" alt="youtube"> </div> Youtube
+									<div class="social-icon"> <img width="24" height="24" loading="lazy" decoding="async" src="img/icons/socials/youtube-fade.svg" alt="youtube"> </div> Youtube
 								</a> </li>
 							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">
-									<div class="social-icon"> <img width="24" height="24" loading="lazy" decoding="async" src="img/icons/socials/instagram.svg" alt="instagram"> </div> Instagram
+									<div class="social-icon"> <img width="24" height="24" loading="lazy" decoding="async" src="img/icons/socials/instagram-fade.svg" alt="instagram"> </div> Instagram
 								</a> </li>
 							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">
-									<div class="social-icon"> <img width="24" height="24" loading="lazy" decoding="async" src="img/icons/socials/x.svg" alt="X (Twitter)"> </div> X (Twitter)
+									<div class="social-icon"> <img width="24" height="24" loading="lazy" decoding="async" src="img/icons/socials/x-fade.svg" alt="X (Twitter)"> </div> X (Twitter)
 								</a> </li>
 						</ul>
 					</div>
@@ -748,7 +772,7 @@
 			</div>
 		</footer>
 	</div>
-	<script async src="js/homepage.min.js?_v=20251127170349"></script>
+	<script async src="js/homepage.min.js?_v=20251127230043"></script>
 </body>
 
 </html>

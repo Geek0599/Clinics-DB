@@ -3892,6 +3892,39 @@
             });
         }
     }
+    function init_ArticlesSlider() {
+        const sliderBlock = document.querySelector('[data-slider="articles"]');
+        if (sliderBlock) {
+            const slider = sliderBlock.querySelector(`[data-slider]`);
+            const sliderPagination = sliderBlock.querySelector("[data-slider-pagination]");
+            if (slider) new swiper_core_Swiper(slider, {
+                modules: [ pagination_Pagination ],
+                slidesPerView: 2,
+                spaceBetween: 16,
+                speed: 600,
+                lazy: true,
+                pagination: {
+                    el: sliderPagination,
+                    clickable: true
+                },
+                breakpoints: {
+                    320: {
+                        slidesPerView: 1,
+                        spaceBetween: 3
+                    },
+                    490: {
+                        slidesPerView: 1,
+                        spaceBetween: 8
+                    },
+                    1250: {
+                        slidesPerView: 2,
+                        spaceBetween: 16
+                    }
+                },
+                on: {}
+            });
+        }
+    }
     function mobilePlaceholder(breakpoint = 479.98) {
         const inputs = document.querySelectorAll("[data-mobile-placeholder]");
         if (!inputs.length) return;
@@ -3909,5 +3942,6 @@
     }
     init_CatalogActionsSlider();
     init_ReviewsSlider();
+    init_ArticlesSlider();
     mobilePlaceholder();
 })();

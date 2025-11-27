@@ -11780,21 +11780,23 @@
         function init_InputMask() {
             const selector = document.querySelector("[data-phone-mask]");
             if (!selector) return;
+            const mask = selector.getAttribute("data-phone-mask");
+            if (!mask) return;
             inputmask_es6({
-                mask: "+1 999-999-9999",
+                mask,
                 clearMaskOnLostFocus: true,
                 showMaskOnFocus: true,
                 showMaskOnHover: false
             }).mask(selector);
-            function updateState() {
-                if (selector.value === "") selector.setAttribute("placeholder", "");
-            }
             selector.addEventListener("input", updateState);
             selector.addEventListener("blur", updateState);
             selector.addEventListener("focus", (() => {
                 selector.focus();
                 setTimeout((() => selector.click()), 300);
             }));
+            function updateState() {
+                if (selector.value === "") selector.setAttribute("placeholder", " ");
+            }
         }
         function gotoBlock({noHeader = false, targetBlock, offsetTop = 0, speed = 500}) {
             const targetBlockElement = document.querySelector(targetBlock);
@@ -12000,13 +12002,23 @@
                             return isError = true;
                         }
                     }
-                    if (input.hasAttribute("data-text-format")) if (!/^[a-zA-Z\s]+$/.test(value)) {
-                        showTextNotice({
-                            input,
-                            text: `Only ${/[а-яА-Я]/.test(value) ? "Latin" : ""} letters are allowed`,
-                            isTextNotice
-                        });
-                        return isError = true;
+                    if (input.hasAttribute("data-text-format")) {
+                        const format = input.getAttribute("data-text-format");
+                        const isLatinOnly = format === "latin";
+                        const REGEX = {
+                            latin: /^[a-zA-Z\s]+$/,
+                            all: /^[a-zA-Zа-яА-ЯёЁїЇіІєЄґҐ\s]+$/
+                        };
+                        const regex = isLatinOnly ? REGEX.latin : REGEX.all;
+                        const message = isLatinOnly ? "Only Latin letters are allowed" : "Only letters are allowed";
+                        if (!regex.test(value)) {
+                            showTextNotice({
+                                input,
+                                text: message,
+                                isTextNotice
+                            });
+                            return isError = true;
+                        }
                     }
                     if (input.type === "email") if (value !== "" && !isEmailValid(input)) {
                         showTextNotice({
@@ -12196,10 +12208,20 @@
         }
         function scrollToBlock() {
             const btns = document.querySelectorAll("[data-go-to]");
-            if (btns.length > 0) btns.forEach((btn => {
-                btn.addEventListener("click", (e => {
+            if (btns.length > 0) {
+                btns.forEach((btn => {
+                    btn.addEventListener("click", (e => {
+                        handleGoTo(e, btn);
+                    }));
+                    btn.addEventListener("keydown", (e => {
+                        if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            handleGoTo(e, btn);
+                        }
+                    }));
+                }));
+                function handleGoTo(e, btn) {
                     const params = btn.dataset.goTo.split(",");
-                    console.log(params[0]);
                     const isMobileHeader = false;
                     const offsetTop = params[1] && params[2] && window.innerWidth <= 479.98 ? params[2] : params[1] ? params[1] : 20;
                     const speed = params[3] ? params[3] : 500;
@@ -12209,8 +12231,8 @@
                         offsetTop,
                         speed
                     });
-                }));
-            }));
+                }
+            }
         }
         init_ProductCardsSlider();
         init_ProductReviewsSlider();
