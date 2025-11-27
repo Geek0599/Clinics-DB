@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="47px" height="24px" viewBox="0 0 47 24" version="1.1"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>Path</title>
+	<g id="UI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+		<g id="Frame" transform="translate(-1164, -887)" fill="currentColor">
+			<path d="M1164,887 L1211,887 C1204.09919,887 1198.25056,892.078768 1197.28302,898.911418 C1196.64719,903.401566 1197.6362,907.431093 1200.25006,911 C1192.14182,908.317813 1185.10872,902.821247 1179.15076,894.5103 L1179.15026,894.51066 C1175.7699,889.796593 1170.32487,887.00053 1164.52406,887 L1164,887 L1164,887 Z" id="Path"></path>
+		</g>
+	</g>
+</svg>

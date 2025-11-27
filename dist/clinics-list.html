@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Clinics List</title>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="favicon.ico">
+	<meta name="robots" content="noindex, nofollow">
+	<link rel="preload" href="./fonts/VelaSans-Bold.woff2" as="font" type="font/woff2">
+	<link rel="preload" href="./fonts/VelaSans-Bold.woff" as="font" type="font/woff">
+	<link rel="preload" href="./fonts/VelaSans-ExtraBold.woff2" as="font" type="font/woff2">
+	<link rel="preload" href="./fonts/VelaSans-ExtraBold.woff" as="font" type="font/woff">
+	<link rel="preload" href="./fonts/VelaSans-Medium.woff2" as="font" type="font/woff2">
+	<link rel="preload" href="./fonts/VelaSans-Medium.woff" as="font" type="font/woff">
+	<link rel="preload" href="./fonts/VelaSans-SemiBold.woff2" as="font" type="font/woff2">
+	<link rel="preload" href="./fonts/VelaSans-SemiBold.woff" as="font" type="font/woff">
+	<link rel="preload" href="./fonts/icons.woff2" as="font" type="font/woff2">
+	<link rel="preload" href="./fonts/icons.woff" as="font" type="font/woff">
+	<style>
+		@font-face {
+			font-family: VelaSans;
+			font-display: swap;
+			src: url("./fonts/VelaSans-Bold.woff2") format("woff2"), url("./fonts/VelaSans-Bold.woff") format("woff");
+			font-weight: 700;
+			font-style: normal
+		}
+
+		@font-face {
+			font-family: VelaSans;
+			font-display: swap;
+			src: url("./fonts/VelaSans-ExtraBold.woff2") format("woff2"), url("./fonts/VelaSans-ExtraBold.woff") format("woff");
+			font-weight: 800;
+			font-style: normal
+		}
+
+		@font-face {
+			font-family: VelaSans;
+			font-display: swap;
+			src: url("./fonts/VelaSans-Medium.woff2") format("woff2"), url("./fonts/VelaSans-Medium.woff") format("woff");
+			font-weight: 500;
+			font-style: normal
+		}
+
+		@font-face {
+			font-family: VelaSans;
+			font-display: swap;
+			src: url("./fonts/VelaSans-SemiBold.woff2") format("woff2"), url("./fonts/VelaSans-SemiBold.woff") format("woff");
+			font-weight: 600;
+			font-style: normal
+		}
+
+		@font-face {
+			font-family: icons;
+			font-display: swap;
+			src: url("./fonts/icons.woff2") format("woff2"), url("./fonts/icons.woff") format("woff");
+			font-weight: 400;
+			font-style: normal
+		}
+	</style>
+	<link rel="stylesheet" href="css/clinics-list.min.css?_v=20251127162127">
+</head>
+
+<body>
+	<div class="wrapper">
+		<main class="page">
+			<section class="page__main main w-full w-full--bg">
+				<header class="header">
+					<div class="header__wrapper">
+						<div class="header__container">
+							<div class="header__body"> <a href="#" class="header__logo logo"> <img class="img" width="149" height="64" fetchpriority="high" loading="eager" decoding="async" src="img/logo/logo.svg" alt="Stem-Health logo"> </a>
+								<nav data-da=".menu-icon__menu, 1600" class="header__menu menu">
+									<ul class="menu__list">
+										<li class="menu__item"><a href="#" class="menu__link btn btn--light">Home</a></li>
+										<li class="menu__item"><a href="#" class="menu__link btn btn--light">Clinics</a></li>
+										<li class="menu__item"><a href="#" class="menu__link btn btn--light">Treatments</a></li>
+										<li class="menu__item"><a href="#" class="menu__link btn btn--light">Diseases</a></li>
+										<li class="menu__item"><a href="#" class="menu__link btn btn--light">Contacts</a></li>
+										<li class="menu__item"> <select id="lang-select" class="menu__link btn btn--light">
+												<option selected="selected" value="en">EN</option>
+												<option value="ua">UA</option>
+												<option value="ru">RU</option>
+											</select> </li>
+									</ul>
+								</nav>
+								<div data-da=".menu-icon__menu, 850" class="header__actions actions-header"> <a href="tel:+180034234234" class="actions-header__btn btn btn--light">+1(800)342-342-34</a> <a href="#" class="actions-header__btn btn btn--dark">Free Consultation</a> </div>
+								<div class="header__menu-icon menu-icon"> <button aria-label="Open menu" type="button" class="menu-icon__icon icon-menu"><span></span></button>
+									<div class="menu-icon__menu"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</header>
+				<div class="main__container">
+					<div class="main__breadcrumbs breadcrumbs">
+						<ul class="breadcrumbs__list">
+							<li class="breadcrumbs__item"> <a href="#" class="breadcrumbs__link"><span>Главная страница</span></a> </li>
+							<li class="breadcrumbs__item"> <span class="breadcrumbs__link breadcrumbs__link--current">База клиник</span> </li>
+						</ul>
+					</div>
+					<h1 class="main__title main-title">База клиник</h1>
+					<div class="main__search main-search">
+						<form action="#" class="main-search__body _icon-search"> <input required placeholder="Найдите клинику по названию или направлению…" data-mobile-placeholder="Название или направление..." name="q" type="text" class="main-search__input"> <button type="submit" class="main-search__btn btn btn--pink">Найти</button> </form>
+					</div>
+				</div>
+			</section>
+			<div class="page__sections-padding">
+				<div class="page__catalog catalog">
+					<div class="catalog__container">
+						<div class="catalog__body">
+							<div class="catalog__filter filter-catalog">
+								<div data-active-filters-head class="filter-catalog__head hidden">
+									<div class="filter-catalog__row">
+										<div class="filter-catalog__title title-sm">Активные фильтры</div> <button data-filter-reset class="filter-catalog__btn-reset text text--semibold c-pink">Сбросить</button>
+									</div>
+									<div data-active-filters-container class="filter-catalog__active-filters"> </div>
+								</div>
+								<div data-spollers class="filter-catalog__items">
+									<div data-filter-group class="filter-catalog__item item-filter-catalog"> <button data-spoller class="item-filter-catalog__title-btn title-sm _icon-arrow-down _spoller-active">Тип клиники</button>
+										<ul class="item-filter-catalog__items">
+											<li class="item-filter-catalog__item"> <label class="item-filter-catalog__radio radio-item"> <input checked="checked" type="radio" name="type_clinic" value="Все клиники"> <span>Все клиники</span> </label> </li>
+											<li class="item-filter-catalog__item"> <label class="item-filter-catalog__radio radio-item"> <input type="radio" name="type_clinic" value="Партнерские"> <span>Партнерские</span> </label> </li>
+										</ul>
+									</div>
+									<div data-filter-group class="filter-catalog__item item-filter-catalog"> <button data-spoller class="item-filter-catalog__title-btn title-sm _icon-arrow-down _spoller-active">Направление</button>
+										<ul class="item-filter-catalog__items">
+											<li class="item-filter-catalog__item"> <label class="item-filter-catalog__checkbox checkbox-item"> <input name="treatment" value="Неврология" type="checkbox"> <span>Неврология</span> <img class="checkbox-item__image" width="16" height="16" loading="lazy" decoding="async" src="img/treatment/nevrologia.svg" alt="Nevrologia"> </label> </li>
+											<li class="item-filter-catalog__item"> <label class="item-filter-catalog__checkbox checkbox-item"> <input name="treatment" value="Ортопедия" type="checkbox"> <span>Ортопедия</span> <img class="checkbox-item__image" width="16" height="16" loading="lazy" decoding="async" src="img/treatment/ortopedia.svg" alt="Ortopedia"> </label> </li>
+											<li class="item-filter-catalog__item"> <label class="item-filter-catalog__checkbox checkbox-item"> <input name="treatment" value="Кардиология" type="checkbox"> <span>Кардиология</span> <img class="checkbox-item__image" width="16" height="16" loading="lazy" decoding="async" src="img/treatment/cardiologia.svg" alt="Cardiologia"> </label> </li>
+											<li class="item-filter-catalog__item"> <label class="item-filter-catalog__checkbox checkbox-item"> <input name="treatment" value="Эстетическая медицина" type="checkbox"> <span>Эстетическая медицина</span> <img class="checkbox-item__image" width="16" height="16" loading="lazy" decoding="async" src="img/treatment/aesthetic.svg" alt="Aesthetic"> </label> </li>
+											<li class="item-filter-catalog__item"> <label class="item-filter-catalog__checkbox checkbox-item"> <input name="treatment" value="Патологии" type="checkbox"> <span>Патологии</span> <img class="checkbox-item__image" width="16" height="16" loading="lazy" decoding="async" src="img/treatment/pathologie.svg" alt="Pathologie"> </label> </li>
+											<li class="item-filter-catalog__item"> <label class="item-filter-catalog__checkbox checkbox-item"> <input name="treatment" value="Аутоимунные заболевания" type="checkbox"> <span>Аутоимунные заболевания</span> <img class="checkbox-item__image" width="16" height="16" loading="lazy" decoding="async" src="img/treatment/autoimmune.svg" alt="Autoimmune"> </label> </li>
+										</ul>
+									</div>
+									<div data-filter-group class="filter-catalog__item item-filter-catalog"> <button data-spoller class="item-filter-catalog__title-btn title-sm _icon-arrow-down _spoller-active">Страна</button>
+										<ul class="item-filter-catalog__items">
+											<li class="item-filter-catalog__item"> <label class="item-filter-catalog__radio radio-item"> <input checked="checked" type="radio" name="country" value="All"> <span>Все страны</span> </label> </li>
+											<li class="item-filter-catalog__item"> <label class="item-filter-catalog__checkbox checkbox-item"> <input name="country" value="Германия" type="checkbox"> <span>Германия</span> </label> </li>
+											<li class="item-filter-catalog__item"> <label class="item-filter-catalog__checkbox checkbox-item"> <input name="country" value="Великобритания" type="checkbox"> <span>Великобритания</span> </label> </li>
+											<li class="item-filter-catalog__item"> <label class="item-filter-catalog__checkbox checkbox-item"> <input name="country" value="Италия" type="checkbox"> <span>Италия</span> </label> </li>
+											<li class="item-filter-catalog__item"> <label class="item-filter-catalog__checkbox checkbox-item"> <input name="country" value="Франция" type="checkbox"> <span>Франция</span> </label> </li>
+											<li class="item-filter-catalog__item"> <label class="item-filter-catalog__checkbox checkbox-item"> <input name="country" value="США" type="checkbox"> <span>США</span> </label> </li>
+											<li class="item-filter-catalog__item"> <label class="item-filter-catalog__checkbox checkbox-item"> <input name="country" value="Швеция" type="checkbox"> <span>Швеция</span> </label> </li>
+										</ul>
+									</div>
+									<div data-filter-group class="filter-catalog__item item-filter-catalog"> <button data-spoller class="item-filter-catalog__title-btn title-sm _icon-arrow-down _spoller-active">Все города</button>
+										<ul class="item-filter-catalog__items">
+											<li class="item-filter-catalog__item"> <label class="item-filter-catalog__radio radio-item"> <input checked="checked" type="radio" name="city" value="All"> <span>Все города</span> </label> </li>
+											<li class="item-filter-catalog__item"> <label class="item-filter-catalog__checkbox checkbox-item"> <input name="city" value="Мюнхен" type="checkbox"> <span>Мюнхен</span> </label> </li>
+											<li class="item-filter-catalog__item"> <label class="item-filter-catalog__checkbox checkbox-item"> <input name="city" value="Берлин" type="checkbox"> <span>Берлин</span> </label> </li>
+											<li class="item-filter-catalog__item"> <label class="item-filter-catalog__checkbox checkbox-item"> <input name="city" value="Франкфурт" type="checkbox"> <span>Франкфурт</span> </label> </li>
+											<li class="item-filter-catalog__item"> <label class="item-filter-catalog__checkbox checkbox-item"> <input name="city" value="Лондон" type="checkbox"> <span>Лондон</span> </label> </li>
+											<li class="item-filter-catalog__item"> <label class="item-filter-catalog__checkbox checkbox-item"> <input name="city" value="Бирмингем" type="checkbox"> <span>Бирмингем</span> </label> </li>
+											<li class="item-filter-catalog__item"> <label class="item-filter-catalog__checkbox checkbox-item"> <input name="city" value="Манчестер" type="checkbox"> <span>Манчестер</span> </label> </li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="catalog__content catalog-content">
+								<div class="catalog-content__title title-sm">Нашлось 23 клиники</div>
+								<div class="catalog-content__actions catalog-content-actions">
+									<div class="catalog-content-actions__view-controlls"> <button data-btn-layout="grid" aria-label="Grid layout" class="catalog-content-actions__view-controll-btn _icon-grid _active"></button> <button data-btn-layout="row" aria-label="Row layout" class="catalog-content-actions__view-controll-btn _icon-row-lines"></button> </div> <select name="sort-by" class="catalog-content-actions__select btn btn--select-ic btn--gray btn--sm">
+										<option value="По рейтингу">По рейтингу</option>
+										<option value="По рейтингу">По алфавиту</option>
+									</select>
+								</div>
+								<div data-content-layout class="catalog-content__products">
+									<div class="product-card product-card--active">
+										<div data-slider="product-card" class="product-card__images">
+											<div data-slider class="product-card__slider swiper">
+												<div class="product-card__wrapper swiper-wrapper">
+													<div class="product-card__slide-img-ibg swiper-slide"> <picture><source srcset="img/clinics/clinic-1.webp" type="image/webp"><img width="303" height="268" loading="lazy" decoding="async" src="img/clinics/clinic-1.png" alt="clinic"></picture> </div>
+													<div class="product-card__slide-img-ibg swiper-slide"> <picture><source srcset="img/clinics/clinic-2.webp" type="image/webp"><img width="303" height="268" loading="lazy" decoding="async" src="img/clinics/clinic-2.png" alt="clinic"></picture> </div>
+													<div class="product-card__slide-img-ibg swiper-slide"> <picture><source srcset="img/clinics/clinic-3.webp" type="image/webp"><img width="303" height="268" loading="lazy" decoding="async" src="img/clinics/clinic-3.png" alt="clinic"></picture> </div>
+												</div>
+											</div>
+											<div data-slider-pagination class="product-card__slider-pagination slider-pagination slider-pagination--sm slider-pagination--light"> </div>
+										</div>
+										<div class="product-card__content"> <strong class="product-card__label title-marked">TOП КЛИНИКА</strong>
+											<div class="product-card__row">
+												<div role="img" class="product-card__rating rating" data-rating="4.5" aria-label="Rating: 4.5 out of 5">
+													<div class="rating__value text text--semibold">4.5</div>
+													<div class="rating__body">
+														<div class="rating__active">
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+														</div>
+														<div class="rating__items">
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+														</div>
+													</div>
+												</div>
+												<div class="product-card__location location-point text text--semibold">
+													<div class="location-point__icon"> <img width="16" height="16" loading="lazy" decoding="async" src="img/country-flags/de.svg" alt="de flag"> </div> Германия, Гамбург
+												</div>
+											</div> <a href="#" class="product-card__title title-md">Medipol Mega University Hospital</a>
+											<div class="product-card__text text text--lh">
+												<p>Каталог медицинских центров, специализирующихся гна стволовых клетках и инновационных методах терапии. От первого запроса до возвращения домой — мы помогаем с организацией лечения, перелётов, проживания и переводов.</p>
+											</div>
+											<div class="product-card__actions"> <a href="#" class="product-card__btn btn btn--sm btn--dark">Консультация</a> <a href="#" class="product-card__btn btn btn--sm btn--gray">Детали</a> </div>
+										</div>
+									</div>
+									<div class="product-card">
+										<div data-slider="product-card" class="product-card__images">
+											<div data-slider class="product-card__slider swiper">
+												<div class="product-card__wrapper swiper-wrapper">
+													<div class="product-card__slide-img-ibg swiper-slide"> <picture><source srcset="img/clinics/clinic-3.webp" type="image/webp"><img width="303" height="268" loading="lazy" decoding="async" src="img/clinics/clinic-3.png" alt="clinic"></picture> </div>
+													<div class="product-card__slide-img-ibg swiper-slide"> <picture><source srcset="img/clinics/clinic-2.webp" type="image/webp"><img width="303" height="268" loading="lazy" decoding="async" src="img/clinics/clinic-2.png" alt="clinic"></picture> </div>
+													<div class="product-card__slide-img-ibg swiper-slide"> <picture><source srcset="img/clinics/clinic-1.webp" type="image/webp"><img width="303" height="268" loading="lazy" decoding="async" src="img/clinics/clinic-1.png" alt="clinic"></picture> </div>
+												</div>
+											</div>
+											<div data-slider-pagination class="product-card__slider-pagination slider-pagination slider-pagination--sm slider-pagination--light"> </div>
+										</div>
+										<div class="product-card__content">
+											<div class="product-card__row">
+												<div role="img" class="product-card__rating rating" data-rating="4.5" aria-label="Rating: 4.5 out of 5">
+													<div class="rating__value text text--semibold">4.5</div>
+													<div class="rating__body">
+														<div class="rating__active">
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+														</div>
+														<div class="rating__items">
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+														</div>
+													</div>
+												</div>
+												<div class="product-card__location location-point text text--semibold">
+													<div class="location-point__icon"> <img width="16" height="16" loading="lazy" decoding="async" src="img/country-flags/de.svg" alt="de flag"> </div> Германия, Гамбург
+												</div>
+											</div> <a href="#" class="product-card__title title-md">Medical Center in Solingen</a>
+											<div class="product-card__text text text--lh">
+												<p>Solingen Municipal Hospital/Academic Hospital of the University of Cologne is among top clinics in Germany according to Focus magazine - one of the most widely circulated German editions. Städtisches Klinikum Solingen is a certified medical institution treating. Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi repellat hic eveniet quo ad assumenda, necessitatibus obcaecati. Facere omnis assumenda molestiae architecto. Aut in quis corporis consequuntur sint porro sit.</p>
+											</div>
+											<div class="product-card__actions"> <a href="#" class="product-card__btn btn btn--sm btn--dark">Консультация</a> <a href="#" class="product-card__btn btn btn--sm btn--gray">Детали</a> </div>
+										</div>
+									</div>
+									<div class="product-card">
+										<div data-slider="product-card" class="product-card__images">
+											<div data-slider class="product-card__slider swiper">
+												<div class="product-card__wrapper swiper-wrapper">
+													<div class="product-card__slide-img-ibg swiper-slide"> <picture><source srcset="img/clinics/clinic-1.webp" type="image/webp"><img width="303" height="268" loading="lazy" decoding="async" src="img/clinics/clinic-1.png" alt="clinic"></picture> </div>
+													<div class="product-card__slide-img-ibg swiper-slide"> <picture><source srcset="img/clinics/clinic-2.webp" type="image/webp"><img width="303" height="268" loading="lazy" decoding="async" src="img/clinics/clinic-2.png" alt="clinic"></picture> </div>
+													<div class="product-card__slide-img-ibg swiper-slide"> <picture><source srcset="img/clinics/clinic-3.webp" type="image/webp"><img width="303" height="268" loading="lazy" decoding="async" src="img/clinics/clinic-3.png" alt="clinic"></picture> </div>
+												</div>
+											</div>
+											<div data-slider-pagination class="product-card__slider-pagination slider-pagination slider-pagination--sm slider-pagination--light"> </div>
+										</div>
+										<div class="product-card__content">
+											<div class="product-card__row">
+												<div role="img" class="product-card__rating rating" data-rating="4.5" aria-label="Rating: 4.5 out of 5">
+													<div class="rating__value text text--semibold">4.5</div>
+													<div class="rating__body">
+														<div class="rating__active">
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+														</div>
+														<div class="rating__items">
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+														</div>
+													</div>
+												</div>
+												<div class="product-card__location location-point text text--semibold">
+													<div class="location-point__icon"> <img width="16" height="16" loading="lazy" decoding="async" src="img/country-flags/de.svg" alt="de flag"> </div> Германия, Гамбург
+												</div>
+											</div>
+											<div class="product-card__title title-md">Center of ophthalmology and eye surgery Dr. Wobbe and Рartners</div>
+											<div class="product-card__text text text--lh">
+												<p>Solingen Municipal Hospital/Academic Hospital of the University of Cologne is among top clinics in Germany according to Focus magazine - one of the most. Lorem ipsum dolor sit, amet consectetur adipisicing elit. At dolorem ut fugiat cumque saepe illum, ipsam facere recusandae ipsum cum!</p>
+											</div>
+											<div class="product-card__actions"> <a href="#" class="product-card__btn btn btn--sm btn--dark">Консультация</a> <a href="#" class="product-card__btn btn btn--sm btn--gray">Детали</a> </div>
+										</div>
+									</div>
+									<div class="product-card">
+										<div data-slider="product-card" class="product-card__images">
+											<div data-slider class="product-card__slider swiper">
+												<div class="product-card__wrapper swiper-wrapper">
+													<div class="product-card__slide-img-ibg swiper-slide"> <picture><source srcset="img/clinics/clinic-1.webp" type="image/webp"><img width="303" height="268" loading="lazy" decoding="async" src="img/clinics/clinic-1.png" alt="clinic"></picture> </div>
+													<div class="product-card__slide-img-ibg swiper-slide"> <picture><source srcset="img/clinics/clinic-2.webp" type="image/webp"><img width="303" height="268" loading="lazy" decoding="async" src="img/clinics/clinic-2.png" alt="clinic"></picture> </div>
+													<div class="product-card__slide-img-ibg swiper-slide"> <picture><source srcset="img/clinics/clinic-3.webp" type="image/webp"><img width="303" height="268" loading="lazy" decoding="async" src="img/clinics/clinic-3.png" alt="clinic"></picture> </div>
+												</div>
+											</div>
+											<div data-slider-pagination class="product-card__slider-pagination slider-pagination slider-pagination--sm slider-pagination--light"> </div>
+										</div>
+										<div class="product-card__content">
+											<div class="product-card__row">
+												<div role="img" class="product-card__rating rating" data-rating="4.5" aria-label="Rating: 4.5 out of 5">
+													<div class="rating__value text text--semibold">4.5</div>
+													<div class="rating__body">
+														<div class="rating__active">
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+														</div>
+														<div class="rating__items">
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+														</div>
+													</div>
+												</div>
+												<div class="product-card__location location-point text text--semibold">
+													<div class="location-point__icon"> <img width="16" height="16" loading="lazy" decoding="async" src="img/country-flags/de.svg" alt="de flag"> </div> Германия, Гамбург
+												</div>
+											</div> <a href="#" class="product-card__title title-md">Medical Center in Solingen</a>
+											<div class="product-card__text text text--lh">
+												<p>Solingen Municipal Hospital/Academic Hospital of the University of Cologne is among top clinics in Germany according to Focus magazine - one of the most widely circulated German editions.</p>
+											</div>
+											<div class="product-card__actions"> <a href="#" class="product-card__btn btn btn--sm btn--dark">Консультация</a> <a href="#" class="product-card__btn btn btn--sm btn--gray">Детали</a> </div>
+										</div>
+									</div>
+									<div class="product-card">
+										<div data-slider="product-card" class="product-card__images">
+											<div data-slider class="product-card__slider swiper">
+												<div class="product-card__wrapper swiper-wrapper">
+													<div class="product-card__slide-img-ibg swiper-slide"> <picture><source srcset="img/clinics/clinic-1.webp" type="image/webp"><img width="303" height="268" loading="lazy" decoding="async" src="img/clinics/clinic-1.png" alt="clinic"></picture> </div>
+													<div class="product-card__slide-img-ibg swiper-slide"> <picture><source srcset="img/clinics/clinic-2.webp" type="image/webp"><img width="303" height="268" loading="lazy" decoding="async" src="img/clinics/clinic-2.png" alt="clinic"></picture> </div>
+													<div class="product-card__slide-img-ibg swiper-slide"> <picture><source srcset="img/clinics/clinic-3.webp" type="image/webp"><img width="303" height="268" loading="lazy" decoding="async" src="img/clinics/clinic-3.png" alt="clinic"></picture> </div>
+												</div>
+											</div>
+											<div data-slider-pagination class="product-card__slider-pagination slider-pagination slider-pagination--sm slider-pagination--light"> </div>
+										</div>
+										<div class="product-card__content">
+											<div class="product-card__row">
+												<div role="img" class="product-card__rating rating" data-rating="4.5" aria-label="Rating: 4.5 out of 5">
+													<div class="rating__value text text--semibold">4.5</div>
+													<div class="rating__body">
+														<div class="rating__active">
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+														</div>
+														<div class="rating__items">
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+														</div>
+													</div>
+												</div>
+												<div class="product-card__location location-point text text--semibold">
+													<div class="location-point__icon"> <img width="16" height="16" loading="lazy" decoding="async" src="img/country-flags/de.svg" alt="de flag"> </div> Германия, Гамбург
+												</div>
+											</div> <a href="#" class="product-card__title title-md">Medical Center in Solingen</a>
+											<div class="product-card__text text text--lh">
+												<p>Solingen Municipal Hospital/Academic Hospital of the University of Cologne is among top clinics in Germany according to Focus magazine - one of the most widely circulated German editions. Städtisches Klinikum Solingen is a certified medical institution treating...</p>
+											</div>
+											<div class="product-card__actions"> <a href="#" class="product-card__btn btn btn--sm btn--dark">Консультация</a> <a href="#" class="product-card__btn btn btn--sm btn--gray">Детали</a> </div>
+										</div>
+									</div>
+									<div class="product-card">
+										<div data-slider="product-card" class="product-card__images">
+											<div data-slider class="product-card__slider swiper">
+												<div class="product-card__wrapper swiper-wrapper">
+													<div class="product-card__slide-img-ibg swiper-slide"> <picture><source srcset="img/clinics/clinic-1.webp" type="image/webp"><img width="303" height="268" loading="lazy" decoding="async" src="img/clinics/clinic-1.png" alt="clinic"></picture> </div>
+													<div class="product-card__slide-img-ibg swiper-slide"> <picture><source srcset="img/clinics/clinic-2.webp" type="image/webp"><img width="303" height="268" loading="lazy" decoding="async" src="img/clinics/clinic-2.png" alt="clinic"></picture> </div>
+													<div class="product-card__slide-img-ibg swiper-slide"> <picture><source srcset="img/clinics/clinic-3.webp" type="image/webp"><img width="303" height="268" loading="lazy" decoding="async" src="img/clinics/clinic-3.png" alt="clinic"></picture> </div>
+												</div>
+											</div>
+											<div data-slider-pagination class="product-card__slider-pagination slider-pagination slider-pagination--sm slider-pagination--light"> </div>
+										</div>
+										<div class="product-card__content">
+											<div class="product-card__row">
+												<div role="img" class="product-card__rating rating" data-rating="4.5" aria-label="Rating: 4.5 out of 5">
+													<div class="rating__value text text--semibold">4.5</div>
+													<div class="rating__body">
+														<div class="rating__active">
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+														</div>
+														<div class="rating__items">
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+														</div>
+													</div>
+												</div>
+												<div class="product-card__location location-point text text--semibold">
+													<div class="location-point__icon"> <img width="16" height="16" loading="lazy" decoding="async" src="img/country-flags/de.svg" alt="de flag"> </div> Германия, Гамбург
+												</div>
+											</div>
+											<div class="product-card__title title-md">Medical Center in Solingen</div>
+											<div class="product-card__text text text--lh">
+												<p>Solingen Municipal Hospital/Academic Hospital of the University of Cologne is among top clinics in Germany according to Focus magazine - one of the most widely circulated German editions. Städtisches Klinikum Solingen is a certified medical institution treating...</p>
+											</div>
+											<div class="product-card__actions"> <a href="#" class="product-card__btn btn btn--sm btn--dark">Консультация</a> <a href="#" class="product-card__btn btn btn--sm btn--gray">Детали</a> </div>
+										</div>
+									</div>
+									<div class="product-card">
+										<div data-slider="product-card" class="product-card__images">
+											<div data-slider class="product-card__slider swiper">
+												<div class="product-card__wrapper swiper-wrapper">
+													<div class="product-card__slide-img-ibg swiper-slide"> <picture><source srcset="img/clinics/clinic-1.webp" type="image/webp"><img width="303" height="268" loading="lazy" decoding="async" src="img/clinics/clinic-1.png" alt="clinic"></picture> </div>
+													<div class="product-card__slide-img-ibg swiper-slide"> <picture><source srcset="img/clinics/clinic-2.webp" type="image/webp"><img width="303" height="268" loading="lazy" decoding="async" src="img/clinics/clinic-2.png" alt="clinic"></picture> </div>
+													<div class="product-card__slide-img-ibg swiper-slide"> <picture><source srcset="img/clinics/clinic-3.webp" type="image/webp"><img width="303" height="268" loading="lazy" decoding="async" src="img/clinics/clinic-3.png" alt="clinic"></picture> </div>
+												</div>
+											</div>
+											<div data-slider-pagination class="product-card__slider-pagination slider-pagination slider-pagination--sm slider-pagination--light"> </div>
+										</div>
+										<div class="product-card__content">
+											<div class="product-card__row">
+												<div role="img" class="product-card__rating rating" data-rating="4.5" aria-label="Rating: 4.5 out of 5">
+													<div class="rating__value text text--semibold">4.5</div>
+													<div class="rating__body">
+														<div class="rating__active">
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+														</div>
+														<div class="rating__items">
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+															<div class="rating__item"></div>
+														</div>
+													</div>
+												</div>
+												<div class="product-card__location location-point text text--semibold">
+													<div class="location-point__icon"> <img width="16" height="16" loading="lazy" decoding="async" src="img/country-flags/de.svg" alt="de flag"> </div> Германия, Гамбург
+												</div>
+											</div> <a href="#" class="product-card__title title-md">Medical Center in Solingen</a>
+											<div class="product-card__text text text--lh">
+												<p>Solingen Municipal Hospital/Academic Hospital of the University of Cologne is among top clinics in Germany according to Focus magazine - one of the most widely circulated German editions. Städtisches Klinikum Solingen is a certified medical institution treating...</p>
+											</div>
+											<div class="product-card__actions"> <a href="#" class="product-card__btn btn btn--sm btn--dark">Консультация</a> <a href="#" class="product-card__btn btn btn--sm btn--gray">Детали</a> </div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="catalog__actions catalog-actions"> <button class="catalog-actions__btn btn btn--gray">Загрузить еще</button> <button class="catalog-actions__btn btn btn--gray btn--loader"> <img width="40" height="40" loading="lazy" decoding="async" src="img/icons/loader.svg" alt=""> </button>
+								<div class="catalog-actions__pagination pagination">
+									<div class="pagination__container pagination__container--no-padding"> <a href="#" class="pagination__arrow pagination__arrow--disabled pagination__arrow--left _icon-arrow-right">pagina precedente</a>
+										<ul class="pagination__list">
+											<li class="pagination__item">
+												<div class="pagination__link _active">1</div>
+											</li>
+											<li class="pagination__item"> <a href="#" class="pagination__link">2</a> </li>
+											<li class="pagination__item"> <a href="#" class="pagination__link">3</a> </li>
+										</ul> <a href="#" class="pagination__arrow pagination__arrow--right _icon-arrow-right">Pagina successiva</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="page__text-info text-info">
+					<div class="text-info__container">
+						<div class="text-info__text text c-gray">
+							<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget. </p>
+							<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget. </p>
+						</div>
+					</div>
+				</div>
+				<section class="page__cta-section cta-section">
+					<div class="cta-section__container">
+						<div class="cta-section__body">
+							<div class="cta-section__content">
+								<div class="cta-section__info">
+									<h2 class="cta-section__title title">Получите бесплатную консультацию</h2> <strong class="cta-section__text text text--semibold">По телефону или онлайн</strong>
+								</div>
+								<div class="cta-section__img-ibg-contain"> <picture><source srcset="img/backgrounds/woman.webp, img/backgrounds/woman@2x.webp 2x" type="image/webp"><img width="161" height="240" loading="lazy" decoding="async" src="img/backgrounds/woman.png" srcset="img/backgrounds/woman@2x.png 2x" alt="Woman"></picture> </div>
+								<div class="cta-section__actions"> <a href="tel:+180034234234" class="cta-section__btn btn btn--lg btn--light">+1(800)342-342-34</a> <a href="#" class="cta-section__btn btn btn--lg btn--dark">Free Consultation</a> </div>
+							</div>
+							<div class="cta-section__img-ibg"> <picture><source srcset="img/backgrounds/abstraction-bg.webp" type="image/webp"><img width="1376" height="200" loading="lazy" decoding="async" src="img/backgrounds/abstraction-bg.png" alt="Abstraction background"></picture> </div>
+						</div>
+					</div>
+				</section>
+				<section class="page__benefits our-benefits">
+					<div class="our-benefits__container">
+						<h2 class="our-benefits__title title">Наши преимущества</h2>
+						<ul class="our-benefits__items">
+							<li class="our-benefits__item our-benefit our-benefit--sm-r">
+								<div class="our-benefit__img-ibg-contain"> <picture><source srcset="img/our-benefits/woman.webp, img/our-benefits/woman@2x.webp 2x" type="image/webp"><img class="our-benefit__img" width="134" height="241" src="img/our-benefits/woman.png" srcset="img/our-benefits/woman@2x.png 2x" alt="Девушка"></picture> </div>
+								<div class="our-benefit__content">
+									<div class="our-benefit__title title-sm">Подбор лечения</div>
+									<div class="our-benefit__text text">
+										<p>Анализ диагноза и бюджета, чтобы предложить лучшее</p>
+									</div>
+								</div>
+							</li>
+							<li class="our-benefits__item our-benefit our-benefit--sm-l">
+								<div class="our-benefit__content">
+									<div class="our-benefit__title title-sm">Прозрачность</div>
+									<div class="our-benefit__text text">
+										<p>Все клиники прошли тщательную проверку.</p>
+									</div>
+								</div>
+								<div class="our-benefit__img-ibg-contain"> <picture><source srcset="img/our-benefits/woman.webp, img/our-benefits/woman@2x.webp 2x" type="image/webp"><img class="our-benefit__img" width="134" height="241" src="img/our-benefits/woman.png" srcset="img/our-benefits/woman@2x.png 2x" alt="Девушка"></picture> </div>
+							</li>
+							<li class="our-benefits__item our-benefit our-benefit--md">
+								<div class="our-benefit__content">
+									<div class="our-benefit__title title-sm">Полное сопровождение</div>
+									<div class="our-benefit__text text">
+										<p>От первого запроса до возвращения домой — мы помогаем с организацией лечения, перелётов, проживания и переводов.</p>
+									</div>
+								</div>
+								<div class="our-benefit__img-ibg-contain"> <picture><source srcset="img/our-benefits/plane.webp, img/our-benefits/plane@2x.webp 2x" type="image/webp"><img class="our-benefit__img" width="352" height="217" src="img/our-benefits/plane.png" srcset="img/our-benefits/plane@2x.png 2x" alt="Самолет"></picture> </div>
+							</li>
+							<li class="our-benefits__item our-benefit our-benefit--lg">
+								<div class="our-benefit__img-ibg-contain"> <picture><source srcset="img/our-benefits/clinic.webp, img/our-benefits/clinic@2x.webp 2x" type="image/webp"><img class="our-benefit__img" width="268" height="375" src="img/our-benefits/clinic.png" srcset="img/our-benefits/clinic@2x.png 2x" alt="Клиника"></picture> </div>
+								<div class="our-benefit__content">
+									<div class="our-benefit__title title-sm">Доступ к лучшим клиникам</div>
+									<div class="our-benefit__text text">
+										<p>Каталог медицинских центров, специализирующихся гна стволовых клетках и инновационных методах терапии </p>
+									</div> <a href="#" class="our-benefit__btn btn btn--light">Перейти к поиску</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="page__num-points num-points">
+					<div class="num-points__container">
+						<h2 class="num-points__title title">Мы в цифрах</h2>
+						<ul class="num-points__items">
+							<li class="num-points__item num-point">
+								<div class="num-point__value title-lg">70</div>
+								<div class="num-point__title title-sm">Направлений лечения</div>
+							</li>
+							<li class="num-points__item num-point">
+								<div class="num-point__value title-lg">30</div>
+								<div class="num-point__title title-sm">Работаем с 30-ю странами</div>
+							</li>
+							<li class="num-points__item num-point">
+								<div class="num-point__value title-lg">70</div>
+								<div class="num-point__title title-sm">Направлений лечения</div>
+							</li>
+							<li class="num-points__item num-point">
+								<div class="num-point__value title-lg">1231</div>
+								<div class="num-point__title title-sm">Проверенных клиник на сайте</div>
+							</li>
+						</ul>
+					</div>
+				</section>
+			</div>
+		</main>
+		<footer class="footer w-full">
+			<div class="footer__container">
+				<div class="footer__aside footer-aside"> <a href="#" class="footer-aside__logo logo-footer"> <picture><source srcset="img/logo/logo-footer.webp" type="image/webp"><img class="img" width="149" height="64" loading="lazy" decoding="async" src="img/logo/logo-footer.png" alt="Stem-Health logo"></picture> </a>
+					<div class="footer-aside__actions"> <a href="tel:+180034234234" class="footer__btn btn btn--gray">+1(800)342-342-34</a> <a href="#" class="footer__btn btn btn--dark">Free Consultation</a> </div>
+				</div>
+				<div class="footer__menu footer-menu">
+					<div class="footer-menu__column">
+						<div class="footer-menu__title title-sm">Связь</div>
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item"> <a href="tel:+18008008000" class="footer-menu__link">+1 800 800 8000</a> </li>
+							<li class="footer-menu__item"> <a href="mailto:mail@mail.com" class="footer-menu__link">mail@mail.com</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Fort Lauderdale, FL, <br>United States</a> </li>
+						</ul>
+					</div>
+					<div class="footer-menu__column">
+						<div class="footer-menu__title title-sm">Соц сети</div>
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">
+									<div class="social-icon"> <img width="24" height="24" loading="lazy" decoding="async" src="img/icons/socials/facebook.svg" alt="facebook"> </div> Facebook
+								</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">
+									<div class="social-icon"> <img width="24" height="24" loading="lazy" decoding="async" src="img/icons/socials/youtube.svg" alt="youtube"> </div> Youtube
+								</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">
+									<div class="social-icon"> <img width="24" height="24" loading="lazy" decoding="async" src="img/icons/socials/instagram.svg" alt="instagram"> </div> Instagram
+								</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">
+									<div class="social-icon"> <img width="24" height="24" loading="lazy" decoding="async" src="img/icons/socials/x.svg" alt="X (Twitter)"> </div> X (Twitter)
+								</a> </li>
+						</ul>
+					</div>
+					<div class="footer-menu__column">
+						<div class="footer-menu__title title-sm">Компания</div>
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Как это работает</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Новости</a> </li>
+						</ul>
+					</div>
+					<div class="footer-menu__column">
+						<div class="footer-menu__title title-sm">Заболевания</div>
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Как это работает</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Новости</a> </li>
+						</ul>
+					</div>
+					<div class="footer-menu__column">
+						<div class="footer-menu__title title-sm">Частые вопросы</div>
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Как это работает</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Новости</a> </li>
+						</ul>
+					</div>
+					<div class="footer-menu__column">
+						<div class="footer-menu__title title-sm">Направления</div>
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Как это работает</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Новости</a> </li>
+						</ul>
+					</div>
+					<div class="footer-menu__column">
+						<div class="footer-menu__title title-sm">Направления</div>
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Как это работает</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Новости</a> </li>
+						</ul>
+					</div>
+					<div class="footer-menu__column footer-menu__column--full">
+						<div class="footer-menu__title title-sm">Нас находят</div>
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+						</ul>
+					</div>
+					<div class="footer-menu__bottom footer-bottom"> <a href="#" class="footer-bottom__link text-small">Terms & conditions</a> <a href="#" class="footer-bottom__link text-small">Privacy policy</a>
+						<div class="footer-bottom__text text-small">© 2025 Stemcell.com, LLC</div>
+					</div>
+					<div class="footer-menu__column-actions"> <a href="tel:+180034234234" class="footer__btn btn btn--gray">+1(800)342-342-34</a> <a href="#" class="footer__btn btn btn--dark">Free Consultation</a> </div>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<script async src="js/clinics-list.min.js?_v=20251127162127"></script>
+</body>
+
+</html>

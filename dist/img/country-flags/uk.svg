@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Flag</title>
+    <defs>
+        <path d="M0,0 L48,0 L48,48 L0,48 L0,0 Z" id="path-1"></path>
+    </defs>
+    <g id="Flag" stroke="none" fill="none" xlink:href="#path-1" fill-rule="evenodd">
+        <rect id="Background" fill="#FFD700" x="0" y="0" width="48" height="48"></rect>
+        <rect id="Blue" fill="#0057B7" x="0" y="0" width="48" height="24"></rect>
+    </g>
+</svg>
