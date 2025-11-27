@@ -1974,6 +1974,7 @@ select.btn--select-ic {
   position: absolute;
   bottom: 0.5rem;
   right: 0.5rem;
+  max-width: 44%;
 }
 
 .product-reviews__row {
