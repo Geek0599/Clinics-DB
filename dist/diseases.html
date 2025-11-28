@@ -59,7 +59,7 @@
 			font-style: normal
 		}
 	</style>
-	<link rel="stylesheet" href="css/diseases.min.css?_v=20251127230043">
+	<link rel="stylesheet" href="css/diseases.min.css?_v=20251128163544">
 </head>
 
 <body>
@@ -70,7 +70,7 @@
 					<div class="header__wrapper">
 						<div class="header__container">
 							<div class="header__body"> <a href="#" class="header__logo logo"> <img class="img" width="149" height="64" fetchpriority="high" loading="eager" decoding="async" src="img/logo/logo.svg" alt="Stem-Health logo"> </a>
-								<nav data-da=".menu-icon__menu, 1600" class="header__menu menu">
+								<nav data-da=".header-menu-mobile__body, 1600, 2" class="header__menu menu">
 									<ul class="menu__list">
 										<li class="menu__item"><a href="#" class="menu__link btn btn--light">Home</a></li>
 										<li class="menu__item"><a href="#" class="menu__link btn btn--light">Clinics</a></li>
@@ -84,9 +84,18 @@
 											</select> </li>
 									</ul>
 								</nav>
-								<div data-da=".menu-icon__menu, 850" class="header__actions actions-header"> <a href="tel:+180034234234" class="actions-header__btn btn btn--light">+1(800)342-342-34</a> <a href="#" class="actions-header__btn btn btn--dark">Free Consultation</a> </div>
+								<div data-da=".header-menu-mobile__body, 850, 1" class="header__actions actions-header"> <a href="tel:+180034234234" class="actions-header__btn btn btn--light">+1(800)342-342-34</a> <a href="#" class="actions-header__btn btn btn--dark">Free Consultation</a> </div>
 								<div class="header__menu-icon menu-icon"> <button aria-label="Open menu" type="button" class="menu-icon__icon icon-menu"><span></span></button>
-									<div class="menu-icon__menu"></div>
+									<div class="menu-icon__menu-mobile header-menu-mobile">
+										<div class="header-menu-mobile__body">
+											<div class="header-menu-mobile__head"> <a href="#" class="header-menu-mobile__logo logo"> <img class="img" width="149" height="64" fetchpriority="high" loading="eager" decoding="async" src="img/logo/logo.svg" alt="Stem-Health logo"> </a> <button aria-label="Open menu" type="button" class="header-menu-mobile__icon icon-menu"><span></span></button> </div>
+										</div>
+									</div>
+								</div>
+								<div class="header__mobile-float header-mobile-float">
+									<div class="header-mobile-float__search search-input search-input--mob">
+										<div class="search-input__body-input _icon-search"> <input class="search-input__input" required placeholder="Начните поиск…" name="q" type="text"> </div>
+									</div> <button aria-label="Open menu" type="button" class="header-mobile-float__btn icon-menu"><span></span></button>
 								</div>
 							</div>
 						</div>
@@ -100,9 +109,9 @@
 						</ul>
 					</div>
 					<h1 class="main__title main-title">Заболевания</h1>
-					<div class="main__search main-search">
-						<form action="#" class="main-search__body _icon-search"> <input required placeholder="Найдите клинику по названию или направлению…" data-mobile-placeholder="Название или направление..." name="q" type="text" class="main-search__input"> <button type="submit" class="main-search__btn btn btn--pink">Найти</button> </form>
-					</div>
+					<form action="#" class="main__search search-input">
+						<div class="search-input__body-input _icon-search"> <input class="search-input__input" required placeholder="Найдите клинику по названию или направлению…" data-mobile-placeholder="Название или направление..." name="q" type="text"> <button class="search-input__btn btn btn--pink" type="submit">Найти</button> </div>
+					</form>
 				</div>
 			</section>
 			<div class="page__sections-padding">
@@ -236,221 +245,223 @@
 						</div>
 					</div>
 				</div>
-				<section class="page__slider-reviews slider-reviews w-full w-full--bg w-full--padding">
-					<div data-slider="reviews" class="slider-reviews__container">
-						<h2 class="slider-reviews__title title">Наилучшие клиники <strong class="title-marked">TOP</strong></h2>
-						<div data-slider class="slider-reviews__slider swiper">
-							<ul class="slider-reviews__wrapper swiper-wrapper">
-								<li class="slider-reviews__slide swiper-slide">
-									<div class="review-card">
-										<div class="review-card__head">
-											<div class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </div>
-											<div class="review-card__head-content">
-												<div class="review-card__title title-sm">Asklepios Hospital Barmbek</div>
-												<div role="img" class="review-card__rating rating" data-rating="4.5" aria-label="Rating: 4.5 out of 5">
-													<div class="rating__value text text--semibold">4.5</div>
-													<div class="rating__body">
-														<div class="rating__active">
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-														</div>
-														<div class="rating__items">
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-														</div>
-													</div>
-												</div>
-												<div class="review-card__location-point location-point text text--semibold">
-													<div class="location-point__icon"> <img width="16" height="16" loading="lazy" decoding="async" src="img/country-flags/de.svg" alt="de flag"> </div> Германия, Гамбург
-												</div>
-											</div>
-										</div>
-										<div class="review-card__item review-item review-item--tail review-item--sm">
-											<div class="review-item__img-ibg"> <picture><source srcset="img/clinics/user.webp" type="image/webp"><img width="32" height="32" loading="lazy" decoding="async" src="img/clinics/user.png" alt="user"></picture> </div>
-											<div class="review-item__content">
-												<div class="review-item__title text text--bold">Marianna Kowalska</div>
-												<div class="review-item__text text text--lh">
-													<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan!</p>
-												</div>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li class="slider-reviews__slide swiper-slide">
-									<div class="review-card">
-										<div class="review-card__head">
-											<div class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </div>
-											<div class="review-card__head-content">
-												<div class="review-card__title title-sm">Center of ophthalmology and eye surgery Dr. Wobbe and Рartners</div>
-												<div role="img" class="review-card__rating rating" data-rating="4.5" aria-label="Rating: 4.5 out of 5">
-													<div class="rating__value text text--semibold">4.5</div>
-													<div class="rating__body">
-														<div class="rating__active">
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-														</div>
-														<div class="rating__items">
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
+				<section class="page__slider-reviews slider-reviews">
+					<div class="slider-reviews__wrapper w-full w-full--bg w-full--padding">
+						<div data-slider="reviews" class="slider-reviews__container">
+							<h2 class="slider-reviews__title title">Наилучшие клиники <strong class="title-marked">TOP</strong></h2>
+							<div data-slider class="slider-reviews__slider swiper">
+								<ul class="slider-reviews__wrapper swiper-wrapper">
+									<li class="slider-reviews__slide swiper-slide">
+										<div class="review-card">
+											<div class="review-card__head">
+												<div class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </div>
+												<div class="review-card__head-content">
+													<div class="review-card__title title-sm">Asklepios Hospital Barmbek</div>
+													<div role="img" class="review-card__rating rating" data-rating="4.5" aria-label="Rating: 4.5 out of 5">
+														<div class="rating__value text text--semibold">4.5</div>
+														<div class="rating__body">
+															<div class="rating__active">
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+															</div>
+															<div class="rating__items">
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+															</div>
 														</div>
 													</div>
-												</div>
-												<div class="review-card__location-point location-point text text--semibold">
-													<div class="location-point__icon"> <img width="16" height="16" loading="lazy" decoding="async" src="img/country-flags/gb.svg" alt="gb flag"> </div> Лондон, Великобритания
-												</div>
-											</div>
-										</div>
-										<div class="review-card__item review-item review-item--tail review-item--sm">
-											<div class="review-item__img-ibg"> <picture><source srcset="img/clinics/user.webp" type="image/webp"><img width="32" height="32" loading="lazy" decoding="async" src="img/clinics/user.png" alt="user"></picture> </div>
-											<div class="review-item__content">
-												<div class="review-item__title text text--bold">Marianna Kowalska</div>
-												<div class="review-item__text text text--lh">
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam delectus id fugiat quia ullam. Excepturi numquam ratione iusto ad. Earum aperiam deserunt quibusdam.</p>
-												</div>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li class="slider-reviews__slide swiper-slide">
-									<div class="review-card">
-										<div class="review-card__head">
-											<div class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </div>
-											<div class="review-card__head-content">
-												<div class="review-card__title title-sm">Medipol Mega University Hospital</div>
-												<div role="img" class="review-card__rating rating" data-rating="4.5" aria-label="Rating: 4.5 out of 5">
-													<div class="rating__value text text--semibold">4.5</div>
-													<div class="rating__body">
-														<div class="rating__active">
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-														</div>
-														<div class="rating__items">
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-														</div>
+													<div class="review-card__location-point location-point text text--semibold">
+														<div class="location-point__icon"> <img width="16" height="16" loading="lazy" decoding="async" src="img/country-flags/de.svg" alt="de flag"> </div> Германия, Гамбург
 													</div>
 												</div>
-												<div class="review-card__location-point location-point text text--semibold">
-													<div class="location-point__icon"> <img width="16" height="16" loading="lazy" decoding="async" src="img/country-flags/de.svg" alt="de flag"> </div> Германия, Гамбург
-												</div>
 											</div>
-										</div>
-										<div class="review-card__item review-item review-item--tail review-item--sm">
-											<div class="review-item__img-ibg"> <picture><source srcset="img/clinics/user.webp" type="image/webp"><img width="32" height="32" loading="lazy" decoding="async" src="img/clinics/user.png" alt="user"></picture> </div>
-											<div class="review-item__content">
-												<div class="review-item__title text text--bold">Marianna Kowalska</div>
-												<div class="review-item__text text text--lh">
-													<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan!</p>
-													<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.</p>
-												</div>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li class="slider-reviews__slide swiper-slide">
-									<div class="review-card">
-										<div class="review-card__head">
-											<div class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </div>
-											<div class="review-card__head-content">
-												<div class="review-card__title title-sm">Asklepios Hospital Barmbek</div>
-												<div role="img" class="review-card__rating rating" data-rating="4.7" aria-label="Rating: 4.7 out of 5">
-													<div class="rating__value text text--semibold">4.7</div>
-													<div class="rating__body">
-														<div class="rating__active">
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-														</div>
-														<div class="rating__items">
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-														</div>
+											<div class="review-card__item review-item review-item--tail review-item--sm">
+												<div class="review-item__img-ibg"> <picture><source srcset="img/clinics/user.webp" type="image/webp"><img width="32" height="32" loading="lazy" decoding="async" src="img/clinics/user.png" alt="user"></picture> </div>
+												<div class="review-item__content">
+													<div class="review-item__title text text--bold">Marianna Kowalska</div>
+													<div class="review-item__text text text--lh">
+														<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan!</p>
 													</div>
 												</div>
-												<div class="review-card__location-point location-point text text--semibold">
-													<div class="location-point__icon"> <img width="16" height="16" loading="lazy" decoding="async" src="img/country-flags/uk.svg" alt="uk flag"> </div> Киев, Украина
-												</div>
 											</div>
 										</div>
-										<div class="review-card__item review-item review-item--tail review-item--sm">
-											<div class="review-item__img-ibg"> <picture><source srcset="img/clinics/user.webp" type="image/webp"><img width="32" height="32" loading="lazy" decoding="async" src="img/clinics/user.png" alt="user"></picture> </div>
-											<div class="review-item__content">
-												<div class="review-item__title text text--bold">Marianna Kowalska</div>
-												<div class="review-item__text text text--lh">
-													<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan!</p>
-												</div>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li class="slider-reviews__slide swiper-slide">
-									<div class="review-card">
-										<div class="review-card__head">
-											<div class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </div>
-											<div class="review-card__head-content">
-												<div class="review-card__title title-sm">Asklepios Hospital Barmbek</div>
-												<div role="img" class="review-card__rating rating" data-rating="4.5" aria-label="Rating: 4.5 out of 5">
-													<div class="rating__value text text--semibold">4.5</div>
-													<div class="rating__body">
-														<div class="rating__active">
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-														</div>
-														<div class="rating__items">
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
-															<div class="rating__item"></div>
+									</li>
+									<li class="slider-reviews__slide swiper-slide">
+										<div class="review-card">
+											<div class="review-card__head">
+												<div class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </div>
+												<div class="review-card__head-content">
+													<div class="review-card__title title-sm">Center of ophthalmology and eye surgery Dr. Wobbe and Рartners</div>
+													<div role="img" class="review-card__rating rating" data-rating="4.5" aria-label="Rating: 4.5 out of 5">
+														<div class="rating__value text text--semibold">4.5</div>
+														<div class="rating__body">
+															<div class="rating__active">
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+															</div>
+															<div class="rating__items">
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+															</div>
 														</div>
 													</div>
+													<div class="review-card__location-point location-point text text--semibold">
+														<div class="location-point__icon"> <img width="16" height="16" loading="lazy" decoding="async" src="img/country-flags/gb.svg" alt="gb flag"> </div> Лондон, Великобритания
+													</div>
 												</div>
-												<div class="review-card__location-point location-point text text--semibold">
-													<div class="location-point__icon"> <img width="16" height="16" loading="lazy" decoding="async" src="img/country-flags/de.svg" alt="de flag"> </div> Германия, Гамбург
+											</div>
+											<div class="review-card__item review-item review-item--tail review-item--sm">
+												<div class="review-item__img-ibg"> <picture><source srcset="img/clinics/user.webp" type="image/webp"><img width="32" height="32" loading="lazy" decoding="async" src="img/clinics/user.png" alt="user"></picture> </div>
+												<div class="review-item__content">
+													<div class="review-item__title text text--bold">Marianna Kowalska</div>
+													<div class="review-item__text text text--lh">
+														<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam delectus id fugiat quia ullam. Excepturi numquam ratione iusto ad. Earum aperiam deserunt quibusdam.</p>
+													</div>
 												</div>
 											</div>
 										</div>
-										<div class="review-card__item review-item review-item--tail review-item--sm">
-											<div class="review-item__img-ibg"> <picture><source srcset="img/clinics/user.webp" type="image/webp"><img width="32" height="32" loading="lazy" decoding="async" src="img/clinics/user.png" alt="user"></picture> </div>
-											<div class="review-item__content">
-												<div class="review-item__title text text--bold">Marianna Kowalska</div>
-												<div class="review-item__text text text--lh">
-													<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan!</p>
+									</li>
+									<li class="slider-reviews__slide swiper-slide">
+										<div class="review-card">
+											<div class="review-card__head">
+												<div class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </div>
+												<div class="review-card__head-content">
+													<div class="review-card__title title-sm">Medipol Mega University Hospital</div>
+													<div role="img" class="review-card__rating rating" data-rating="4.5" aria-label="Rating: 4.5 out of 5">
+														<div class="rating__value text text--semibold">4.5</div>
+														<div class="rating__body">
+															<div class="rating__active">
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+															</div>
+															<div class="rating__items">
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+															</div>
+														</div>
+													</div>
+													<div class="review-card__location-point location-point text text--semibold">
+														<div class="location-point__icon"> <img width="16" height="16" loading="lazy" decoding="async" src="img/country-flags/de.svg" alt="de flag"> </div> Германия, Гамбург
+													</div>
+												</div>
+											</div>
+											<div class="review-card__item review-item review-item--tail review-item--sm">
+												<div class="review-item__img-ibg"> <picture><source srcset="img/clinics/user.webp" type="image/webp"><img width="32" height="32" loading="lazy" decoding="async" src="img/clinics/user.png" alt="user"></picture> </div>
+												<div class="review-item__content">
+													<div class="review-item__title text text--bold">Marianna Kowalska</div>
+													<div class="review-item__text text text--lh">
+														<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan!</p>
+														<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.</p>
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-								</li>
-							</ul>
-						</div>
-						<div class="slider-reviews__slider-actions slider-actions"> <button data-slider-prevbtn aria-label="slide prev" class="slider-actions__btn slider-btn _icon-arrow-triangle"></button>
-							<div data-slider-pagination class="slider-actions__pagionation slider-pagination"></div> <button data-slider-nextbtn aria-label="slide next" class="slider-actions__btn slider-btn _icon-arrow-triangle"></button>
+									</li>
+									<li class="slider-reviews__slide swiper-slide">
+										<div class="review-card">
+											<div class="review-card__head">
+												<div class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </div>
+												<div class="review-card__head-content">
+													<div class="review-card__title title-sm">Asklepios Hospital Barmbek</div>
+													<div role="img" class="review-card__rating rating" data-rating="4.7" aria-label="Rating: 4.7 out of 5">
+														<div class="rating__value text text--semibold">4.7</div>
+														<div class="rating__body">
+															<div class="rating__active">
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+															</div>
+															<div class="rating__items">
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+															</div>
+														</div>
+													</div>
+													<div class="review-card__location-point location-point text text--semibold">
+														<div class="location-point__icon"> <img width="16" height="16" loading="lazy" decoding="async" src="img/country-flags/uk.svg" alt="uk flag"> </div> Киев, Украина
+													</div>
+												</div>
+											</div>
+											<div class="review-card__item review-item review-item--tail review-item--sm">
+												<div class="review-item__img-ibg"> <picture><source srcset="img/clinics/user.webp" type="image/webp"><img width="32" height="32" loading="lazy" decoding="async" src="img/clinics/user.png" alt="user"></picture> </div>
+												<div class="review-item__content">
+													<div class="review-item__title text text--bold">Marianna Kowalska</div>
+													<div class="review-item__text text text--lh">
+														<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan!</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class="slider-reviews__slide swiper-slide">
+										<div class="review-card">
+											<div class="review-card__head">
+												<div class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </div>
+												<div class="review-card__head-content">
+													<div class="review-card__title title-sm">Asklepios Hospital Barmbek</div>
+													<div role="img" class="review-card__rating rating" data-rating="4.5" aria-label="Rating: 4.5 out of 5">
+														<div class="rating__value text text--semibold">4.5</div>
+														<div class="rating__body">
+															<div class="rating__active">
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+															</div>
+															<div class="rating__items">
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+															</div>
+														</div>
+													</div>
+													<div class="review-card__location-point location-point text text--semibold">
+														<div class="location-point__icon"> <img width="16" height="16" loading="lazy" decoding="async" src="img/country-flags/de.svg" alt="de flag"> </div> Германия, Гамбург
+													</div>
+												</div>
+											</div>
+											<div class="review-card__item review-item review-item--tail review-item--sm">
+												<div class="review-item__img-ibg"> <picture><source srcset="img/clinics/user.webp" type="image/webp"><img width="32" height="32" loading="lazy" decoding="async" src="img/clinics/user.png" alt="user"></picture> </div>
+												<div class="review-item__content">
+													<div class="review-item__title text text--bold">Marianna Kowalska</div>
+													<div class="review-item__text text text--lh">
+														<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan!</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="slider-reviews__slider-actions slider-actions"> <button data-slider-prevbtn aria-label="slide prev" class="slider-actions__btn slider-btn _icon-arrow-triangle"></button>
+								<div data-slider-pagination class="slider-actions__pagionation slider-pagination"></div> <button data-slider-nextbtn aria-label="slide next" class="slider-actions__btn slider-btn _icon-arrow-triangle"></button>
+							</div>
 						</div>
 					</div>
 				</section>
@@ -545,10 +556,8 @@
 		</main>
 		<footer class="footer w-full">
 			<div class="footer__container">
-				<div class="footer__aside footer-aside"> <a href="#" class="footer-aside__logo logo-footer"> <picture><source srcset="img/logo/logo-footer.webp" type="image/webp"><img class="img" width="149" height="64" loading="lazy" decoding="async" src="img/logo/logo-footer.png" alt="Stem-Health logo"></picture> </a>
-					<div class="footer-aside__actions"> <a href="tel:+180034234234" class="footer__btn btn btn--gray">+1(800)342-342-34</a> <a href="#" class="footer__btn btn btn--dark">Free Consultation</a> </div>
-				</div>
-				<div class="footer__menu footer-menu">
+				<div class="footer__aside footer-aside"> <a href="#" class="footer-aside__logo logo-footer"> <picture><source srcset="img/logo/logo-footer.webp" type="image/webp"><img class="img" width="149" height="64" loading="lazy" decoding="async" src="img/logo/logo-footer.png" alt="Stem-Health logo"></picture> </a> </div>
+				<nav class="footer__menu footer-menu">
 					<div class="footer-menu__column">
 						<div class="footer-menu__title title-sm">Связь</div>
 						<ul class="footer-menu__list">
@@ -644,12 +653,12 @@
 					<div class="footer-menu__bottom footer-bottom"> <a href="#" class="footer-bottom__link text-small">Terms & conditions</a> <a href="#" class="footer-bottom__link text-small">Privacy policy</a>
 						<div class="footer-bottom__text text-small">© 2025 Stemcell.com, LLC</div>
 					</div>
-					<div class="footer-menu__column-actions"> <a href="tel:+180034234234" class="footer__btn btn btn--gray">+1(800)342-342-34</a> <a href="#" class="footer__btn btn btn--dark">Free Consultation</a> </div>
-				</div>
+					<div data-da=".footer-aside, 1250" class="footer-menu__column-actions"> <a href="tel:+180034234234" class="footer__btn btn btn--gray">+1(800)342-342-34</a> <a href="#" class="footer__btn btn btn--dark">Free Consultation</a> </div>
+				</nav>
 			</div>
 		</footer>
 	</div>
-	<script async src="js/diseases.min.js?_v=20251127230043"></script>
+	<script async src="js/diseases.min.js?_v=20251128163544"></script>
 </body>
 
 </html>

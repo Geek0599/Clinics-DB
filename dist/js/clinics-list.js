@@ -286,6 +286,23 @@
     isWebp();
     addLoadedClass();
     menuInit();
+    function headerScroll() {
+        const mainWrapper = document.querySelector(".wrapper");
+        const mainSection = document.querySelector(".main");
+        if (!mainSection && !mainWrapper) return;
+        const startPoint = mainSection.dataset.scroll ? mainSection.dataset.scroll : 1;
+        const fullScrolled = "_main-full-scroll";
+        const offset = 20;
+        let mainOffset = mainSection.offsetHeight;
+        document.addEventListener("scroll", (function(e) {
+            const scrollTop = window.scrollY;
+            if (scrollTop >= startPoint && scrollTop >= mainOffset + offset) !mainWrapper.classList.contains(fullScrolled) ? mainWrapper.classList.add(fullScrolled) : null; else {
+                mainWrapper.classList.contains(fullScrolled) ? mainWrapper.classList.remove(fullScrolled) : null;
+                mainOffset = mainSection.offsetHeight;
+            }
+        }));
+    }
+    headerScroll();
     function spollers() {
         const spollersArray = document.querySelectorAll("[data-spollers]");
         if (spollersArray.length > 0) {
