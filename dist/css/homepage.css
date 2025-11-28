@@ -483,9 +483,6 @@ Snippet (HTML): cnt
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
-.wrapper._main-full-scroll {
-  padding-bottom: 6.5rem;
-}
 
 @supports (padding-top: clamp( 2.375rem , 1.7662337662rem  +  2.5974025974vw , 4rem )) {
   .page__sections-padding {
@@ -2061,16 +2058,27 @@ select.btn--select-ic {
     margin-bottom: calc(1.875rem + 2 * (100vw - 23.4375rem) / 62.5625);
   }
 }
+.reviews-companies__group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
 .reviews-companies__items {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 100%;
+          flex: 0 0 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  gap: 2rem;
+  -webkit-column-gap: 8.875rem;
+     -moz-column-gap: 8.875rem;
+          column-gap: 8.875rem;
+  row-gap: 2rem;
 }
 .reviews-companies__item-img-ibg-contain {
   -webkit-box-flex: 0;
@@ -2126,15 +2134,17 @@ select.btn--select-ic {
   }
 }
 @media (min-width: 37.5em){
+  .cta-section__img-ibg img {
+    -o-object-position: right;
+       object-position: right;
+  }
+}
+@media (min-width: 37.56125em){
   .article-card__img-ibg {
     -webkit-box-flex: 0;
         -ms-flex: 0 0 45.2941176471%;
             flex: 0 0 45.2941176471%;
     max-width: 19.25rem;
-  }
-  .cta-section__img-ibg img {
-    -o-object-position: right;
-       object-position: right;
   }
 }
 @media (min-width: 47.99875em){
@@ -2255,11 +2265,6 @@ select.btn--select-ic {
   .our-benefit--sm-r .our-benefit__img-ibg-contain img {
     top: 0.3125rem;
   }
-  .reviews-companies__items {
-    -webkit-column-gap: 8.875rem;
-       -moz-column-gap: 8.875rem;
-            column-gap: 8.875rem;
-  }
 }
 @media (min-width: 78.125em){
   .footer-aside .footer-menu__column-actions {
@@ -2285,6 +2290,11 @@ select.btn--select-ic {
     grid-column: -3/-1;
     -ms-grid-row: 1;
     grid-row: 1;
+  }
+}
+@media (min-width: 88em){
+  .reviews-companies__items:nth-child(2) {
+    display: none;
   }
 }
 @media (min-width: 100.06125em){
@@ -2385,6 +2395,71 @@ select.btn--select-ic {
   }
   .our-benefit {
     gap: 0.75rem;
+  }
+  .reviews-companies__group {
+    margin: 0 -1rem;
+    padding: 0 1rem;
+    overflow-x: auto;
+    position: relative;
+  }
+  .reviews-companies__group::-webkit-scrollbar {
+    display: none;
+  }
+  .reviews-companies__group::before, .reviews-companies__group::after {
+    content: "";
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 3rem;
+    background: -webkit-gradient(linear, right top, left top, from(rgba(255, 255, 255, 0)), to(rgb(255, 255, 255))) 100%;
+    background: linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255)) 100%;
+  }
+  .reviews-companies__group::before {
+    left: 0;
+  }
+  .reviews-companies__group::after {
+    right: 0;
+    -webkit-transform: scale(-1, 1);
+        -ms-transform: scale(-1, 1);
+            transform: scale(-1, 1);
+  }
+  .reviews-companies__items {
+    gap: 3.875rem;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    will-change: transform;
+    padding-right: 3.875rem;
+  }
+  ._anim-scroll-start .reviews-companies__items {
+    -webkit-animation: infiniteScroll 18s infinite linear;
+            animation: infiniteScroll 18s infinite linear;
+  }
+  @-webkit-keyframes infiniteScroll {
+    0% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+    }
+    100% {
+      -webkit-transform: translateX(-100%);
+              transform: translateX(-100%);
+    }
+  }
+  @keyframes infiniteScroll {
+    0% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+    }
+    100% {
+      -webkit-transform: translateX(-100%);
+              transform: translateX(-100%);
+    }
   }
 }
 @media (max-width: 84.375em){
@@ -2573,6 +2648,11 @@ select.btn--select-ic {
     padding-top: 0;
     padding-right: 0;
   }
+  .reviews-companies__item-img-ibg-contain {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 6.875rem;
+            flex: 0 0 6.875rem;
+  }
 }
 @media (max-width: 61.99875em) and (min-width: 29.99875em){
   .footer-menu__bottom {
@@ -2608,6 +2688,9 @@ select.btn--select-ic {
 @media (max-width: 47.99875em){
   .search-input__btn {
     display: none;
+  }
+  .wrapper._main-full-scroll {
+    padding-bottom: 6.5rem;
   }
   .actions-header {
     width: 100%;
@@ -2667,6 +2750,8 @@ select.btn--select-ic {
     display: -ms-flexbox;
     display: flex;
     gap: 0.25rem;
+    -ms-scroll-snap-type: x proximity;
+        scroll-snap-type: x proximity;
   }
   .catalog-nav-action__items::-webkit-scrollbar {
     display: none;
@@ -2677,6 +2762,7 @@ select.btn--select-ic {
             flex: 0 0 33.333%;
     min-width: 6.8125rem;
     max-width: 8.125rem;
+    scroll-snap-align: center;
   }
   .catalog-nav-action__link-all {
     display: none;
@@ -2738,7 +2824,7 @@ select.btn--select-ic {
     width: 100%;
   }
 }
-@media (max-width: 37.5em){
+@media (max-width: 37.56125em){
   .article-card {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -2821,6 +2907,7 @@ select.btn--select-ic {
     gap: 0.375rem;
   }
   .review-card {
+    gap: 1rem;
     padding: 1rem 1rem 0.5rem;
   }
   .review-card__rating:not(:last-child) {
@@ -2857,6 +2944,9 @@ select.btn--select-ic {
   }
   .review-item__content {
     display: contents;
+  }
+  .article-card__content {
+    padding: 1rem 0.5rem 0.5rem;
   }
   .catalog-nav-action__title a, .catalog-nav-action__link-all {
     gap: 0.75rem;
@@ -2904,7 +2994,7 @@ select.btn--select-ic {
     width: 90.8474576271%;
   }
   .our-benefit--lg .our-benefit__img-ibg-contain img {
-    height: calc(100% + 7.4375rem);
+    height: 168%;
   }
   .our-benefit__text {
     max-width: 98%;
@@ -2930,6 +3020,15 @@ select.btn--select-ic {
   }
   .articles__actions {
     margin-top: 1rem;
+  }
+}
+@media (max-width: 29.99875em) and (min-width: 22.5em){
+  .cta-section__btn {
+    min-height: 4rem;
+    padding: 1rem 2rem;
+    border-radius: 2.75rem;
+    font-size: 1.3125rem;
+    letter-spacing: -0.05em;
   }
 }
 @media (max-width: 23.125em){

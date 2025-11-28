@@ -3918,6 +3918,9 @@
                 modules: [ pagination_Pagination ],
                 slidesPerView: 2,
                 spaceBetween: 16,
+                observer: true,
+                observeParents: true,
+                watchSlidesProgress: true,
                 speed: 600,
                 lazy: true,
                 pagination: {
@@ -3948,7 +3951,7 @@
         function updatePlaceholders() {
             const isMobile = window.innerWidth <= breakpoint;
             inputs.forEach((input => {
-                if (!input.dataset.originalPlaceholder) input.dataset.originalPlaceholder = input.placeholder || "";
+                if (!input.dataset.originalPlaceholder) input.dataset.originalPlaceholder = input.dataset.placeholder || input.placeholder || "";
                 const mobilePlaceholder = input.dataset.mobilePlaceholder;
                 const originalPlaceholder = input.dataset.originalPlaceholder;
                 input.placeholder = isMobile ? mobilePlaceholder : originalPlaceholder;
@@ -3957,8 +3960,20 @@
         updatePlaceholders();
         window.addEventListener("resize", updatePlaceholders);
     }
+    function inifiteScrollDublicateGroup() {
+        const groups = document.querySelectorAll("[data-infinite-scroll]");
+        if (!groups.length) return;
+        groups.forEach((group => {
+            console.log(group);
+            const clone = group.cloneNode(true);
+            clone.setAttribute("aria-hidden", "");
+            group.insertAdjacentElement("afterend", clone);
+            group.parentElement.classList.add("_anim-scroll-start");
+        }));
+    }
     init_CatalogActionsSlider();
     init_ReviewsSlider();
     init_ArticlesSlider();
     mobilePlaceholder();
+    inifiteScrollDublicateGroup();
 })();

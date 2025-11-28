@@ -4154,7 +4154,7 @@
         function updatePlaceholders() {
             const isMobile = window.innerWidth <= breakpoint;
             inputs.forEach((input => {
-                if (!input.dataset.originalPlaceholder) input.dataset.originalPlaceholder = input.placeholder || "";
+                if (!input.dataset.originalPlaceholder) input.dataset.originalPlaceholder = input.dataset.placeholder || input.placeholder || "";
                 const mobilePlaceholder = input.dataset.mobilePlaceholder;
                 const originalPlaceholder = input.dataset.originalPlaceholder;
                 input.placeholder = isMobile ? mobilePlaceholder : originalPlaceholder;

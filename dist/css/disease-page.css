@@ -483,9 +483,6 @@ Snippet (HTML): cnt
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
-.wrapper._main-full-scroll {
-  padding-bottom: 6.5rem;
-}
 
 @supports (padding-top: clamp( 2.375rem , 1.7662337662rem  +  2.5974025974vw , 4rem )) {
   .page__sections-padding {
@@ -2388,6 +2385,9 @@ select.btn--select-ic {
   .search-input__btn {
     display: none;
   }
+  .wrapper._main-full-scroll {
+    padding-bottom: 6.5rem;
+  }
   .actions-header {
     width: 100%;
   }
@@ -2443,6 +2443,8 @@ select.btn--select-ic {
     display: -ms-flexbox;
     display: flex;
     gap: 0.25rem;
+    -ms-scroll-snap-type: x proximity;
+        scroll-snap-type: x proximity;
   }
   .catalog-nav-action__items::-webkit-scrollbar {
     display: none;
@@ -2453,6 +2455,7 @@ select.btn--select-ic {
             flex: 0 0 33.333%;
     min-width: 6.8125rem;
     max-width: 8.125rem;
+    scroll-snap-align: center;
   }
   .catalog-nav-action__link-all {
     display: none;
@@ -2633,7 +2636,7 @@ select.btn--select-ic {
     width: 90.8474576271%;
   }
   .our-benefit--lg .our-benefit__img-ibg-contain img {
-    height: calc(100% + 7.4375rem);
+    height: 168%;
   }
   .our-benefit__text {
     max-width: 98%;
@@ -2652,6 +2655,15 @@ select.btn--select-ic {
   }
   .cta-section__info {
     gap: 1rem;
+  }
+}
+@media (max-width: 29.99875em) and (min-width: 22.5em){
+  .cta-section__btn {
+    min-height: 4rem;
+    padding: 1rem 2rem;
+    border-radius: 2.75rem;
+    font-size: 1.3125rem;
+    letter-spacing: -0.05em;
   }
 }
 @media (max-width: 23.125em){

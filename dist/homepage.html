@@ -59,7 +59,7 @@
 			font-style: normal
 		}
 	</style>
-	<link rel="stylesheet" href="css/homepage.min.css?_v=20251128163544">
+	<link rel="stylesheet" href="css/homepage.min.css?_v=20251128201926">
 </head>
 
 <body>
@@ -104,7 +104,7 @@
 				<div class="main__container">
 					<h1 class="main__title main-title text-center">Найдите лучшие клиники для передового лечения</h1>
 					<form action="#" class="main__search search-input">
-						<div class="search-input__body-input _icon-search"> <input class="search-input__input" required placeholder="Найдите клинику по названию или направлению…" data-mobile-placeholder="Название или направление..." name="q" type="text"> <button class="search-input__btn btn btn--pink" type="submit">Найти</button> </div>
+						<div class="search-input__body-input _icon-search"> <input required class="search-input__input" data-placeholder="Найдите клинику по названию или направлению…" data-mobile-placeholder="Название или направление..." name="q" type="text"> <button class="search-input__btn btn btn--pink" type="submit">Найти</button> </div>
 					</form>
 					<div class="main__info-total info-total">
 						<div class="info-total__count text-title"><span class="title">129</span>Клиник</div>
@@ -665,14 +665,16 @@
 				<section class="page__reviews-companies reviews-companies">
 					<div class="reviews-companies__container">
 						<h2 class="reviews-companies__title title">О нас пишут</h2>
-						<ul class="reviews-companies__items">
-							<li class="reviews-companies__item-img-ibg-contain"> <img class="img" width="112" height="42" loading="lazy" decoding="async" src="img/reviews-companies/yelp.svg" alt="yelp logo"> </li>
-							<li class="reviews-companies__item-img-ibg-contain"> <img class="img" width="119" height="36" loading="lazy" decoding="async" src="img/reviews-companies/yp-ca.svg" alt="yp-ca logo"> </li>
-							<li class="reviews-companies__item-img-ibg-contain"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/reviews-companies/yp.svg" alt="yp logo"> </li>
-							<li class="reviews-companies__item-img-ibg-contain"> <img class="img" width="147" height="35" loading="lazy" decoding="async" src="img/reviews-companies/ezlocal.svg" alt="ezlocal logo"> </li>
-							<li class="reviews-companies__item-img-ibg-contain"> <img class="img" width="113" height="26" loading="lazy" decoding="async" src="img/reviews-companies/manta.svg" alt="manta logo"> </li>
-							<li class="reviews-companies__item-img-ibg-contain"> <img class="img" width="128" height="48" loading="lazy" decoding="async" src="img/reviews-companies/bbb.svg" alt="bbb logo"> </li>
-						</ul>
+						<div class="reviews-companies__group">
+							<ul data-infinite-scroll class="reviews-companies__items">
+								<li class="reviews-companies__item-img-ibg-contain"> <img class="img" width="112" height="42" loading="lazy" decoding="async" src="img/reviews-companies/yelp.svg" alt="yelp logo"> </li>
+								<li class="reviews-companies__item-img-ibg-contain"> <img class="img" width="119" height="36" loading="lazy" decoding="async" src="img/reviews-companies/yp-ca.svg" alt="yp-ca logo"> </li>
+								<li class="reviews-companies__item-img-ibg-contain"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/reviews-companies/yp.svg" alt="yp logo"> </li>
+								<li class="reviews-companies__item-img-ibg-contain"> <img class="img" width="147" height="35" loading="lazy" decoding="async" src="img/reviews-companies/ezlocal.svg" alt="ezlocal logo"> </li>
+								<li class="reviews-companies__item-img-ibg-contain"> <img class="img" width="113" height="26" loading="lazy" decoding="async" src="img/reviews-companies/manta.svg" alt="manta logo"> </li>
+								<li class="reviews-companies__item-img-ibg-contain"> <img class="img" width="128" height="48" loading="lazy" decoding="async" src="img/reviews-companies/bbb.svg" alt="bbb logo"> </li>
+							</ul>
+						</div>
 					</div>
 				</section>
 			</div>
@@ -781,7 +783,7 @@
 			</div>
 		</footer>
 	</div>
-	<script async src="js/homepage.min.js?_v=20251128163544"></script>
+	<script async src="js/homepage.min.js?_v=20251128201926"></script>
 </body>
 
 </html>
