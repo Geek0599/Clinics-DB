@@ -3317,66 +3317,100 @@
             bodyUnlock();
             document.documentElement.classList.remove("menu-open");
         }
-        function DynamicAdapt(type) {
-            this.type = type;
-            this.resizeTimeout;
-        }
-        DynamicAdapt.prototype.init = function() {
-            const _this = this;
-            this.оbjects = [];
-            this.daClassname = "_dynamic_adapt_";
-            this.nodes = document.querySelectorAll("[data-da]");
-            for (let i = 0; i < this.nodes.length; i++) {
-                const node = this.nodes[i];
-                const data = node.dataset.da.trim();
-                const dataArray = data.split(",");
-                const оbject = {};
-                оbject.element = node;
-                оbject.parent = node.parentNode;
-                оbject.destination = document.querySelector(dataArray[0].trim());
-                оbject.breakpoint = dataArray[1] ? dataArray[1].trim() : "767";
-                оbject.place = dataArray[2] ? dataArray[2].trim() : "last";
-                оbject.originalNextSibling = node.nextElementSibling;
-                оbject.isMoved = false;
-                this.оbjects.push(оbject);
-            }
-            window.addEventListener("resize", (function() {
-                clearTimeout(_this.resizeTimeout);
-                _this.resizeTimeout = setTimeout((function() {
-                    _this.mediaHandler();
-                }), 0);
+        function useDynamicAdapt(type = "max") {
+            const className = "_dynamic_adapt_";
+            const attrName = "data-da";
+            const dNodes = getDNodes();
+            const dMediaQueries = getDMediaQueries(dNodes);
+            dMediaQueries.forEach((dMediaQuery => {
+                const matchMedia = window.matchMedia(dMediaQuery.query);
+                const filteredDNodes = dNodes.filter((({breakpoint}) => breakpoint === dMediaQuery.breakpoint));
+                const mediaHandler = getMediaHandler(matchMedia, filteredDNodes);
+                matchMedia.addEventListener("change", mediaHandler);
+                mediaHandler();
             }));
-            this.mediaHandler();
-        };
-        DynamicAdapt.prototype.mediaHandler = function() {
-            for (let i = 0; i < this.оbjects.length; i++) {
-                const оbject = this.оbjects[i];
-                const matchMedia = window.matchMedia("(max-width: " + оbject.breakpoint + "px)");
-                if (matchMedia.matches) {
-                    if (!оbject.isMoved) {
-                        this.delayedMoveTo(оbject.place, оbject.element, оbject.destination);
-                        оbject.isMoved = true;
-                    }
-                } else if (оbject.isMoved) {
-                    this.delayedMoveBack(оbject.parent, оbject.element, оbject.originalNextSibling);
-                    оbject.isMoved = false;
-                }
+            function getDNodes() {
+                const result = [];
+                const elements = [ ...document.querySelectorAll(`[${attrName}]`) ];
+                elements.forEach((element => {
+                    const attr = element.getAttribute(attrName);
+                    const [toSelector, breakpoint, order] = attr.split(",").map((val => val.trim()));
+                    const to = document.querySelector(toSelector);
+                    if (to) result.push({
+                        parent: element.parentElement,
+                        element,
+                        to,
+                        breakpoint: breakpoint ?? "767",
+                        order: order !== void 0 ? isNumber(order) ? Number(order) : order : "last",
+                        index: -1
+                    });
+                }));
+                return sortDNodes(result);
             }
-        };
-        DynamicAdapt.prototype.delayedMoveTo = function(place, element, destination) {
-            setTimeout((() => {
-                element.classList.add(this.daClassname);
-                if (place === "last" || place >= destination.children.length) destination.appendChild(element); else if (place === "first") destination.insertBefore(element, destination.firstElementChild); else destination.insertBefore(element, destination.children[place]);
-            }), 0);
-        };
-        DynamicAdapt.prototype.delayedMoveBack = function(parent, element, originalNextSibling) {
-            setTimeout((() => {
-                element.classList.remove(this.daClassname);
-                if (originalNextSibling) parent.insertBefore(element, originalNextSibling); else parent.appendChild(element);
-            }), 0);
-        };
-        const da = new DynamicAdapt("max");
-        da.init();
+            function getDMediaQueries(items) {
+                const uniqItems = [ ...new Set(items.map((({breakpoint}) => `(${type}-width: ${breakpoint}px),${breakpoint}`))) ];
+                return uniqItems.map((item => {
+                    const [query, breakpoint] = item.split(",");
+                    return {
+                        query,
+                        breakpoint
+                    };
+                }));
+            }
+            function getMediaHandler(matchMedia, items) {
+                return function mediaHandler() {
+                    if (matchMedia.matches) {
+                        items.forEach((item => {
+                            moveTo(item);
+                        }));
+                        items.reverse();
+                    } else {
+                        items.forEach((item => {
+                            if (item.element.classList.contains(className)) moveBack(item);
+                        }));
+                        items.reverse();
+                    }
+                };
+            }
+            function moveTo(dNode) {
+                const {to, element, order} = dNode;
+                dNode.index = getIndexInParent(dNode.element, dNode.element.parentElement);
+                element.classList.add(className);
+                if (order === "last" || order >= to.children.length) {
+                    to.append(element);
+                    return;
+                }
+                if (order === "first") {
+                    to.prepend(element);
+                    return;
+                }
+                to.children[order].before(element);
+            }
+            function moveBack(dNode) {
+                const {parent, element, index} = dNode;
+                element.classList.remove(className);
+                if (index >= 0 && parent.children[index]) parent.children[index].before(element); else parent.append(element);
+            }
+            function getIndexInParent(element, parent) {
+                return [ ...parent.children ].indexOf(element);
+            }
+            function sortDNodes(items) {
+                const isMin = type === "min" ? 1 : 0;
+                return [ ...items ].sort(((a, b) => {
+                    if (a.breakpoint === b.breakpoint) {
+                        if (a.order === b.order) return 0;
+                        if (a.order === "first" || b.order === "last") return -1 * isMin;
+                        if (a.order === "last" || b.order === "first") return 1 * isMin;
+                        return 0;
+                    }
+                    return (a.breakpoint - b.breakpoint) * isMin;
+                }));
+            }
+            function isNumber(value) {
+                return !isNaN(value);
+            }
+        }
+        useDynamicAdapt();
         function initRatings() {
             const ratings = document.querySelectorAll(".rating:not(.rating--initialized)");
             if (ratings.length > 0) ratings.forEach((rating => {
@@ -3441,12 +3475,12 @@
             const startPoint = mainSection.dataset.scroll ? mainSection.dataset.scroll : 1;
             const fullScrolled = "_main-full-scroll";
             const offset = 20;
-            let mainOffset = mainSection.offsetHeight;
+            let mainSectionHeight = mainSection.offsetHeight;
             document.addEventListener("scroll", (function(e) {
                 const scrollTop = window.scrollY;
-                if (scrollTop >= startPoint && scrollTop >= mainOffset + offset) !mainWrapper.classList.contains(fullScrolled) ? mainWrapper.classList.add(fullScrolled) : null; else {
+                if (scrollTop >= startPoint && scrollTop >= mainSectionHeight + offset) !mainWrapper.classList.contains(fullScrolled) ? mainWrapper.classList.add(fullScrolled) : null; else {
                     mainWrapper.classList.contains(fullScrolled) ? mainWrapper.classList.remove(fullScrolled) : null;
-                    mainOffset = mainSection.offsetHeight;
+                    mainSectionHeight = mainSection.offsetHeight;
                 }
             }));
         }
@@ -7006,7 +7040,7 @@
                 if (slider) new swiper_core_Swiper(slider, {
                     modules: [ navigation_Navigation, pagination_Pagination ],
                     slidesPerView: 4,
-                    spaceBetween: 32,
+                    spaceBetween: `${32 / 1376 * 100}%`,
                     speed: 600,
                     lazy: true,
                     watchSlidesProgress: true,
@@ -7028,11 +7062,11 @@
                         },
                         992: {
                             slidesPerView: 3,
-                            spaceBetween: 24
+                            spaceBetween: `${24 / 1376 * 100}%`
                         },
                         1200: {
                             slidesPerView: 4,
-                            spaceBetween: 32
+                            spaceBetween: `${32 / 1376 * 100}%`
                         }
                     },
                     on: {}
@@ -11794,7 +11828,7 @@
         const inputmask_es6_inputmask = window.Inputmask;
         window.Inputmask = void 0;
         const inputmask_es6 = inputmask_es6_inputmask;
-        function init_InputMask() {
+        function init_PhoneMask() {
             const selector = document.querySelector("[data-phone-mask]");
             if (!selector) return;
             const mask = selector.getAttribute("data-phone-mask");
@@ -12086,8 +12120,8 @@
                         return isError = true;
                     }
                     if (input.inputmask) {
-                        const status = !input.inputmask.isComplete();
-                        if (status && value !== "") {
+                        const isComplete = input.inputmask.isComplete();
+                        if (!isComplete && value !== "") {
                             showTextNotice({
                                 input,
                                 text: "Please enter full phone number",
@@ -12255,7 +12289,7 @@
         init_ProductReviewsSlider();
         init_ProductsSlider();
         init_ProductGallary();
-        init_InputMask();
+        init_PhoneMask();
         scrollToBlock();
         showMoreStaticElems();
         setInputMode();
