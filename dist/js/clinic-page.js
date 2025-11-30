@@ -3471,16 +3471,22 @@
         function headerScroll() {
             const mainWrapper = document.querySelector(".wrapper");
             const mainSection = document.querySelector(".main");
-            if (!mainSection && !mainWrapper) return;
-            const startPoint = mainSection.dataset.scroll ? mainSection.dataset.scroll : 1;
-            const fullScrolled = "_main-full-scroll";
+            if (!mainSection || !mainWrapper) return;
+            const mainFullScrollClass = "_main-full-scroll";
             const offset = 20;
             let mainSectionHeight = mainSection.offsetHeight;
-            document.addEventListener("scroll", (function(e) {
-                const scrollTop = window.scrollY;
-                if (scrollTop >= startPoint && scrollTop >= mainSectionHeight + offset) !mainWrapper.classList.contains(fullScrolled) ? mainWrapper.classList.add(fullScrolled) : null; else {
-                    mainWrapper.classList.contains(fullScrolled) ? mainWrapper.classList.remove(fullScrolled) : null;
-                    mainSectionHeight = mainSection.offsetHeight;
+            window.addEventListener("resize", (() => {
+                mainSectionHeight = mainSection.offsetHeight;
+            }));
+            let ticking = false;
+            document.addEventListener("scroll", (() => {
+                if (!ticking) {
+                    window.requestAnimationFrame((() => {
+                        const scrollTop = window.scrollY;
+                        if (scrollTop >= mainSectionHeight + offset) mainWrapper.classList.add(mainFullScrollClass); else mainWrapper.classList.remove(mainFullScrollClass);
+                        ticking = false;
+                    }));
+                    ticking = true;
                 }
             }));
         }
