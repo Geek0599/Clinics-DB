@@ -3626,6 +3626,9 @@ select.btn--select-ic {
         -ms-transform: translateY(-0.125rem);
             transform: translateY(-0.125rem);
   }
+  .product-card--active .product-card__btn.btn--gray:hover {
+    background-color: var(--white-light-x);
+  }
   .product-gallery__image-ibg {
     position: relative;
   }

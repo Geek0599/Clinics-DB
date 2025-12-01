@@ -2073,16 +2073,13 @@ select.btn--select-ic {
 }
 .filter-catalog__active-filter {
   opacity: 1;
-  -webkit-transition: opacity 0.05s ease 0.05s, -webkit-transform 0.1s;
-  transition: opacity 0.05s ease 0.05s, -webkit-transform 0.1s;
-  transition: opacity 0.05s ease 0.05s, transform 0.1s;
-  transition: opacity 0.05s ease 0.05s, transform 0.1s, -webkit-transform 0.1s;
+}
+.filter-catalog__active-filter.btn {
+  -webkit-transition: opacity 0.05s ease 0.05s, background-color 0.25s;
+  transition: opacity 0.05s ease 0.05s, background-color 0.25s;
 }
 .filter-catalog__active-filter._remove {
   opacity: 0;
-  -webkit-transform: scale(0.7);
-      -ms-transform: scale(0.7);
-          transform: scale(0.7);
   pointer-events: none;
 }
 .filter-catalog__items {
@@ -3565,6 +3562,9 @@ select.btn--select-ic {
     -webkit-transform: translateY(-0.125rem);
         -ms-transform: translateY(-0.125rem);
             transform: translateY(-0.125rem);
+  }
+  .product-card--active .product-card__btn.btn--gray:hover {
+    background-color: var(--white-light-x);
   }
   .pagination__link:hover:not(._active):not(.pagination__arrow--disabled):not(:disabled), .pagination__arrow:hover:not(._active):not(.pagination__arrow--disabled):not(:disabled) {
     background-color: var(--gray-xx-light);
