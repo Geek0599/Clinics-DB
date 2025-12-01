@@ -169,100 +169,79 @@
             }
         }
     }
-    function useDynamicAdapt(type = "max") {
-        const className = "_dynamic_adapt_";
-        const attrName = "data-da";
-        const dNodes = getDNodes();
-        const dMediaQueries = getDMediaQueries(dNodes);
-        dMediaQueries.forEach((dMediaQuery => {
-            const matchMedia = window.matchMedia(dMediaQuery.query);
-            const filteredDNodes = dNodes.filter((({breakpoint}) => breakpoint === dMediaQuery.breakpoint));
-            const mediaHandler = getMediaHandler(matchMedia, filteredDNodes);
-            matchMedia.addEventListener("change", mediaHandler);
-            mediaHandler();
-        }));
-        function getDNodes() {
-            const result = [];
-            const elements = [ ...document.querySelectorAll(`[${attrName}]`) ];
-            elements.forEach((element => {
-                const attr = element.getAttribute(attrName);
-                const [toSelector, breakpoint, order] = attr.split(",").map((val => val.trim()));
-                const to = document.querySelector(toSelector);
-                if (to) result.push({
-                    parent: element.parentElement,
-                    element,
-                    to,
-                    breakpoint: breakpoint ?? "767",
-                    order: order !== void 0 ? isNumber(order) ? Number(order) : order : "last",
-                    index: -1
-                });
-            }));
-            return sortDNodes(result);
-        }
-        function getDMediaQueries(items) {
-            const uniqItems = [ ...new Set(items.map((({breakpoint}) => `(${type}-width: ${breakpoint}px),${breakpoint}`))) ];
-            return uniqItems.map((item => {
-                const [query, breakpoint] = item.split(",");
-                return {
-                    query,
-                    breakpoint
-                };
-            }));
-        }
-        function getMediaHandler(matchMedia, items) {
-            return function mediaHandler() {
-                if (matchMedia.matches) {
-                    items.forEach((item => {
-                        moveTo(item);
-                    }));
-                    items.reverse();
-                } else {
-                    items.forEach((item => {
-                        if (item.element.classList.contains(className)) moveBack(item);
-                    }));
-                    items.reverse();
-                }
-            };
-        }
-        function moveTo(dNode) {
-            const {to, element, order} = dNode;
-            dNode.index = getIndexInParent(dNode.element, dNode.element.parentElement);
-            element.classList.add(className);
-            if (order === "last" || order >= to.children.length) {
-                to.append(element);
-                return;
-            }
-            if (order === "first") {
-                to.prepend(element);
-                return;
-            }
-            to.children[order].before(element);
-        }
-        function moveBack(dNode) {
-            const {parent, element, index} = dNode;
-            element.classList.remove(className);
-            if (index >= 0 && parent.children[index]) parent.children[index].before(element); else parent.append(element);
-        }
-        function getIndexInParent(element, parent) {
-            return [ ...parent.children ].indexOf(element);
-        }
-        function sortDNodes(items) {
-            const isMin = type === "min" ? 1 : 0;
-            return [ ...items ].sort(((a, b) => {
-                if (a.breakpoint === b.breakpoint) {
-                    if (a.order === b.order) return 0;
-                    if (a.order === "first" || b.order === "last") return -1 * isMin;
-                    if (a.order === "last" || b.order === "first") return 1 * isMin;
-                    return 0;
-                }
-                return (a.breakpoint - b.breakpoint) * isMin;
-            }));
-        }
-        function isNumber(value) {
-            return !isNaN(value);
-        }
+    function DynamicAdapt(type) {
+        this.type = type;
+        this.resizeTimeout = null;
     }
-    useDynamicAdapt();
+    DynamicAdapt.prototype.init = function() {
+        const _this = this;
+        this.objects = [];
+        this.daClassname = "_dynamic_adapt_";
+        this.nodes = document.querySelectorAll("[data-da]");
+        for (let i = 0; i < this.nodes.length; i++) {
+            const node = this.nodes[i];
+            const data = node.dataset.da.trim();
+            const dataArray = data.split(",");
+            const object = {
+                element: node,
+                parent: node.parentNode,
+                destination: document.querySelector(dataArray[0].trim()),
+                breakpoint: dataArray[1] ? dataArray[1].trim() : "767",
+                place: dataArray[2] ? dataArray[2].trim() : "last",
+                originalNextSibling: node.nextElementSibling,
+                originalIndex: Array.from(node.parentNode.children).indexOf(node),
+                isMoved: false
+            };
+            this.objects.push(object);
+        }
+        window.addEventListener("resize", (function() {
+            clearTimeout(_this.resizeTimeout);
+            _this.resizeTimeout = setTimeout((() => {
+                _this.mediaHandler();
+            }), 10);
+        }));
+        this.mediaHandler();
+    };
+    DynamicAdapt.prototype.mediaHandler = function() {
+        for (let i = 0; i < this.objects.length; i++) {
+            const obj = this.objects[i];
+            const breakpointValue = parseInt(obj.breakpoint, 10);
+            const isMax = this.type !== "min";
+            const query = isMax ? `(max-width: ${breakpointValue}px)` : `(min-width: ${breakpointValue + 1}px)`;
+            const match = window.matchMedia(query).matches;
+            if (match) {
+                if (!obj.isMoved) {
+                    this.moveTo(obj.place, obj.element, obj.destination);
+                    obj.isMoved = true;
+                }
+            } else if (obj.isMoved) {
+                this.moveBack(obj);
+                obj.isMoved = false;
+            }
+        }
+    };
+    DynamicAdapt.prototype.moveTo = function(place, element, destination) {
+        setTimeout((() => {
+            element.classList.add(this.daClassname);
+            if (place === "last" || place >= destination.children.length) destination.appendChild(element); else if (place === "first") destination.insertBefore(element, destination.firstElementChild); else {
+                const index = parseInt(place, 10);
+                destination.insertBefore(element, destination.children[index] || null);
+            }
+        }), 0);
+    };
+    DynamicAdapt.prototype.moveBack = function(obj) {
+        const {parent, element, originalNextSibling, originalIndex} = obj;
+        setTimeout((() => {
+            element.classList.remove(this.daClassname);
+            if (originalNextSibling && originalNextSibling.parentNode === parent) {
+                parent.insertBefore(element, originalNextSibling);
+                return;
+            }
+            if (parent.children.length > 0) if (originalIndex === 0) parent.prepend(element); else if (originalIndex < parent.children.length) parent.insertBefore(element, parent.children[originalIndex]); else parent.appendChild(element); else parent.appendChild(element);
+        }), 0);
+    };
+    const da = new DynamicAdapt("max");
+    da.init();
     function initRatings() {
         const ratings = document.querySelectorAll(".rating:not(.rating--initialized)");
         if (ratings.length > 0) ratings.forEach((rating => {
@@ -333,7 +312,7 @@
         let ticking = false;
         document.addEventListener("scroll", (() => {
             if (!ticking) {
-                window.requestAnimationFrame((() => {
+                requestAnimationFrame((() => {
                     const scrollTop = window.scrollY;
                     if (scrollTop >= mainSectionHeight + offset) mainWrapper.classList.add(mainFullScrollClass); else mainWrapper.classList.remove(mainFullScrollClass);
                     ticking = false;
