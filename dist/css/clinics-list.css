@@ -770,52 +770,37 @@ select.btn--select-ic {
 .btn--light, .product-card--active .product-card__btn.btn--gray {
   background-color: var(--white);
 }
-.btn--dark {
-  color: var(--white);
+.btn--dark, .btn--pink {
   -webkit-box-shadow: 0 -12px 8px -6px inset rgba(255, 255, 255, 0.25);
           box-shadow: 0 -12px 8px -6px inset rgba(255, 255, 255, 0.25);
-  position: relative;
-  background: radial-gradient(circle at 50% 220%, #000000 0%, #565656 133%);
 }
-.btn--dark span {
+.btn--dark span, .btn--pink span {
   position: relative;
-  z-index: 2;
-}
-.btn--dark::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at 50% 100%, #000000 0%, #565656 133%);
-  opacity: 0;
-  -webkit-transition: opacity 0.35s ease;
-  transition: opacity 0.35s ease;
   z-index: 1;
 }
+.btn--dark::before, .btn--pink::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  -webkit-transition: opacity 0.35s ease;
+  transition: opacity 0.35s ease;
+  opacity: 0;
+}
+.btn--dark {
+  position: relative;
+  color: var(--white);
+  background: radial-gradient(circle at 50% 220%, #000000 0%, #565656 133%);
+}
+.btn--dark::before {
+  background: radial-gradient(circle at 50% 100%, #000000 0%, #565656 133%);
+}
 .btn--pink {
-  -webkit-box-shadow: 0 -12px 8px -6px inset rgba(255, 255, 255, 0.25);
-          box-shadow: 0 -12px 8px -6px inset rgba(255, 255, 255, 0.25);
   color: var(--white);
   background: radial-gradient(circle at 50% 100%, #D73869 0%, #FF9DBF 103%);
 }
-.btn--pink span {
-  position: relative;
-  z-index: 2;
-}
 .btn--pink::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   background: radial-gradient(circle at 50% 50%, #d73869 0%, #ff9dbf 103%);
-  opacity: 0;
-  -webkit-transition: opacity 0.35s ease;
-  transition: opacity 0.35s ease;
-  z-index: 1;
 }
 .btn--gray {
   background-color: var(--white-light-x);
@@ -2938,10 +2923,7 @@ select.btn--select-ic {
   .filter-catalog__btn-reset:hover, .footer-bottom__link:hover, .footer-menu__link:hover {
     text-decoration: underline;
   }
-  .btn--dark:hover::before {
-    opacity: 1;
-  }
-  .btn--pink:hover::before {
+  .btn--dark:hover::before, .btn--pink:hover::before {
     opacity: 1;
   }
   .btn--light, .product-card--active .product-card__btn.btn--gray, .btn--gray {
