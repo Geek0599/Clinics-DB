@@ -2690,10 +2690,10 @@ select.btn--select-ic {
   }
   .pagination__link, .pagination__arrow {
     -webkit-box-flex: 0;
-        -ms-flex: 0 0 2.6875rem;
-            flex: 0 0 2.6875rem;
-    width: 2.6875rem;
-    height: 2.6875rem;
+        -ms-flex: 0 0 3rem;
+            flex: 0 0 3rem;
+    width: 3rem;
+    height: 3rem;
   }
   .cta-section__content {
     -ms-grid-columns: 1fr;
@@ -2769,6 +2769,13 @@ select.btn--select-ic {
 @media (max-width: 29.99875em) {
   .main__container {
     gap: 1.5rem;
+  }
+  .main__title-body {
+    gap: 1rem;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
   }
   .main__title-icon-ibg-contain {
     -webkit-box-flex: 0;

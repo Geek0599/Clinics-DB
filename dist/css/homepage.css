@@ -2861,6 +2861,13 @@ select.btn--select-ic {
   .main__container {
     gap: 1.5rem;
   }
+  .main__title-body {
+    gap: 1rem;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+  }
   .main__title-icon-ibg-contain {
     -webkit-box-flex: 0;
         -ms-flex: 0 0 3rem;
@@ -2920,6 +2927,9 @@ select.btn--select-ic {
   }
   .action-card--images {
     padding: 1rem 1.5rem;
+  }
+  .action-card--compact {
+    gap: 1.125rem;
   }
   .action-card__content {
     gap: 0.375rem;
