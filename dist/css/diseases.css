@@ -1455,6 +1455,9 @@ select.btn--select-ic {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-column-gap: 2rem;
      -moz-column-gap: 2rem;
           column-gap: 2rem;
@@ -2420,7 +2423,7 @@ select.btn--select-ic {
   .search-input__btn {
     display: none;
   }
-  .wrapper._main-full-scroll {
+  .wrapper {
     padding-bottom: 6.5rem;
   }
   .actions-header {

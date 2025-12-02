@@ -1455,6 +1455,9 @@ select.btn--select-ic {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-column-gap: 2rem;
      -moz-column-gap: 2rem;
           column-gap: 2rem;
@@ -1645,7 +1648,7 @@ select.btn--select-ic {
   height: 2rem;
   font-size: 0.74375em;
   position: relative;
-  top: 0.0625em;
+  top: 0.09375em;
 }
 .catalog-nav-action__item {
   display: -ms-grid;
@@ -1668,7 +1671,9 @@ select.btn--select-ic {
 .catalog-nav-action__link-all._icon-arrow-right::before {
   width: 1rem;
   height: 1rem;
-  font-size: 0.71875rem;
+  font-size: 0.6388888889em;
+  position: relative;
+  top: 0.0434782609em;
 }
 
 .slider-catalog-actions__overflow {
@@ -2397,7 +2402,7 @@ select.btn--select-ic {
   .search-input__btn {
     display: none;
   }
-  .wrapper._main-full-scroll {
+  .wrapper {
     padding-bottom: 6.5rem;
   }
   .actions-header {
