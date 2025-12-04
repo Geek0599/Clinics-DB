@@ -3470,6 +3470,38 @@
             }));
         }
         headerScroll();
+        function animIcons() {
+            const btns = document.querySelectorAll("[data-menu-icon-link]");
+            const isHover = window.matchMedia("(hover: hover)").matches;
+            btns.forEach((btn => {
+                const video = btn.querySelector("video");
+                if (!video) return;
+                let sourcesLoaded = false;
+                if (isHover) loadSources();
+                btn.classList.add("_unhover");
+                btn.addEventListener("mouseenter", (() => {
+                    if (!sourcesLoaded) loadSources();
+                    video.currentTime = 0;
+                    video.play();
+                    btn.classList.remove("_unhover");
+                }));
+                btn.addEventListener("mouseleave", (() => {
+                    video.pause();
+                    video.currentTime = 0;
+                    btn.classList.add("_unhover");
+                }));
+                function loadSources() {
+                    if (sourcesLoaded) return;
+                    const sources = video.querySelectorAll("source");
+                    sources.forEach((source => {
+                        if (source.dataset.src) source.src = source.dataset.src;
+                    }));
+                    video.load();
+                    sourcesLoaded = true;
+                }
+            }));
+        }
+        animIcons();
         function ssr_window_esm_isObject(obj) {
             return obj !== null && typeof obj === "object" && "constructor" in obj && obj.constructor === Object;
         }
@@ -12270,6 +12302,10 @@
                 }
             }
         }
+        function setGalleryItemsCountClass() {
+            const galleryItems = document.querySelector("[data-gallery-items]");
+            if (galleryItems) galleryItems.classList.add(`gallery-items-${galleryItems.children.length}`);
+        }
         init_ProductCardsSlider();
         init_ProductReviewsSlider();
         init_ProductsSlider();
@@ -12278,6 +12314,7 @@
         scrollToBlock();
         showMoreStaticElems();
         setInputMode();
+        setGalleryItemsCountClass();
         const {removeStatus} = formValidate();
         formOrder();
         function formOrder() {

@@ -8,11 +8,11 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<link rel="shortcut icon" href="favicon.ico">
 	<meta name="robots" content="noindex, nofollow">
-	<link rel="preload" href="./fonts/VelaSans-Bold.woff2" as="font" type="font/woff2">
-	<link rel="preload" href="./fonts/VelaSans-ExtraBold.woff2" as="font" type="font/woff2">
-	<link rel="preload" href="./fonts/VelaSans-Medium.woff2" as="font" type="font/woff2">
-	<link rel="preload" href="./fonts/VelaSans-SemiBold.woff2" as="font" type="font/woff2">
-	<link rel="preload" href="./fonts/icons.woff2" as="font" type="font/woff2">
+	<link rel="preload" href="./fonts/VelaSans-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="./fonts/VelaSans-ExtraBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="./fonts/VelaSans-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="./fonts/VelaSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="./fonts/icons.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 	<style>
 		@font-face {
 			font-family: VelaSans;
@@ -54,8 +54,8 @@
 			font-style: normal
 		}
 	</style>
-	<link rel="preload" href="css/disease-page.min.css?_v=20251202155737" as="style" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/disease-page.min.css?_v=20251202155737">
+	<link rel="preload" href="css/disease-page.min.css?_v=20251204195614" as="style" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/disease-page.min.css?_v=20251204195614">
 </head>
 
 <body>
@@ -65,34 +65,51 @@
 				<header class="header">
 					<div class="header__wrapper">
 						<div class="header__container">
-							<div class="header__body"> <a href="#" class="header__logo logo"> <img class="img" width="149" height="64" fetchpriority="high" loading="eager" decoding="async" src="img/logo/logo.svg" alt="Stem-Health logo"> </a>
-								<nav data-da=".header-menu-mobile__body, 1600, 2" class="header__menu menu">
-									<ul class="menu__list">
-										<li class="menu__item"><a href="#" class="menu__link btn btn--light">Home</a></li>
-										<li class="menu__item"><a href="#" class="menu__link btn btn--light">Clinics</a></li>
-										<li class="menu__item"><a href="#" class="menu__link btn btn--light">Treatments</a></li>
-										<li class="menu__item"><a href="#" class="menu__link btn btn--light">Diseases</a></li>
-										<li class="menu__item"><a href="#" class="menu__link btn btn--light">Contacts</a></li>
-										<li class="menu__item"> <select id="lang-select" class="menu__link btn btn--light">
-												<option selected="selected" value="en">EN</option>
-												<option value="ua">UA</option>
-												<option value="ru">RU</option>
-											</select> </li>
-									</ul>
-								</nav>
-								<div data-da=".header-menu-mobile__body, 850, 1" class="header__actions actions-header"> <a href="tel:+180034234234" class="actions-header__btn btn btn--light">+1(800)342-342-34</a> <a href="#" class="actions-header__btn btn btn--dark"><span>Free Consultation</span></a> </div>
-								<div class="header__menu-icon menu-icon"> <button aria-label="Open menu" type="button" class="menu-icon__icon icon-menu"><span></span></button>
-									<div class="menu-icon__menu-mobile header-menu-mobile">
-										<div class="header-menu-mobile__body">
-											<div class="header-menu-mobile__head"> <a href="#" class="header-menu-mobile__logo logo"> <img class="img" width="149" height="64" fetchpriority="high" loading="eager" decoding="async" src="img/logo/logo.svg" alt="Stem-Health logo"> </a> <button aria-label="Open menu" type="button" class="header-menu-mobile__icon icon-menu"><span></span></button> </div>
-										</div>
+							<div class="header__left"> <a href="#" class="header__logo logo"> <img class="img" width="169" height="56" fetchpriority="high" loading="eager" decoding="async" src="img/logo/logo.svg" alt="Stem-Health logo"> </a> <select data-da=".menu__list, 1600, last" id="lang-select" class="header__lang btn btn--light">
+									<option selected="selected" value="en">EN</option>
+									<option value="ua">UA</option>
+									<option value="ru">RU</option>
+								</select> </div>
+							<nav data-da=".header-menu-mobile__body, 1600, 2" class="header__menu menu">
+								<ul class="menu__list">
+									<li class="menu__item"> <a data-menu-icon-link href="#" class="menu__link btn btn--light">
+											<div class="btn-icon"> <video class="btn-icon__video btn-anim-icon__video--hospital" width="48" height="48" playsinline muted preload="auto">
+													<source data-src="files/hospital.mp4" type="video/mp4">
+													<source data-src="files/hospital.webm" type="video/webm">
+												</video>
+												<div class="btn-icon__img"> <picture><source srcset="img/header/hospital.webp, img/header/hospital@2x.webp 2x" type="image/webp"><img width="48" height="48" loading="lazy" decoding="async" src="img/header/hospital.png" srcset="img/header/hospital@2x.png 2x" alt="hospital icon"></picture> </div>
+											</div> Clinics
+										</a> </li>
+									<li class="menu__item"> <a data-menu-icon-link href="#" class="menu__link btn btn--light">
+											<div class="btn-icon"> <video class="btn-icon__video btn-anim-icon__video--hospital" width="48" height="48" playsinline muted preload="auto">
+													<source data-src="files/treatments.mp4" type="video/mp4">
+													<source data-src="files/treatments.webm" type="video/webm">
+												</video>
+												<div class="btn-icon__img"> <picture><source srcset="img/header/treatments.webp, img/header/treatments@2x.webp 2x" type="image/webp"><img width="48" height="48" loading="lazy" decoding="async" src="img/header/treatments.png" srcset="img/header/treatments@2x.png 2x" alt="treatments icon"></picture> </div>
+											</div> Treatments
+										</a> </li>
+									<li class="menu__item"> <a data-menu-icon-link href="#" class="menu__link btn btn--light">
+											<div class="btn-icon"> <video class="btn-icon__video" width="48" height="48" playsinline muted preload="auto">
+													<source data-src="files/diseases.mp4" type="video/mp4">
+													<source data-src="files/diseases.webm" type="video/webm">
+												</video>
+												<div class="btn-icon__img"> <picture><source srcset="img/header/diseases.webp, img/header/diseases@2x.webp 2x" type="image/webp"><img width="48" height="48" loading="lazy" decoding="async" src="img/header/diseases.png" srcset="img/header/diseases@2x.png 2x" alt="diseases icon"></picture> </div>
+											</div> Diseases
+										</a> </li>
+								</ul>
+							</nav>
+							<div data-da=".header-menu-mobile__body, 850, 1" class="header__actions actions-header"> <a href="tel:+180034234234" class="actions-header__btn btn btn--light">+1(800)342-342-34</a> <a href="#" class="actions-header__btn btn btn--dark"> <span> Free Consultation </span> </a> </div>
+							<div class="header__menu-icon menu-icon"> <button aria-label="Open menu" type="button" class="menu-icon__icon icon-menu"><span></span></button>
+								<div class="menu-icon__menu-mobile header-menu-mobile">
+									<div class="header-menu-mobile__body">
+										<div class="header-menu-mobile__head"> <a href="#" class="header-menu-mobile__logo logo"> <img class="img" width="149" height="64" fetchpriority="high" loading="eager" decoding="async" src="img/logo/logo.svg" alt="Stem-Health logo"> </a> <button aria-label="Open menu" type="button" class="header-menu-mobile__icon icon-menu"><span></span></button> </div>
 									</div>
 								</div>
-								<div class="header__mobile-float header-mobile-float">
-									<div class="header-mobile-float__search search-input search-input--mob">
-										<div class="search-input__body-input _icon-search"> <input class="search-input__input" required placeholder="Начните поиск…" name="q" type="text"> </div>
-									</div> <button aria-label="Open menu" type="button" class="header-mobile-float__btn icon-menu"><span></span></button>
-								</div>
+							</div>
+							<div class="header__mobile-float header-mobile-float">
+								<div class="header-mobile-float__search search-input search-input--mob">
+									<div class="search-input__body-input _icon-search"> <input class="search-input__input" required placeholder="Начните поиск…" name="q" type="text"> </div>
+								</div> <button aria-label="Open menu" type="button" class="header-mobile-float__btn icon-menu"><span></span></button>
 							</div>
 						</div>
 					</div>
@@ -464,7 +481,7 @@
 			</div>
 		</footer>
 	</div>
-	<script async src="js/disease-page.min.js?_v=20251202155737"></script>
+	<script async src="js/disease-page.min.js?_v=20251204195614"></script>
 </body>
 
 </html>
