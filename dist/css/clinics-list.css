@@ -934,7 +934,7 @@ select.btn--select-ic {
   height: 3rem;
   position: relative;
 }
-.btn-icon__video, .btn-icon__img {
+.btn-icon__video, .btn-icon__img, .btn-icon [data-btn-icon-img-fallback] {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -944,7 +944,7 @@ select.btn--select-ic {
   -o-object-fit: contain;
      object-fit: contain;
 }
-.btn-icon__video {
+.btn-icon__video, .btn-icon [data-btn-icon-img-fallback] {
   -webkit-transform: scale(1);
       -ms-transform: scale(1);
           transform: scale(1);
