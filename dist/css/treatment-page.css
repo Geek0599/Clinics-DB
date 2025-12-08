@@ -949,7 +949,10 @@ select.btn--select-ic {
   height: 3rem;
   position: relative;
 }
-.btn-icon__video, .btn-icon__img, .btn-icon [data-btn-icon-img-fallback] {
+.btn-icon__video {
+  display: none;
+}
+.btn-icon__canvas, .btn-icon__img {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -959,15 +962,10 @@ select.btn--select-ic {
   -o-object-fit: contain;
      object-fit: contain;
 }
-.btn-icon__video, .btn-icon [data-btn-icon-img-fallback] {
+.btn-icon__canvas {
   -webkit-transform: scale(1);
       -ms-transform: scale(1);
           transform: scale(1);
-  backface-visibility: hidden;
-  -webkit-mask-image: -webkit-radial-gradient(white, #000);
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -webkit-appearance: none;
 }
 .btn-icon__img {
   -webkit-transform: scale(0);
@@ -989,12 +987,12 @@ select.btn--select-ic {
   transition: transform 0.2s;
   transition: transform 0.2s, -webkit-transform 0.2s;
 }
-.menu__link._unhover .btn-icon__video {
+.menu__link._unhover .btn-icon__canvas {
   -webkit-transform: scale(0);
       -ms-transform: scale(0);
           transform: scale(0);
 }
-.loaded .menu__link._unhover .btn-icon__video {
+.loaded .menu__link._unhover .btn-icon__canvas {
   -webkit-transition: -webkit-transform 0.08s;
   transition: -webkit-transform 0.08s;
   transition: transform 0.08s;

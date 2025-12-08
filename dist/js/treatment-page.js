@@ -325,150 +325,72 @@
     function animIcons() {
         const btns = document.querySelectorAll("[data-menu-icon-link]");
         const isHover = window.matchMedia("(hover: hover)").matches;
-        const AUTOPLAY_KEY = "site:videoAutoplayAllowed";
-        function tryPlayVideo(video, timeout = 500) {
-            return new Promise((resolve => {
-                if (!video) return resolve(false);
-                if (!video.paused && !video.ended) return resolve(true);
-                let timedOut = false;
-                const timer = setTimeout((() => {
-                    timedOut = true;
-                    cleanup();
-                    resolve(!video.paused && !video.ended);
-                }), timeout);
-                function onPlaying() {
-                    if (timedOut) return;
-                    cleanup();
-                    resolve(true);
-                }
-                function onError() {
-                    if (timedOut) return;
-                    cleanup();
-                    resolve(false);
-                }
-                function cleanup() {
-                    clearTimeout(timer);
-                    video.removeEventListener("playing", onPlaying);
-                    video.removeEventListener("error", onError);
-                }
-                video.addEventListener("playing", onPlaying);
-                video.addEventListener("error", onError);
-                const p = video.play();
-                if (p && typeof p.then === "function") p.then((() => {})).catch((() => {
-                    cleanup();
-                    resolve(false);
-                }));
-            }));
-        }
-        function createGifElement(video, gifSrc) {
-            const img = document.createElement("img");
-            img.setAttribute("data-btn-icon-img-fallback", "");
-            img.src = gifSrc;
-            return img;
-        }
-        function makeGifPathFromSource(sourceUrl) {
-            if (!sourceUrl) return null;
-            const noQs = sourceUrl.split("?")[0];
-            const gif = noQs.replace(/\.(mp4|webm|mov|m4v)$/i, ".gif");
-            return gif === noQs ? `${noQs}.gif` : gif;
-        }
-        function onUserInteractionTryEnableAutoplay() {
-            if (localStorage.getItem(AUTOPLAY_KEY) === "1") return;
-            const videos = document.querySelectorAll("video");
-            const tryPromises = Array.from(videos).map((v => tryPlayVideo(v, 800)));
-            Promise.all(tryPromises).then((results => {
-                if (results.some(Boolean)) {
-                    localStorage.setItem(AUTOPLAY_KEY, "1");
-                    document.querySelectorAll(".btn-icon__gif-fallback").forEach((img => {
-                        img.remove();
-                    }));
-                }
-            })).finally((() => {
-                document.removeEventListener("click", onUserInteractionTryEnableAutoplay);
-            }));
-        }
-        document.addEventListener("click", onUserInteractionTryEnableAutoplay, {
-            once: true
-        });
         btns.forEach((btn => {
             const video = btn.querySelector("video");
             if (!video) return;
-            const container = video.parentElement;
-            if (container && getComputedStyle(container).position === "static") container.style.position = container.style.position || "relative";
+            const canvas = btn.querySelector("canvas");
+            if (!canvas) return;
+            const ctx = canvas.getContext("2d");
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = "high";
             let sourcesLoaded = false;
-            let gifElement = null;
+            let duration;
+            let isPlaying = false;
+            let animationId;
+            let startTime = 0;
+            function renderFrame(timestamp) {
+                if (!isPlaying) return;
+                if (!startTime) startTime = timestamp;
+                const elapsed = (timestamp - startTime) / 1e3;
+                if (elapsed >= duration) {
+                    stop();
+                    return;
+                }
+                video.currentTime = elapsed;
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                animationId = requestAnimationFrame(renderFrame);
+            }
+            function start() {
+                if (isPlaying) return;
+                isPlaying = true;
+                startTime = 0;
+                animationId = requestAnimationFrame(renderFrame);
+            }
+            function stop() {
+                if (!isPlaying) return;
+                isPlaying = false;
+                cancelAnimationFrame(animationId);
+                video.currentTime = 0;
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            }
+            async function loadSources() {
+                if (sourcesLoaded) return;
+                const sources = video.querySelectorAll("source");
+                sources.forEach((source => {
+                    if (source.dataset.src) source.src = source.dataset.src;
+                }));
+                video.load();
+                await new Promise((res => video.addEventListener("loadedmetadata", res, {
+                    once: true
+                })));
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                duration = video.duration;
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                sourcesLoaded = true;
+            }
             if (isHover) loadSources();
             btn.classList.add("_unhover");
             btn.addEventListener("mouseenter", (async () => {
-                if (!sourcesLoaded) loadSources();
-                if (localStorage.getItem(AUTOPLAY_KEY) === "1") try {
-                    video.currentTime = 0;
-                    await video.play();
-                    btn.classList.remove("_unhover");
-                    return;
-                } catch (e) {}
-                const ok = await tryPlayVideo(video, 400);
+                if (!sourcesLoaded) await loadSources();
+                video.currentTime = 0;
+                start();
                 btn.classList.remove("_unhover");
-                if (ok) {
-                    video.currentTime = 0;
-                    if (gifElement && gifElement.parentNode) {
-                        gifElement.remove();
-                        gifElement = null;
-                    }
-                } else showGifFallback(video);
             }));
             btn.addEventListener("mouseleave", (() => {
-                if (!video.paused) {
-                    video.pause();
-                    video.currentTime = 0;
-                }
+                stop();
                 btn.classList.add("_unhover");
-                if (gifElement && gifElement.parentNode) {
-                    gifElement.remove();
-                    gifElement = null;
-                }
             }));
-            btn.addEventListener("click", (async e => {
-                try {
-                    const ok = await tryPlayVideo(video, 800);
-                    if (ok) {
-                        localStorage.setItem(AUTOPLAY_KEY, "1");
-                        if (gifElement && gifElement.parentNode) {
-                            gifElement.remove();
-                            gifElement = null;
-                        }
-                    }
-                } catch (err) {}
-            }));
-            function loadSources() {
-                if (sourcesLoaded) return;
-                const canWebm = video.canPlayType('video/webm; codecs="vp8, vorbis"') || video.canPlayType("video/webm");
-                const sources = video.querySelectorAll("source");
-                sources.forEach((source => {
-                    if (!source.dataset.src) return;
-                    if (source.type.includes("webm")) {
-                        if (canWebm) source.src = source.dataset.src;
-                    } else if (source.type.includes("mp4")) {
-                        if (!canWebm) source.src = source.dataset.src;
-                    } else source.src = source.dataset.src;
-                }));
-                video.load();
-                sourcesLoaded = true;
-            }
-            function showGifFallback(videoEl) {
-                if (gifElement && gifElement.parentNode) {
-                    gifElement.remove();
-                    gifElement = null;
-                }
-                const firstSource = videoEl.querySelector("source");
-                const srcCandidate = firstSource ? firstSource.dataset.src || firstSource.src : null;
-                const gifPathBase = makeGifPathFromSource(srcCandidate);
-                if (!gifPathBase) return;
-                const gifPath = gifPathBase + "?v=" + Date.now();
-                gifElement = createGifElement(videoEl, gifPath);
-                gifElement.style.zIndex = 11;
-                videoEl.parentNode.insertBefore(gifElement, videoEl.nextSibling);
-            }
         }));
     }
     animIcons();
