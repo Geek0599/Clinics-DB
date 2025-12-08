@@ -251,26 +251,45 @@
                 video.currentTime = 0;
                 ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
             }
-            async function loadSources() {
-                if (sourcesLoaded) return;
-                const sources = video.querySelectorAll("source");
-                sources.forEach((source => {
-                    if (source.dataset.src) source.src = source.dataset.src;
+            function getVideoType(url) {
+                const ext = url.split(".").pop().toLowerCase();
+                switch (ext) {
+                  case "webm":
+                    return "video/webm";
+
+                  case "mp4":
+                    return "video/mp4";
+
+                  case "mov":
+                    return "video/quicktime";
+
+                  case "ogg":
+                  case "ogv":
+                    return "video/ogg";
+
+                  default:
+                    return "video/mp4";
+                }
+            }
+            async function loadSources(video) {
+                if (video.dataset.sourcesLoaded) return;
+                const sources = (video.dataset.sources || "").split(",").map((s => s.trim())).filter(Boolean);
+                sources.forEach((src => {
+                    const source = document.createElement("source");
+                    source.src = src;
+                    source.type = getVideoType(src);
+                    video.appendChild(source);
                 }));
                 video.load();
                 await new Promise((res => video.addEventListener("loadedmetadata", res, {
                     once: true
                 })));
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                duration = video.duration;
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                sourcesLoaded = true;
+                video.dataset.sourcesLoaded = true;
             }
-            if (isHover) loadSources();
+            if (isHover) loadSources(video);
             btn.classList.add("_unhover");
             btn.addEventListener("mouseenter", (async () => {
-                if (!sourcesLoaded) await loadSources();
+                if (!sourcesLoaded) await loadSources(video);
                 video.currentTime = 0;
                 start();
                 btn.classList.remove("_unhover");
