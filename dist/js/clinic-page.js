@@ -12452,13 +12452,13 @@
                     }));
                 }));
                 function handleGoTo(e, btn) {
-                    const params = btn.dataset.goTo.split(",");
-                    const isMobileHeader = false;
-                    const offsetTop = params[1] && params[2] && window.innerWidth <= 479.98 ? params[2] : params[1] ? params[1] : 20;
-                    const speed = params[3] ? params[3] : 500;
+                    let [targetBlock, speed] = btn.dataset.goTo.split(",");
+                    if (!targetBlock) return;
+                    const stickyTitlesOffset = document.querySelector("[data-sticky-titles]")?.offsetHeight + 12;
+                    let offsetTop = stickyTitlesOffset ? stickyTitlesOffset : 20;
+                    speed = speed ? speed : 400;
                     gotoBlock({
-                        noHeader: isMobileHeader,
-                        targetBlock: params[0],
+                        targetBlock,
                         offsetTop,
                         speed
                     });
@@ -12468,6 +12468,75 @@
         function setGalleryItemsCountClass() {
             const galleryItems = document.querySelector("[data-gallery-items]");
             if (galleryItems) galleryItems.classList.add(`gallery-items-${galleryItems.children.length}`);
+        }
+        function autoResizeTextarea() {
+            const inputs = document.querySelectorAll("[data-input-auto-resize]");
+            if (!inputs.length) return;
+            inputs.forEach((input => {
+                const MAX_HEIGHT = parseFloat(getComputedStyle(input).maxHeight);
+                const setInputHeight = () => {
+                    const prevHeight = input.offsetHeight;
+                    input.style.height = "auto";
+                    const newHeight = Math.min(input.scrollHeight, MAX_HEIGHT);
+                    input.style.height = prevHeight + "px";
+                    void input.offsetHeight;
+                    input.style.height = newHeight + "px";
+                };
+                input.addEventListener("input", setInputHeight);
+            }));
+        }
+        function scrollBasedNavigation({buttonSelector = "[data-go-to]", stickySelector = "[data-sticky-titles]", activeClass = "_active"} = {}) {
+            const buttons = document.querySelectorAll(buttonSelector);
+            if (!buttons.length) return;
+            const sticky = document.querySelector(stickySelector);
+            const getStickyHeight = () => sticky ? sticky.offsetHeight + (window.innerWidth > 479.98 ? 32 : 24) : 0;
+            let observer = null;
+            let sectionMap = new Map;
+            let isClickScroll = false;
+            const setActiveButton = button => {
+                buttons.forEach((btn => btn.classList.remove(activeClass)));
+                button.classList.add(activeClass);
+                button.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest",
+                    inline: "center"
+                });
+            };
+            buttons.forEach((button => {
+                button.addEventListener("click", (() => {
+                    isClickScroll = true;
+                    setActiveButton(button);
+                    clearTimeout(button._scrollTimeout);
+                    button._scrollTimeout = setTimeout((() => {
+                        isClickScroll = false;
+                    }), 400);
+                }));
+            }));
+            const createObserver = () => {
+                if (observer) observer.disconnect();
+                sectionMap.clear();
+                const stickyHeight = getStickyHeight();
+                buttons.forEach((button => {
+                    const selector = button.dataset.goTo;
+                    const section = document.querySelector(selector);
+                    if (section) sectionMap.set(section, button);
+                }));
+                observer = new IntersectionObserver((entries => {
+                    if (isClickScroll) return;
+                    entries.forEach((entry => {
+                        if (!entry.isIntersecting) return;
+                        const activeButton = sectionMap.get(entry.target);
+                        if (activeButton && !activeButton.classList.contains(activeClass)) setActiveButton(activeButton);
+                    }));
+                }), {
+                    root: null,
+                    threshold: 0,
+                    rootMargin: `-${stickyHeight}px 0px -100% 0px`
+                });
+                sectionMap.forEach(((_, section) => observer.observe(section)));
+            };
+            createObserver();
+            window.addEventListener("resize", createObserver);
         }
         function init_PopupSimple() {
             class PopupSimple {
@@ -12602,6 +12671,8 @@
         showMoreStaticElems();
         setInputMode();
         setGalleryItemsCountClass();
+        autoResizeTextarea();
+        scrollBasedNavigation();
         const {removeStatus} = formValidate();
         formOrder();
         function formOrder() {
