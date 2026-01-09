@@ -12571,7 +12571,7 @@
                         error: "error.svg"
                     };
                     const isDev = "production" === "development";
-                    const basePath = isDev ? "/img" : "/img";
+                    const basePath = isDev ? "/img" : "./img";
                     const alertPopupTemplate = `<div id="custom-alert" role="dialog" aria-modal="true" aria-label="${title}" class="popup ${classModificator ? "popup--" + classModificator : ""}">\n                    <div class="popup__wrapper">\n                        <div class="popup__content text-center">\n                            <div class="popup__icon">\n                                <img width="32" height="32" src="${basePath}/icons/${icons[typeIcon]}" alt="${typeIcon} icon">\n                            </div>\n                            <div class="popup__title title-md">${title}</div>\n                            <div class="popup__text text text--lh">${text}</div>\n                            <div class="popup__actions">\n                                <button data-close type="button" class="popup__btn btn btn--dark btn--sm">${textBtn}</button>\n                            </div>\n                        </div>\n                    </div>\n                </div>`;
                     document.body.insertAdjacentHTML("beforeend", alertPopupTemplate);
                     const newPopup = document.querySelector("#custom-alert");
