@@ -1263,6 +1263,9 @@ select.btn--select-ic {
     gap: calc(1.5rem + 1 * (100vw - 100rem) / 6.25);
   }
 }
+.header__lang {
+  height: 3.5rem;
+}
 
 .menu {
   display: -webkit-box;
