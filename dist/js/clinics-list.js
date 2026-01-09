@@ -13,6 +13,7 @@
             document.documentElement.classList.add(className);
         }));
     }
+    const isHover = () => window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     function addLoadedClass() {
         window.addEventListener("load", (function() {
             setTimeout((function() {
@@ -119,12 +120,24 @@
         }
     };
     function menuInit() {
-        if (document.querySelector(".icon-menu")) document.addEventListener("click", (function(e) {
-            if (bodyLockStatus && e.target.closest(".icon-menu")) {
-                bodyLockToggle();
-                document.documentElement.classList.toggle("menu-open");
-            }
-        }));
+        const menuOpenClass = "menu-open";
+        const btnMenuIcon = document.querySelector(".icon-menu");
+        if (btnMenuIcon) {
+            const isOpen = () => document.documentElement.classList.contains(menuOpenClass);
+            document.addEventListener("click", (function(e) {
+                if (bodyLockStatus && e.target.closest(".icon-menu")) {
+                    bodyLockToggle();
+                    document.documentElement.classList.toggle(menuOpenClass);
+                    if (isOpen() && btnMenuIcon.contains(e.target) && window.innerWidth <= 992.98 && window.scrollY > 0) window.scrollTo({
+                        top: 0
+                    });
+                }
+                if (isOpen() && bodyLockStatus && !e.target.closest(".icon-menu") && !e.target.closest(".header-menu-mobile")) {
+                    bodyUnlock();
+                    document.documentElement.classList.remove(menuOpenClass);
+                }
+            }));
+        }
     }
     function uniqArray(array) {
         return array.filter((function(item, index, self) {
@@ -306,9 +319,9 @@
         const mainFullScrollClass = "_main-full-scroll";
         const offset = 20;
         let mainSectionHeight = mainSection.offsetHeight;
-        window.addEventListener("resize", (() => {
-            mainSectionHeight = mainSection.offsetHeight;
-        }));
+        const updateHeight = () => mainSectionHeight = mainSection.offsetHeight;
+        window.addEventListener("resize", updateHeight);
+        window.addEventListener("load", updateHeight);
         let ticking = false;
         document.addEventListener("scroll", (() => {
             if (!ticking) {
@@ -324,7 +337,6 @@
     headerScroll();
     function animIcons() {
         const btns = document.querySelectorAll("[data-menu-icon-link]");
-        const isHover = window.matchMedia("(hover: hover)").matches;
         btns.forEach((btn => {
             const video = btn.querySelector("video");
             if (!video) return;
@@ -333,86 +345,145 @@
             const ctx = canvas.getContext("2d");
             ctx.imageSmoothingEnabled = true;
             ctx.imageSmoothingQuality = "high";
-            let sourcesLoaded = false;
             let duration;
             let isPlaying = false;
             let animationId;
-            let startTime = 0;
+            let startTime = null;
+            let currentProgress = 0;
+            let startProgress = 0;
+            let direction = 1;
+            let loaded = false;
             function renderFrame(timestamp) {
                 if (!isPlaying) return;
                 if (!startTime) startTime = timestamp;
-                const elapsed = (timestamp - startTime) / 1e3;
-                if (elapsed >= duration) {
+                const elapsed = timestamp - startTime;
+                const delta = elapsed / 1e3 / duration;
+                currentProgress = startProgress + direction * delta;
+                if (currentProgress > 1) currentProgress = 1;
+                if (currentProgress < 0) currentProgress = 0;
+                video.currentTime = currentProgress * duration;
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                if (direction > 0 && currentProgress >= 1 || direction < 0 && currentProgress <= 0) {
                     stop();
                     return;
                 }
-                video.currentTime = elapsed;
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
                 animationId = requestAnimationFrame(renderFrame);
             }
             function start() {
                 if (isPlaying) return;
                 isPlaying = true;
-                startTime = 0;
+                startTime = null;
+                startProgress = currentProgress;
                 animationId = requestAnimationFrame(renderFrame);
             }
             function stop() {
                 if (!isPlaying) return;
                 isPlaying = false;
                 cancelAnimationFrame(animationId);
-                video.currentTime = 0;
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
             }
-            function getVideoType(url) {
-                const ext = url.split(".").pop().toLowerCase();
-                switch (ext) {
-                  case "webm":
-                    return "video/webm";
-
-                  case "mp4":
-                    return "video/mp4";
-
-                  case "mov":
-                    return "video/quicktime";
-
-                  case "ogg":
-                  case "ogv":
-                    return "video/ogg";
-
-                  default:
-                    return "video/mp4";
-                }
-            }
-            async function loadSources(video) {
-                if (video.dataset.sourcesLoaded) return;
-                const sources = (video.dataset.sources || "").split(",").map((s => s.trim())).filter(Boolean);
-                sources.forEach((src => {
-                    const source = document.createElement("source");
-                    source.src = src;
-                    source.type = getVideoType(src);
-                    video.appendChild(source);
-                }));
-                video.load();
-                await new Promise((res => video.addEventListener("loadedmetadata", res, {
+            const onLoaded = () => {
+                duration = video.duration;
+                loaded = true;
+                currentProgress = 0;
+                const drawFirstFrame = () => {
+                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                };
+                video.addEventListener("seeked", drawFirstFrame, {
                     once: true
-                })));
-                video.dataset.sourcesLoaded = true;
-            }
-            if (isHover) loadSources(video);
-            btn.classList.add("_unhover");
-            btn.addEventListener("mouseenter", (async () => {
-                if (!sourcesLoaded) await loadSources(video);
+                });
                 video.currentTime = 0;
-                start();
-                btn.classList.remove("_unhover");
-            }));
-            btn.addEventListener("mouseleave", (() => {
+            };
+            video.addEventListener("loadeddata", onLoaded, {
+                once: true
+            });
+            video.load();
+            async function onActive() {
+                if (!loaded) {
+                    video.load();
+                    await new Promise((res => video.addEventListener("loadeddata", res, {
+                        once: true
+                    })));
+                }
+                if (!isHover()) return;
                 stop();
-                btn.classList.add("_unhover");
-            }));
+                direction = 1;
+                start();
+            }
+            function unActive(e) {
+                if (e.target.closest("[data-submenu-item]") && e.target.closest("[data-submenu-item]").classList.contains("_open")) return;
+                stop();
+                direction = -1;
+                start();
+            }
+            btn.addEventListener("mouseenter", onActive);
+            btn.addEventListener("mouseleave", unActive);
+            btn.addEventListener("focus", onActive);
+            btn.addEventListener("blur", unActive);
+            btn.addEventListener("onActive", onActive);
+            btn.addEventListener("unActive", unActive);
         }));
     }
     animIcons();
+    function selectOutline() {
+        document.addEventListener("keydown", (() => {
+            document.documentElement.classList.add("kbd");
+        }));
+        document.addEventListener("mousedown", (() => {
+            document.documentElement.classList.remove("kbd");
+        }));
+    }
+    selectOutline();
+    function showHideSubMenu() {
+        const subMenuItems = document.querySelectorAll("[data-submenu-item]");
+        const classOpen = "_open";
+        if (!subMenuItems.length) return;
+        subMenuItems.forEach((subMenuItem => {
+            const subMenuAction = subMenuItem.querySelector("[data-submenu-action]");
+            const subMenu = subMenuItem.querySelector("[data-submenu]");
+            if (!subMenuAction || !subMenu) return;
+            const isOpen = () => subMenuItem.classList.contains(classOpen);
+            const open = () => {
+                subMenuItem.classList.add(classOpen);
+                subMenuAction.setAttribute("aria-expanded", "true");
+                subMenu.setAttribute("aria-hidden", "false");
+            };
+            const close = () => {
+                subMenuItem.classList.remove(classOpen);
+                subMenuAction.setAttribute("aria-expanded", "false");
+                subMenu.setAttribute("aria-hidden", "true");
+                subMenuAction.dispatchEvent(new CustomEvent("unActive"));
+            };
+            let isPointerDown = false;
+            document.addEventListener("pointerdown", (() => {
+                isPointerDown = true;
+            }));
+            document.addEventListener("keydown", (e => {
+                if (e.key === "Tab") isPointerDown = false;
+            }));
+            document.addEventListener("click", (e => {
+                if (isHover() && isOpen() && !subMenuItem.contains(e.target)) close();
+            }));
+            subMenuAction.addEventListener("click", (e => {
+                if (!isHover()) e.preventDefault();
+                isOpen() ? close() : open();
+            }));
+            subMenuAction.addEventListener("focus", (() => {
+                if (isPointerDown) return;
+                open();
+            }));
+            subMenuItem.addEventListener("focusout", (e => {
+                const relatedTarget = e.relatedTarget;
+                if (relatedTarget && !subMenuItem.contains(relatedTarget)) close();
+            }));
+            subMenuItem.addEventListener("mouseenter", (() => {
+                if (isHover()) open();
+            }));
+            subMenuItem.addEventListener("mouseleave", (() => {
+                if (isHover()) close();
+            }));
+        }));
+    }
+    showHideSubMenu();
     function spollers() {
         const spollersArray = document.querySelectorAll("[data-spollers]");
         if (spollersArray.length > 0) {
@@ -3964,6 +4035,7 @@
                 if (radios.length) radios[0].checked = true;
             }));
         }));
+        filtersPopup();
     }
     function mobilePlaceholder(breakpoint = 479.98) {
         const inputs = document.querySelectorAll("[data-mobile-placeholder]");
@@ -3979,6 +4051,34 @@
         }
         updatePlaceholders();
         window.addEventListener("resize", updatePlaceholders);
+    }
+    function filtersPopup() {
+        const filtersPopup = document.querySelector("[data-filters]");
+        const activeClass = "filters-open";
+        let isClosedSpollers = false;
+        if (document.querySelector("[data-filters-open]")) document.addEventListener("click", (function(e) {
+            if (bodyLockStatus && e.target.closest("[data-filters-open]")) {
+                filtersOpen();
+                !isClosedSpollers && closeSpollers();
+            }
+            if (bodyLockStatus && e.target.closest("[data-filters-close]")) filtersClose();
+        }));
+        function filtersOpen() {
+            bodyLock();
+            document.documentElement.classList.add(activeClass);
+        }
+        function filtersClose() {
+            bodyUnlock();
+            document.documentElement.classList.remove(activeClass);
+        }
+        function closeSpollers() {
+            const spollers = filtersPopup.querySelectorAll("[data-spoller]");
+            spollers.forEach((spoller => {
+                spoller.classList.remove("_spoller-active");
+                spoller.nextElementSibling.setAttribute("hidden", "");
+            }));
+            isClosedSpollers = true;
+        }
     }
     spollers();
     init_ProductCardsSlider();

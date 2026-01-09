@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Frame 6</title>
+    <title>Frame</title>
     <defs>
         <path d="M12,0 C18.627417,-1.77635684e-15 24,5.372583 24,12 C24,18.627417 18.627417,24 12,24 C5.372583,24 0,18.627417 0,12 C0,5.372583 5.372583,0 12,0 Z" id="path-1"></path>
     </defs>
-    <g id="Frame-6" stroke="none" fill="none" opacity="0.5" xlink:href="#path-1" fill-rule="evenodd">
-        <use fill="#FFFFFF" xlink:href="#path-1"></use>
+    <g id="Frame" stroke="none" fill="none" opacity="0.65" xlink:href="#path-1" fill-rule="evenodd">
         <g id="Logo/Facebook-app/_Blue-Square" stroke-width="1">
             <g id="Blue-Square">
-                <rect id="Background" fill="#1877F2" x="0" y="0" width="24" height="24"></rect>
+                <rect id="Background" fill="#000000" x="0" y="0" width="24" height="24"></rect>
                 <g id="s/Facebook-app/White" transform="translate(5.1429, 5.1429)" fill="#FFFFFF">
                     <path d="M8.18593192,3.20089286 C6.81540067,3.20089286 5.91964286,4.03151786 5.91964286,5.53526786 L5.91964286,6.85714286 L4.39620301,6.85714286 L4.39620536,8.59151786 L5.91964051,8.59151786 L5.91964286,12.7842171 C3.05125614,12.334135 0.857142857,9.85191629 0.857142857,6.85714286 C0.857142857,3.54343192 3.54343192,0.857142857 6.85714286,0.857142857 C10.1708538,0.857142857 12.8571429,3.54343192 12.8571429,6.85714286 C12.8571429,9.85191629 10.6630296,12.334135 7.79464286,12.7842171 L7.79464286,8.59151786 L9.19268973,8.59151786 L9.45870301,6.85714286 L7.79464051,6.85714286 L7.79464051,5.73163895 C7.79464051,5.25714676 8.02708192,4.79464286 8.77242958,4.79464286 L9.52901551,4.79464286 L9.52901786,3.31808036 C9.52901786,3.31808036 8.84238114,3.20089286 8.18593192,3.20089286 Z" id="Combined-Shape"></path>
                 </g>

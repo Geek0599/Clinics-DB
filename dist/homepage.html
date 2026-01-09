@@ -54,8 +54,12 @@
 			font-style: normal
 		}
 	</style>
-	<link rel="preload" href="css/homepage.min.css?_v=20251208152331" as="style" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/homepage.min.css?_v=20251208152331">
+	<link rel="preload" href="css/homepage.min.css?_v=20260109144638" as="style" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/homepage.min.css?_v=20260109144638">
+	<link rel="preload" as="image" type="image/webp" imagesrcset="
+		/img/backgrounds/main-bg-mobile.webp 1x,
+		/img/backgrounds/main-bg-mobile@2x.webp 2x
+	" imagesizes="100vw" media="(max-width: 490px)">
 </head>
 
 <body>
@@ -65,28 +69,132 @@
 				<header class="header">
 					<div class="header__wrapper">
 						<div class="header__container">
-							<div class="header__left"> <a href="#" class="header__logo logo"> <img class="img" width="169" height="56" fetchpriority="high" loading="eager" decoding="async" src="img/logo/logo.svg" alt="Stem-Health logo"> </a> <select data-da=".menu__list, 1600, last" id="lang-select" class="header__lang btn btn--light">
-									<option selected="selected" value="en">EN</option>
-									<option value="ua">UA</option>
-									<option value="ru">RU</option>
+							<div class="header__left"> <a href="#" class="header__logo logo"> <img class="img" width="169" height="56" fetchpriority="high" loading="eager" decoding="async" src="img/logo/logo.svg" alt="Stem-Health logo"> </a> <select data-da=".header-menu-mobile__body, 1600, 3" id="lang-select" class="header__lang btn btn--light">
+									<option selected="selected" value="en">En</option>
+									<option value="ua">Ua</option>
+									<option value="ru">Ru</option>
 								</select> </div>
 							<nav data-da=".header-menu-mobile__body, 1600, 2" class="header__menu menu">
 								<ul class="menu__list">
+									<li data-submenu-item class="menu__item"> <a href="#" data-submenu-action data-menu-icon-link class="menu__link btn btn--light menu__link--arrow">
+											<div class="btn-icon"> <canvas width="128" height="128" class="btn-icon__canvas"></canvas> <video class="btn-icon__video" width="48" height="48" playsinline muted preload="none">
+													<source src="files/hospital.webm" type="video/webm">
+													<source src="files/hospital.mp4" type="video/mp4">
+												</video> </div> Clinics
+										</a>
+										<div data-submenu class="menu__sub-menu sub-menu">
+											<div class="sub-menu__body">
+												<div class="sub-menu__overflow">
+													<div class="sub-menu__content scrollbar">
+														<div class="sub-menu__column">
+															<div class="sub-menu__column-title title-md">По странам</div>
+															<ul class="sub-menu__column-list">
+																<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																		<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="24" height="24" loading="lazy" decoding="async" src="img/country-flags/de.svg" alt="de flag"> </div>
+																		<div class="action-card__title text text--semibold">Германия</div>
+																	</a> </li>
+																<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																		<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="24" height="24" loading="lazy" decoding="async" src="img/country-flags/gb.svg" alt="gb flag"> </div>
+																		<div class="action-card__title text text--semibold">Великобритания</div>
+																	</a> </li>
+																<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																		<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="24" height="24" loading="lazy" decoding="async" src="img/country-flags/it.svg" alt="it flag"> </div>
+																		<div class="action-card__title text text--semibold">Италия</div>
+																	</a> </li>
+																<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																		<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="24" height="24" loading="lazy" decoding="async" src="img/country-flags/fr.svg" alt="fr flag"> </div>
+																		<div class="action-card__title text text--semibold">Франция</div>
+																	</a> </li>
+																<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																		<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="24" height="24" loading="lazy" decoding="async" src="img/country-flags/us.svg" alt="us flag"> </div>
+																		<div class="action-card__title text text--semibold">США</div>
+																	</a> </li>
+																<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																		<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="24" height="24" loading="lazy" decoding="async" src="img/country-flags/se.svg" alt="se flag"> </div>
+																		<div class="action-card__title text text--semibold">Швеция</div>
+																	</a> </li>
+																<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																		<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="24" height="24" loading="lazy" decoding="async" src="img/country-flags/ch.svg" alt="ch flag"> </div>
+																		<div class="action-card__title text text--semibold">Швейцария</div>
+																	</a> </li>
+																<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																		<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="24" height="24" loading="lazy" decoding="async" src="img/country-flags/tr.svg" alt="tr flag"> </div>
+																		<div class="action-card__title text text--semibold">Турция</div>
+																	</a> </li>
+															</ul>
+														</div>
+														<div class="sub-menu__column">
+															<div class="sub-menu__column-title title-md">По направлениям</div>
+															<ul class="sub-menu__column-list">
+																<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																		<div class="action-card__img-ibg"> <img width="24" height="24" loading="lazy" decoding="async" src="img/treatment/ortopedia.svg" alt="Ортопедия"> </div>
+																		<div class="action-card__title text text--semibold">Ортопедия</div>
+																	</a> </li>
+																<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																		<div class="action-card__img-ibg"> <img width="24" height="24" loading="lazy" decoding="async" src="img/treatment/nevrologia.svg" alt="Неврология"> </div>
+																		<div class="action-card__title text text--semibold">Неврология</div>
+																	</a> </li>
+																<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																		<div class="action-card__img-ibg"> <img width="24" height="24" loading="lazy" decoding="async" src="img/treatment/cardiologia.svg" alt="Кардиология"> </div>
+																		<div class="action-card__title text text--semibold">Кардиология</div>
+																	</a> </li>
+																<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																		<div class="action-card__img-ibg"> <img width="24" height="24" loading="lazy" decoding="async" src="img/treatment/aesthetic.svg" alt="Эстетическая медицина"> </div>
+																		<div class="action-card__title text text--semibold">Эстетическая медицина</div>
+																	</a> </li>
+																<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																		<div class="action-card__img-ibg"> <img width="24" height="24" loading="lazy" decoding="async" src="img/treatment/pathologie.svg" alt="Патологии"> </div>
+																		<div class="action-card__title text text--semibold">Патологии</div>
+																	</a> </li>
+																<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																		<div class="action-card__img-ibg"> <img width="24" height="24" loading="lazy" decoding="async" src="img/treatment/autoimmune.svg" alt="Аутоимунные заболевания"> </div>
+																		<div class="action-card__title text text--semibold">Аутоимунные заболевания</div>
+																	</a> </li>
+																<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																		<div class="action-card__img-ibg"> <img width="24" height="24" loading="lazy" decoding="async" src="img/treatment/methabolic.svg" alt="Метаболические заболевания"> </div>
+																		<div class="action-card__title text text--semibold">Метаболические заболевания</div>
+																	</a> </li>
+																<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																		<div class="action-card__img-ibg"> <img width="24" height="24" loading="lazy" decoding="async" src="img/treatment/rejuvenation.svg" alt="Омоложение"> </div>
+																		<div class="action-card__title text text--semibold">Омоложение</div>
+																	</a> </li>
+															</ul>
+														</div> <a href="#" class="sub-menu__btn btn btn--dark btn--sm">Все клиники</a>
+														<div class="linearBlur" style="pointer-events:none;transform-origin:center bottom;height:72px;top:auto">
+															<div style="position:relative;z-index:0;width:100%;height:100%;background:linear-gradient(to top,rgba(255,255,255,.79) 0,rgba(255,255,255,0) 100%)">
+																<div style="position:absolute;z-index:1;inset:0px;mask-image:linear-gradient(to top,rgb(0,0,0) 10%,rgba(0,0,0,0) 20.5882%);backdrop-filter:blur(4px)"></div>
+																<div style="position:absolute;z-index:2;inset:0px;mask-image:linear-gradient(to top,rgb(0,0,0) 10%,rgb(0,0,0) 20.5882%,rgba(0,0,0,0) 31.1765%);backdrop-filter:blur(3.03143px)"></div>
+																<div style="position:absolute;z-index:2;inset:0px;mask-image:linear-gradient(to top,rgba(0,0,0,0) 10%,rgb(0,0,0) 20.5882%,rgb(0,0,0) 31.1765%,rgba(0,0,0,0) 41.7647%);backdrop-filter:blur(2.2974px)"></div>
+																<div style="position:absolute;z-index:3;inset:0px;mask-image:linear-gradient(to top,rgba(0,0,0,0) 20.5882%,rgb(0,0,0) 31.1765%,rgb(0,0,0) 41.7647%,rgba(0,0,0,0) 52.3529%);backdrop-filter:blur(1.7411px)"></div>
+																<div style="position:absolute;z-index:4;inset:0px;mask-image:linear-gradient(to top,rgba(0,0,0,0) 31.1765%,rgb(0,0,0) 41.7647%,rgb(0,0,0) 52.3529%,rgba(0,0,0,0) 62.9412%);backdrop-filter:blur(1.31951px)"></div>
+																<div style="position:absolute;z-index:5;inset:0px;mask-image:linear-gradient(to top,rgba(0,0,0,0) 41.7647%,rgb(0,0,0) 52.3529%,rgb(0,0,0) 62.9412%,rgba(0,0,0,0) 73.5294%);backdrop-filter:blur(1px)"></div>
+																<div style="position:absolute;z-index:6;inset:0px;mask-image:linear-gradient(to top,rgba(0,0,0,0) 52.3529%,rgb(0,0,0) 62.9412%,rgb(0,0,0) 73.5294%,rgba(0,0,0,0) 84.1176%);backdrop-filter:blur(0.757858px)"></div>
+																<div style="position:absolute;z-index:7;inset:0px;mask-image:linear-gradient(to top,rgba(0,0,0,0) 62.9412%,rgb(0,0,0) 73.5294%,rgb(0,0,0) 84.1176%,rgba(0,0,0,0) 94.7059%);backdrop-filter:blur(0.574349px)"></div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
 									<li class="menu__item"> <a data-menu-icon-link href="#" class="menu__link btn btn--light">
-											<div class="btn-icon"> <canvas width="128" height="128" class="btn-icon__canvas"></canvas> <video data-sources="files/hospital.webm, files/hospital.mp4" class="btn-icon__video" width="48" height="48" playsinline muted preload="none"></video> <picture><source srcset="img/header/hospital.webp, img/header/hospital@2x.webp 2x" type="image/webp"><img class="btn-icon__img" width="48" height="48" loading="lazy" decoding="async" src="img/header/hospital.png" srcset="img/header/hospital@2x.png 2x" alt="hospital icon"></picture> </div> Clinics
+											<div class="btn-icon"> <canvas width="128" height="128" class="btn-icon__canvas"></canvas> <video class="btn-icon__video" width="48" height="48" playsinline muted preload="none">
+													<source src="files/treatments.webm" type="video/webm">
+													<source src="files/treatments.mp4" type="video/mp4">
+												</video> </div> Treatments
 										</a> </li>
 									<li class="menu__item"> <a data-menu-icon-link href="#" class="menu__link btn btn--light">
-											<div class="btn-icon"> <canvas width="128" height="128" class="btn-icon__canvas"></canvas> <video data-sources="files/treatments.webm, files/treatments.mp4" class="btn-icon__video" width="48" height="48" playsinline muted preload="none"></video> <picture><source srcset="img/header/treatments.webp, img/header/treatments@2x.webp 2x" type="image/webp"><img class="btn-icon__img" width="48" height="48" loading="lazy" decoding="async" src="img/header/treatments.png" srcset="img/header/treatments@2x.png 2x" alt="treatments icon"></picture> </div> Treatments
-										</a> </li>
-									<li class="menu__item"> <a data-menu-icon-link href="#" class="menu__link btn btn--light">
-											<div class="btn-icon"> <canvas width="128" height="128" class="btn-icon__canvas"></canvas> <video data-sources="files/diseases.webm, files/diseases.mp4" class="btn-icon__video" width="48" height="48" playsinline muted preload="none"></video> <picture><source srcset="img/header/diseases.webp, img/header/diseases@2x.webp 2x" type="image/webp"><img class="btn-icon__img" width="48" height="48" loading="lazy" decoding="async" src="img/header/diseases.png" srcset="img/header/diseases@2x.png 2x" alt="diseases icon"></picture> </div> Diseases
+											<div class="btn-icon"> <canvas width="128" height="128" class="btn-icon__canvas"></canvas> <video class="btn-icon__video" width="48" height="48" playsinline muted preload="none">
+													<source src="files/diseases.webm" type="video/webm">
+													<source src="files/diseases.mp4" type="video/mp4">
+												</video> </div> Diseases
 										</a> </li>
 								</ul>
 							</nav>
-							<div data-da=".header-menu-mobile__body, 850, 1" class="header__actions actions-header"> <a href="tel:+180034234234" class="actions-header__btn btn btn--light">+1(800)342-342-34</a> <a href="#" class="actions-header__btn btn btn--dark"> <span> Free Consultation </span> </a> </div>
+							<div data-da=".header-menu-mobile__body, 850, 1" class="header__actions actions-header"> <a href="tel:+180034234234" class="actions-header__btn btn btn--light">+1(800)342-342-34</a> <a href="#" class="actions-header__btn btn btn--dark"> Free Consultation </a> </div>
 							<div class="header__menu-icon menu-icon"> <button aria-label="Open menu" type="button" class="menu-icon__icon icon-menu"><span></span></button>
 								<div class="menu-icon__menu-mobile header-menu-mobile">
-									<div class="header-menu-mobile__body">
+									<div class="header-menu-mobile__body scrollbar">
 										<div class="header-menu-mobile__head"> <a href="#" class="header-menu-mobile__logo logo"> <img class="img" width="149" height="64" fetchpriority="high" loading="eager" decoding="async" src="img/logo/logo.svg" alt="Stem-Health logo"> </a> <button aria-label="Open menu" type="button" class="header-menu-mobile__icon icon-menu"><span></span></button> </div>
 									</div>
 								</div>
@@ -102,21 +210,23 @@
 				<div class="main__container">
 					<h1 class="main__title main-title text-center">Найдите лучшие клиники для передового лечения</h1>
 					<form action="#" class="main__search search-input">
-						<div class="search-input__body-input _icon-search"> <input required class="search-input__input" data-placeholder="Найдите клинику по названию или направлению…" data-mobile-placeholder="Название или направление..." name="q" type="text"> <button class="search-input__btn btn btn--pink" type="submit"><span>Найти</span></button> </div>
+						<div class="search-input__body-input _icon-search"> <input required class="search-input__input" data-placeholder="Найдите клинику по названию или направлению…" data-mobile-placeholder="Название или направление..." name="q" type="text"> <button class="search-input__btn btn btn--accent" type="submit">Найти</button> </div>
 					</form>
 					<div class="main__info-total info-total">
 						<div class="info-total__count text-title"><span class="title">129</span>Клиник</div>
 						<div class="info-total__content text">Международный каталог медицинских центров, специализирующихся на стволовых клетках и инновационных методах терапии</div>
 					</div>
 				</div>
-				<picture>
-					<source type="image/webp" srcset="img/backgrounds/main-bg-mobile.webp, img/backgrounds/main-bg-mobile@2x.webp 2x" media="(max-width: 490px)">
-					<source type="image/webp" srcset="img/backgrounds/main-bg-tablet.webp, img/backgrounds/main-bg-tablet@2x.webp 2x" media="(max-width: 600px)">
-					<source type="image/webp" srcset="img/backgrounds/main-bg.webp, img/backgrounds/main-bg@2x.webp 2x" media="(min-width: 601px)">
-					<source srcset="img/backgrounds/main-bg-mobile.png, img/backgrounds/main-bg-mobile@2x.png 2x" media="(max-width: 490px)">
-					<source srcset="img/backgrounds/main-bg-tablet.png, img/backgrounds/main-bg-tablet@2x.png 2x" media="(max-width: 600px)">
-					<source srcset="img/backgrounds/main-bg.png, img/backgrounds/main-bg@2x.png 2x" media="(min-width: 601px)"> <img fetchpriority="high" loading="eager" decoding="async" class="w-full__img-bg" width="1888" height="613" src="img/backgrounds/main-bg.png" alt="main background">
-				</picture>
+				<div class="w-full__img-bg">
+					<picture>
+						<source type="image/webp" srcset="img/backgrounds/main-bg-mobile.webp, img/backgrounds/main-bg-mobile@2x.webp 2x" media="(max-width: 490px)">
+						<source type="image/webp" srcset="img/backgrounds/main-bg-tablet.webp, img/backgrounds/main-bg-tablet@2x.webp 2x" media="(max-width: 992px)">
+						<source type="image/webp" srcset="img/backgrounds/main-bg.webp, img/backgrounds/main-bg@2x.webp 2x" media="(min-width: 601px)">
+						<source srcset="img/backgrounds/main-bg-mobile.png, img/backgrounds/main-bg-mobile@2x.png 2x" media="(max-width: 490px)">
+						<source srcset="img/backgrounds/main-bg-tablet.png, img/backgrounds/main-bg-tablet@2x.png 2x" media="(max-width: 992px)">
+						<source srcset="img/backgrounds/main-bg.png, img/backgrounds/main-bg@2x.png 2x" media="(min-width: 601px)"> <img fetchpriority="high" loading="eager" decoding="async" width="1888" height="613" src="img/backgrounds/main-bg.png" alt="main background">
+					</picture>
+				</div>
 			</section>
 			<div class="page__sections-padding">
 				<section class="page__main-actions catalog-nav-actions">
@@ -225,7 +335,7 @@
 										<p>Все клиники прошли тщательную проверку.</p>
 									</div>
 								</div>
-								<div class="our-benefit__img-ibg-contain"> <picture><source srcset="img/our-benefits/woman.webp, img/our-benefits/woman@2x.webp 2x" type="image/webp"><img class="our-benefit__img" width="134" height="241" src="img/our-benefits/woman.png" srcset="img/our-benefits/woman@2x.png 2x" alt="Девушка"></picture> </div>
+								<div class="our-benefit__img-ibg-contain"> <picture><source srcset="img/our-benefits/transparency.webp, img/our-benefits/transparency@2x.webp 2x" type="image/webp"><img class="our-benefit__img" width="134" height="241" src="img/our-benefits/transparency.png" srcset="img/our-benefits/transparency@2x.png 2x" alt="Прозрачность"></picture> </div>
 							</li>
 							<li class="our-benefits__item our-benefit our-benefit--md">
 								<div class="our-benefit__content">
@@ -278,8 +388,8 @@
 								<div class="cta-section__info">
 									<h2 class="cta-section__title title">Получите бесплатную консультацию</h2> <strong class="cta-section__text text text--semibold">По телефону или онлайн</strong>
 								</div>
-								<div class="cta-section__img-ibg-contain"> <picture><source srcset="img/backgrounds/woman.webp, img/backgrounds/woman@2x.webp 2x" type="image/webp"><img width="161" height="240" loading="lazy" decoding="async" src="img/backgrounds/woman.png" srcset="img/backgrounds/woman@2x.png 2x" alt="Woman"></picture> </div>
-								<div class="cta-section__actions"> <a href="tel:+180034234234" class="cta-section__btn btn btn--lg btn--light">+1(800)342-342-34</a> <a href="#" class="cta-section__btn btn btn--lg btn--dark"><span>Free Consultation</span></a> </div>
+								<div class="cta-section__img-ibg-contain"> <picture><source srcset="img/backgrounds/women.webp, img/backgrounds/women@2x.webp 2x" type="image/webp"><img width="161" height="240" loading="lazy" decoding="async" src="img/backgrounds/women.png" srcset="img/backgrounds/women@2x.png 2x" alt="Women"></picture> </div>
+								<div class="cta-section__actions"> <a href="tel:+180034234234" class="cta-section__btn btn btn--lg btn--light">+1(800)342-342-34</a> <a href="#" class="cta-section__btn btn btn--lg btn--dark">Free Consultation</a> </div>
 							</div>
 							<div class="cta-section__img-ibg">
 								<picture>
@@ -293,116 +403,114 @@
 					</div>
 				</section>
 				<section class="page__slider-catalog-actions slider-catalog-actions">
-					<div class="slider-catalog-actions__overflow">
-						<div data-slider="catalog-actions" class="slider-catalog-actions__container">
-							<h2 class="slider-catalog-actions__title title">Часто ищут</h2>
-							<div data-slider class="slider-catalog-actions__slider swiper">
-								<ul class="slider-catalog-actions__wrapper swiper-wrapper">
-									<li class="slider-catalog-actions__slide swiper-slide"> <a href="#" class="action-card action-card--images">
-											<div class="action-card__content">
-												<div class="action-card__title title-sm">Ортопедия</div>
-												<div class="action-card__sub-title text text--semibold">Германия</div>
-											</div>
-											<div class="action-card__images">
-												<div class="action-card__img-ibg"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/treatment/ortopedia.svg" alt="ortopedia"> </div>
-												<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/country-flags/de.svg" alt="de flag"> </div>
-											</div>
-										</a> </li>
-									<li class="slider-catalog-actions__slide swiper-slide"> <a href="#" class="action-card action-card--images">
-											<div class="action-card__content">
-												<div class="action-card__title title-sm">Эстетическая медицина</div>
-												<div class="action-card__sub-title text text--semibold">Великобритания</div>
-											</div>
-											<div class="action-card__images">
-												<div class="action-card__img-ibg"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/treatment/aesthetic.svg" alt="aesthetic"> </div>
-												<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/country-flags/gb.svg" alt="gb flag"> </div>
-											</div>
-										</a> </li>
-									<li class="slider-catalog-actions__slide swiper-slide"> <a href="#" class="action-card action-card--images">
-											<div class="action-card__content">
-												<div class="action-card__title title-sm">Кардиология</div>
-												<div class="action-card__sub-title text text--semibold">Украина</div>
-											</div>
-											<div class="action-card__images">
-												<div class="action-card__img-ibg"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/treatment/cardiologia.svg" alt="cardiologia"> </div>
-												<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/country-flags/uk.svg" alt="uk flag"> </div>
-											</div>
-										</a> </li>
-									<li class="slider-catalog-actions__slide swiper-slide"> <a href="#" class="action-card action-card--images">
-											<div class="action-card__content">
-												<div class="action-card__title title-sm">Кардиология</div>
-												<div class="action-card__sub-title text text--semibold">Украина</div>
-											</div>
-											<div class="action-card__images">
-												<div class="action-card__img-ibg"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/treatment/cardiologia.svg" alt="cardiologia"> </div>
-												<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/country-flags/uk.svg" alt="uk flag"> </div>
-											</div>
-										</a> </li>
-									<li class="slider-catalog-actions__slide swiper-slide"> <a href="#" class="action-card action-card--images">
-											<div class="action-card__content">
-												<div class="action-card__title title-sm">Омоложение</div>
-												<div class="action-card__sub-title text text--semibold">Германия</div>
-											</div>
-											<div class="action-card__images">
-												<div class="action-card__img-ibg"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/treatment/rejuvenation.svg" alt="rejuvenation"> </div>
-												<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/country-flags/de.svg" alt="de flag"> </div>
-											</div>
-										</a> </li>
-									<li class="slider-catalog-actions__slide swiper-slide"> <a href="#" class="action-card action-card--images">
-											<div class="action-card__content">
-												<div class="action-card__title title-sm">Неврология</div>
-												<div class="action-card__sub-title text text--semibold">Италия</div>
-											</div>
-											<div class="action-card__images">
-												<div class="action-card__img-ibg"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/treatment/nevrologia.svg" alt="nevrologia"> </div>
-												<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/country-flags/it.svg" alt="it flag"> </div>
-											</div>
-										</a> </li>
-									<li class="slider-catalog-actions__slide swiper-slide"> <a href="#" class="action-card action-card--images">
-											<div class="action-card__content">
-												<div class="action-card__title title-sm">Омоложение</div>
-												<div class="action-card__sub-title text text--semibold">Германия</div>
-											</div>
-											<div class="action-card__images">
-												<div class="action-card__img-ibg"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/treatment/rejuvenation.svg" alt="rejuvenation"> </div>
-												<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/country-flags/de.svg" alt="de flag"> </div>
-											</div>
-										</a> </li>
-									<li class="slider-catalog-actions__slide swiper-slide"> <a href="#" class="action-card action-card--images">
-											<div class="action-card__content">
-												<div class="action-card__title title-sm">Неврология</div>
-												<div class="action-card__sub-title text text--semibold">Италия</div>
-											</div>
-											<div class="action-card__images">
-												<div class="action-card__img-ibg"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/treatment/nevrologia.svg" alt="nevrologia"> </div>
-												<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/country-flags/it.svg" alt="it flag"> </div>
-											</div>
-										</a> </li>
-									<li class="slider-catalog-actions__slide swiper-slide"> <a href="#" class="action-card action-card--images">
-											<div class="action-card__content">
-												<div class="action-card__title title-sm">Ортопедия</div>
-												<div class="action-card__sub-title text text--semibold">Германия</div>
-											</div>
-											<div class="action-card__images">
-												<div class="action-card__img-ibg"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/treatment/ortopedia.svg" alt="ortopedia"> </div>
-												<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/country-flags/de.svg" alt="de flag"> </div>
-											</div>
-										</a> </li>
-									<li class="slider-catalog-actions__slide swiper-slide"> <a href="#" class="action-card action-card--images">
-											<div class="action-card__content">
-												<div class="action-card__title title-sm">Кардиология</div>
-												<div class="action-card__sub-title text text--semibold">Украина</div>
-											</div>
-											<div class="action-card__images">
-												<div class="action-card__img-ibg"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/treatment/cardiologia.svg" alt="cardiologia"> </div>
-												<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/country-flags/uk.svg" alt="uk flag"> </div>
-											</div>
-										</a> </li>
-								</ul>
-							</div>
-							<div class="slider-catalog-actions__slider-actions slider-actions"> <button data-slider-prevbtn aria-label="slide prev" class="slider-actions__btn slider-btn _icon-arrow-triangle"></button>
-								<div data-slider-pagination class="slider-actions__pagionation slider-pagination"></div> <button data-slider-nextbtn aria-label="slide next" class="slider-actions__btn slider-btn _icon-arrow-triangle"></button>
-							</div>
+					<div data-slider="catalog-actions" class="slider-catalog-actions__container">
+						<h2 class="slider-catalog-actions__title title">Часто ищут</h2>
+						<div data-slider class="slider-catalog-actions__slider swiper">
+							<ul class="slider-catalog-actions__wrapper swiper-wrapper">
+								<li class="slider-catalog-actions__slide swiper-slide"> <a href="#" class="action-card action-card--images">
+										<div class="action-card__content">
+											<div class="action-card__title title-sm">Ортопедия</div>
+											<div class="action-card__sub-title text text--semibold">Германия</div>
+										</div>
+										<div class="action-card__images">
+											<div class="action-card__img-ibg"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/treatment/ortopedia.svg" alt="ortopedia"> </div>
+											<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/country-flags/de.svg" alt="de flag"> </div>
+										</div>
+									</a> </li>
+								<li class="slider-catalog-actions__slide swiper-slide"> <a href="#" class="action-card action-card--images">
+										<div class="action-card__content">
+											<div class="action-card__title title-sm">Эстетическая медицина</div>
+											<div class="action-card__sub-title text text--semibold">Великобритания</div>
+										</div>
+										<div class="action-card__images">
+											<div class="action-card__img-ibg"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/treatment/aesthetic.svg" alt="aesthetic"> </div>
+											<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/country-flags/gb.svg" alt="gb flag"> </div>
+										</div>
+									</a> </li>
+								<li class="slider-catalog-actions__slide swiper-slide"> <a href="#" class="action-card action-card--images">
+										<div class="action-card__content">
+											<div class="action-card__title title-sm">Кардиология</div>
+											<div class="action-card__sub-title text text--semibold">Украина</div>
+										</div>
+										<div class="action-card__images">
+											<div class="action-card__img-ibg"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/treatment/cardiologia.svg" alt="cardiologia"> </div>
+											<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/country-flags/uk.svg" alt="uk flag"> </div>
+										</div>
+									</a> </li>
+								<li class="slider-catalog-actions__slide swiper-slide"> <a href="#" class="action-card action-card--images">
+										<div class="action-card__content">
+											<div class="action-card__title title-sm">Кардиология</div>
+											<div class="action-card__sub-title text text--semibold">Украина</div>
+										</div>
+										<div class="action-card__images">
+											<div class="action-card__img-ibg"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/treatment/cardiologia.svg" alt="cardiologia"> </div>
+											<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/country-flags/uk.svg" alt="uk flag"> </div>
+										</div>
+									</a> </li>
+								<li class="slider-catalog-actions__slide swiper-slide"> <a href="#" class="action-card action-card--images">
+										<div class="action-card__content">
+											<div class="action-card__title title-sm">Омоложение</div>
+											<div class="action-card__sub-title text text--semibold">Германия</div>
+										</div>
+										<div class="action-card__images">
+											<div class="action-card__img-ibg"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/treatment/rejuvenation.svg" alt="rejuvenation"> </div>
+											<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/country-flags/de.svg" alt="de flag"> </div>
+										</div>
+									</a> </li>
+								<li class="slider-catalog-actions__slide swiper-slide"> <a href="#" class="action-card action-card--images">
+										<div class="action-card__content">
+											<div class="action-card__title title-sm">Неврология</div>
+											<div class="action-card__sub-title text text--semibold">Италия</div>
+										</div>
+										<div class="action-card__images">
+											<div class="action-card__img-ibg"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/treatment/nevrologia.svg" alt="nevrologia"> </div>
+											<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/country-flags/it.svg" alt="it flag"> </div>
+										</div>
+									</a> </li>
+								<li class="slider-catalog-actions__slide swiper-slide"> <a href="#" class="action-card action-card--images">
+										<div class="action-card__content">
+											<div class="action-card__title title-sm">Омоложение</div>
+											<div class="action-card__sub-title text text--semibold">Германия</div>
+										</div>
+										<div class="action-card__images">
+											<div class="action-card__img-ibg"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/treatment/rejuvenation.svg" alt="rejuvenation"> </div>
+											<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/country-flags/de.svg" alt="de flag"> </div>
+										</div>
+									</a> </li>
+								<li class="slider-catalog-actions__slide swiper-slide"> <a href="#" class="action-card action-card--images">
+										<div class="action-card__content">
+											<div class="action-card__title title-sm">Неврология</div>
+											<div class="action-card__sub-title text text--semibold">Италия</div>
+										</div>
+										<div class="action-card__images">
+											<div class="action-card__img-ibg"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/treatment/nevrologia.svg" alt="nevrologia"> </div>
+											<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/country-flags/it.svg" alt="it flag"> </div>
+										</div>
+									</a> </li>
+								<li class="slider-catalog-actions__slide swiper-slide"> <a href="#" class="action-card action-card--images">
+										<div class="action-card__content">
+											<div class="action-card__title title-sm">Ортопедия</div>
+											<div class="action-card__sub-title text text--semibold">Германия</div>
+										</div>
+										<div class="action-card__images">
+											<div class="action-card__img-ibg"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/treatment/ortopedia.svg" alt="ortopedia"> </div>
+											<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/country-flags/de.svg" alt="de flag"> </div>
+										</div>
+									</a> </li>
+								<li class="slider-catalog-actions__slide swiper-slide"> <a href="#" class="action-card action-card--images">
+										<div class="action-card__content">
+											<div class="action-card__title title-sm">Кардиология</div>
+											<div class="action-card__sub-title text text--semibold">Украина</div>
+										</div>
+										<div class="action-card__images">
+											<div class="action-card__img-ibg"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/treatment/cardiologia.svg" alt="cardiologia"> </div>
+											<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="48" height="48" loading="lazy" decoding="async" src="img/country-flags/uk.svg" alt="uk flag"> </div>
+										</div>
+									</a> </li>
+							</ul>
+						</div>
+						<div class="slider-catalog-actions__slider-actions slider-actions"> <button data-slider-prevbtn aria-label="slide prev" class="slider-actions__btn slider-btn _icon-arrow-triangle"></button>
+							<div data-slider-pagination class="slider-actions__pagionation slider-pagination"></div> <button data-slider-nextbtn aria-label="slide next" class="slider-actions__btn slider-btn _icon-arrow-triangle"></button>
 						</div>
 					</div>
 				</section>
@@ -414,10 +522,8 @@
 								<ul class="slider-reviews__wrapper swiper-wrapper">
 									<li class="slider-reviews__slide swiper-slide">
 										<div class="review-card">
-											<div class="review-card__head">
-												<div class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </div>
-												<div class="review-card__head-content">
-													<div class="review-card__title title-sm">Asklepios Hospital Barmbek</div>
+											<div class="review-card__head"> <a href="#" class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </a>
+												<div class="review-card__head-content"> <a href="#" class="review-card__title title-sm">Asklepios Hospital Barmbek</a>
 													<div role="img" class="review-card__rating rating" data-rating="4.5" aria-label="Rating: 4.5 out of 5">
 														<div class="rating__value text text--semibold">4.5</div>
 														<div class="rating__body">
@@ -455,10 +561,8 @@
 									</li>
 									<li class="slider-reviews__slide swiper-slide">
 										<div class="review-card">
-											<div class="review-card__head">
-												<div class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </div>
-												<div class="review-card__head-content">
-													<div class="review-card__title title-sm">Center of ophthalmology and eye surgery Dr. Wobbe and Рartners</div>
+											<div class="review-card__head"> <a href="#" class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </a>
+												<div class="review-card__head-content"> <a href="#" class="review-card__title title-sm">Center of ophthalmology and eye surgery Dr. Wobbe and Рartners</a>
 													<div role="img" class="review-card__rating rating" data-rating="4.5" aria-label="Rating: 4.5 out of 5">
 														<div class="rating__value text text--semibold">4.5</div>
 														<div class="rating__body">
@@ -496,10 +600,8 @@
 									</li>
 									<li class="slider-reviews__slide swiper-slide">
 										<div class="review-card">
-											<div class="review-card__head">
-												<div class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </div>
-												<div class="review-card__head-content">
-													<div class="review-card__title title-sm">Medipol Mega University Hospital</div>
+											<div class="review-card__head"> <a href="#" class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </a>
+												<div class="review-card__head-content"> <a href="#" class="review-card__title title-sm">Medipol Mega University Hospital</a>
 													<div role="img" class="review-card__rating rating" data-rating="4.5" aria-label="Rating: 4.5 out of 5">
 														<div class="rating__value text text--semibold">4.5</div>
 														<div class="rating__body">
@@ -538,10 +640,8 @@
 									</li>
 									<li class="slider-reviews__slide swiper-slide">
 										<div class="review-card">
-											<div class="review-card__head">
-												<div class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </div>
-												<div class="review-card__head-content">
-													<div class="review-card__title title-sm">Asklepios Hospital Barmbek</div>
+											<div class="review-card__head"> <a href="#" class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </a>
+												<div class="review-card__head-content"> <a href="#" class="review-card__title title-sm">Asklepios Hospital Barmbek</a>
 													<div role="img" class="review-card__rating rating" data-rating="4.7" aria-label="Rating: 4.7 out of 5">
 														<div class="rating__value text text--semibold">4.7</div>
 														<div class="rating__body">
@@ -579,10 +679,8 @@
 									</li>
 									<li class="slider-reviews__slide swiper-slide">
 										<div class="review-card">
-											<div class="review-card__head">
-												<div class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </div>
-												<div class="review-card__head-content">
-													<div class="review-card__title title-sm">Asklepios Hospital Barmbek</div>
+											<div class="review-card__head"> <a href="#" class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </a>
+												<div class="review-card__head-content"> <a href="#" class="review-card__title title-sm">Asklepios Hospital Barmbek</a>
 													<div role="img" class="review-card__rating rating" data-rating="4.5" aria-label="Rating: 4.5 out of 5">
 														<div class="rating__value text text--semibold">4.5</div>
 														<div class="rating__body">
@@ -679,7 +777,7 @@
 		</main>
 		<footer class="footer w-full">
 			<div class="footer__container">
-				<div class="footer__aside footer-aside"> <a href="#" class="footer-aside__logo logo-footer"> <picture><source srcset="img/logo/logo-footer.webp" type="image/webp"><img class="img" width="149" height="64" loading="lazy" decoding="async" src="img/logo/logo-footer.png" alt="Stem-Health logo"></picture> </a> </div>
+				<div class="footer__aside footer-aside"> <a href="#" class="footer-aside__logo logo-footer"> <img class="img" width="109" height="34" loading="lazy" decoding="async" src="img/logo/logo-dark.svg" alt="Stem-Health logo"> </a> </div>
 				<nav class="footer__menu footer-menu">
 					<div class="footer-menu__column">
 						<div class="footer-menu__title title-sm">Связь</div>
@@ -776,12 +874,12 @@
 					<div class="footer-menu__bottom footer-bottom"> <a href="#" class="footer-bottom__link text-small">Terms & conditions</a> <a href="#" class="footer-bottom__link text-small">Privacy policy</a>
 						<div class="footer-bottom__text text-small">© 2025 Stemcell.com, LLC</div>
 					</div>
-					<div data-da=".footer-aside, 1250" class="footer-menu__column-actions"> <a href="tel:+180034234234" class="footer__btn btn btn--gray">+1(800)342-342-34</a> <a href="#" class="footer__btn btn btn--dark"><span>Free Consultation</span></a> </div>
+					<div data-da=".footer-aside, 1250" class="footer-menu__column-actions"> <a href="tel:+180034234234" class="footer__btn btn btn--gray">+1(800)342-342-34</a> <a href="#" class="footer__btn btn btn--dark">Free Consultation</a> </div>
 				</nav>
 			</div>
 		</footer>
 	</div>
-	<script async src="js/homepage.min.js?_v=20251208152331"></script>
+	<script async src="js/homepage.min.js?_v=20260109144638"></script>
 </body>
 
 </html>

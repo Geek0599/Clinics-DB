@@ -13,6 +13,7 @@
             document.documentElement.classList.add(className);
         }));
     }
+    const isHover = () => window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     function addLoadedClass() {
         window.addEventListener("load", (function() {
             setTimeout((function() {
@@ -20,42 +21,54 @@
             }), 0);
         }));
     }
-    let bodyLockStatus = true;
+    let functions_bodyLockStatus = true;
     let bodyLockToggle = (delay = 500) => {
-        if (document.documentElement.classList.contains("lock")) bodyUnlock(delay); else bodyLock(delay);
+        if (document.documentElement.classList.contains("lock")) functions_bodyUnlock(delay); else functions_bodyLock(delay);
     };
-    let bodyUnlock = (delay = 500) => {
-        if (bodyLockStatus) {
-            bodyLockStatus = false;
+    let functions_bodyUnlock = (delay = 500) => {
+        if (functions_bodyLockStatus) {
+            functions_bodyLockStatus = false;
             if (delay) setTimeout((function() {
-                bodyLockStatus = true;
+                functions_bodyLockStatus = true;
                 document.documentElement.style.removeProperty("--scrollbar-compensate");
                 document.documentElement.classList.remove("lock");
             }), delay); else {
-                bodyLockStatus = true;
+                functions_bodyLockStatus = true;
                 document.documentElement.style.removeProperty("--scrollbar-compensate");
                 document.documentElement.classList.remove("lock");
             }
         }
     };
-    let bodyLock = (delay = 500) => {
-        if (bodyLockStatus) {
+    let functions_bodyLock = (delay = 500) => {
+        if (functions_bodyLockStatus) {
             const scrollbarCompensate = window.innerWidth - document.querySelector(".wrapper").offsetWidth;
             if (scrollbarCompensate > 0) document.documentElement.style.setProperty("--scrollbar-compensate", scrollbarCompensate + "px");
             document.documentElement.classList.add("lock");
-            bodyLockStatus = false;
+            functions_bodyLockStatus = false;
             if (delay) setTimeout((function() {
-                bodyLockStatus = true;
-            }), delay); else bodyLockStatus = true;
+                functions_bodyLockStatus = true;
+            }), delay); else functions_bodyLockStatus = true;
         }
     };
     function menuInit() {
-        if (document.querySelector(".icon-menu")) document.addEventListener("click", (function(e) {
-            if (bodyLockStatus && e.target.closest(".icon-menu")) {
-                bodyLockToggle();
-                document.documentElement.classList.toggle("menu-open");
-            }
-        }));
+        const menuOpenClass = "menu-open";
+        const btnMenuIcon = document.querySelector(".icon-menu");
+        if (btnMenuIcon) {
+            const isOpen = () => document.documentElement.classList.contains(menuOpenClass);
+            document.addEventListener("click", (function(e) {
+                if (functions_bodyLockStatus && e.target.closest(".icon-menu")) {
+                    bodyLockToggle();
+                    document.documentElement.classList.toggle(menuOpenClass);
+                    if (isOpen() && btnMenuIcon.contains(e.target) && window.innerWidth <= 992.98 && window.scrollY > 0) window.scrollTo({
+                        top: 0
+                    });
+                }
+                if (isOpen() && functions_bodyLockStatus && !e.target.closest(".icon-menu") && !e.target.closest(".header-menu-mobile")) {
+                    functions_bodyUnlock();
+                    document.documentElement.classList.remove(menuOpenClass);
+                }
+            }));
+        }
     }
     function DynamicAdapt(type) {
         this.type = type;
@@ -194,9 +207,9 @@
         const mainFullScrollClass = "_main-full-scroll";
         const offset = 20;
         let mainSectionHeight = mainSection.offsetHeight;
-        window.addEventListener("resize", (() => {
-            mainSectionHeight = mainSection.offsetHeight;
-        }));
+        const updateHeight = () => mainSectionHeight = mainSection.offsetHeight;
+        window.addEventListener("resize", updateHeight);
+        window.addEventListener("load", updateHeight);
         let ticking = false;
         document.addEventListener("scroll", (() => {
             if (!ticking) {
@@ -212,7 +225,6 @@
     headerScroll();
     function animIcons() {
         const btns = document.querySelectorAll("[data-menu-icon-link]");
-        const isHover = window.matchMedia("(hover: hover)").matches;
         btns.forEach((btn => {
             const video = btn.querySelector("video");
             if (!video) return;
@@ -221,86 +233,145 @@
             const ctx = canvas.getContext("2d");
             ctx.imageSmoothingEnabled = true;
             ctx.imageSmoothingQuality = "high";
-            let sourcesLoaded = false;
             let duration;
             let isPlaying = false;
             let animationId;
-            let startTime = 0;
+            let startTime = null;
+            let currentProgress = 0;
+            let startProgress = 0;
+            let direction = 1;
+            let loaded = false;
             function renderFrame(timestamp) {
                 if (!isPlaying) return;
                 if (!startTime) startTime = timestamp;
-                const elapsed = (timestamp - startTime) / 1e3;
-                if (elapsed >= duration) {
+                const elapsed = timestamp - startTime;
+                const delta = elapsed / 1e3 / duration;
+                currentProgress = startProgress + direction * delta;
+                if (currentProgress > 1) currentProgress = 1;
+                if (currentProgress < 0) currentProgress = 0;
+                video.currentTime = currentProgress * duration;
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                if (direction > 0 && currentProgress >= 1 || direction < 0 && currentProgress <= 0) {
                     stop();
                     return;
                 }
-                video.currentTime = elapsed;
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
                 animationId = requestAnimationFrame(renderFrame);
             }
             function start() {
                 if (isPlaying) return;
                 isPlaying = true;
-                startTime = 0;
+                startTime = null;
+                startProgress = currentProgress;
                 animationId = requestAnimationFrame(renderFrame);
             }
             function stop() {
                 if (!isPlaying) return;
                 isPlaying = false;
                 cancelAnimationFrame(animationId);
-                video.currentTime = 0;
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
             }
-            function getVideoType(url) {
-                const ext = url.split(".").pop().toLowerCase();
-                switch (ext) {
-                  case "webm":
-                    return "video/webm";
-
-                  case "mp4":
-                    return "video/mp4";
-
-                  case "mov":
-                    return "video/quicktime";
-
-                  case "ogg":
-                  case "ogv":
-                    return "video/ogg";
-
-                  default:
-                    return "video/mp4";
-                }
-            }
-            async function loadSources(video) {
-                if (video.dataset.sourcesLoaded) return;
-                const sources = (video.dataset.sources || "").split(",").map((s => s.trim())).filter(Boolean);
-                sources.forEach((src => {
-                    const source = document.createElement("source");
-                    source.src = src;
-                    source.type = getVideoType(src);
-                    video.appendChild(source);
-                }));
-                video.load();
-                await new Promise((res => video.addEventListener("loadedmetadata", res, {
+            const onLoaded = () => {
+                duration = video.duration;
+                loaded = true;
+                currentProgress = 0;
+                const drawFirstFrame = () => {
+                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                };
+                video.addEventListener("seeked", drawFirstFrame, {
                     once: true
-                })));
-                video.dataset.sourcesLoaded = true;
-            }
-            if (isHover) loadSources(video);
-            btn.classList.add("_unhover");
-            btn.addEventListener("mouseenter", (async () => {
-                if (!sourcesLoaded) await loadSources(video);
+                });
                 video.currentTime = 0;
-                start();
-                btn.classList.remove("_unhover");
-            }));
-            btn.addEventListener("mouseleave", (() => {
+            };
+            video.addEventListener("loadeddata", onLoaded, {
+                once: true
+            });
+            video.load();
+            async function onActive() {
+                if (!loaded) {
+                    video.load();
+                    await new Promise((res => video.addEventListener("loadeddata", res, {
+                        once: true
+                    })));
+                }
+                if (!isHover()) return;
                 stop();
-                btn.classList.add("_unhover");
-            }));
+                direction = 1;
+                start();
+            }
+            function unActive(e) {
+                if (e.target.closest("[data-submenu-item]") && e.target.closest("[data-submenu-item]").classList.contains("_open")) return;
+                stop();
+                direction = -1;
+                start();
+            }
+            btn.addEventListener("mouseenter", onActive);
+            btn.addEventListener("mouseleave", unActive);
+            btn.addEventListener("focus", onActive);
+            btn.addEventListener("blur", unActive);
+            btn.addEventListener("onActive", onActive);
+            btn.addEventListener("unActive", unActive);
         }));
     }
     animIcons();
+    function selectOutline() {
+        document.addEventListener("keydown", (() => {
+            document.documentElement.classList.add("kbd");
+        }));
+        document.addEventListener("mousedown", (() => {
+            document.documentElement.classList.remove("kbd");
+        }));
+    }
+    selectOutline();
+    function showHideSubMenu() {
+        const subMenuItems = document.querySelectorAll("[data-submenu-item]");
+        const classOpen = "_open";
+        if (!subMenuItems.length) return;
+        subMenuItems.forEach((subMenuItem => {
+            const subMenuAction = subMenuItem.querySelector("[data-submenu-action]");
+            const subMenu = subMenuItem.querySelector("[data-submenu]");
+            if (!subMenuAction || !subMenu) return;
+            const isOpen = () => subMenuItem.classList.contains(classOpen);
+            const open = () => {
+                subMenuItem.classList.add(classOpen);
+                subMenuAction.setAttribute("aria-expanded", "true");
+                subMenu.setAttribute("aria-hidden", "false");
+            };
+            const close = () => {
+                subMenuItem.classList.remove(classOpen);
+                subMenuAction.setAttribute("aria-expanded", "false");
+                subMenu.setAttribute("aria-hidden", "true");
+                subMenuAction.dispatchEvent(new CustomEvent("unActive"));
+            };
+            let isPointerDown = false;
+            document.addEventListener("pointerdown", (() => {
+                isPointerDown = true;
+            }));
+            document.addEventListener("keydown", (e => {
+                if (e.key === "Tab") isPointerDown = false;
+            }));
+            document.addEventListener("click", (e => {
+                if (isHover() && isOpen() && !subMenuItem.contains(e.target)) close();
+            }));
+            subMenuAction.addEventListener("click", (e => {
+                if (!isHover()) e.preventDefault();
+                isOpen() ? close() : open();
+            }));
+            subMenuAction.addEventListener("focus", (() => {
+                if (isPointerDown) return;
+                open();
+            }));
+            subMenuItem.addEventListener("focusout", (e => {
+                const relatedTarget = e.relatedTarget;
+                if (relatedTarget && !subMenuItem.contains(relatedTarget)) close();
+            }));
+            subMenuItem.addEventListener("mouseenter", (() => {
+                if (isHover()) open();
+            }));
+            subMenuItem.addEventListener("mouseleave", (() => {
+                if (isHover()) close();
+            }));
+        }));
+    }
+    showHideSubMenu();
     function ssr_window_esm_isObject(obj) {
         return obj !== null && typeof obj === "object" && "constructor" in obj && obj.constructor === Object;
     }
@@ -3942,7 +4013,7 @@
                     nextEl: btnNext
                 },
                 breakpoints: {
-                    320: {
+                    300: {
                         spaceBetween: 8,
                         slidesPerView: 1,
                         grid: {
@@ -4002,7 +4073,7 @@
                     nextEl: btnNext
                 },
                 breakpoints: {
-                    320: {
+                    300: {
                         slidesPerView: 1,
                         spaceBetween: 2
                     },
@@ -4038,7 +4109,7 @@
                     clickable: true
                 },
                 breakpoints: {
-                    320: {
+                    300: {
                         slidesPerView: 1,
                         spaceBetween: 3
                     },
