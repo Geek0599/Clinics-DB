@@ -12536,7 +12536,7 @@
                         break;
                     }
                 }
-                if (!current || current === activeSection) return;
+                if (!current) return;
                 if (forcedSection) {
                     if (current === forcedSection) {
                         forcedSection = null;
@@ -12559,7 +12559,6 @@
                     const section = buttonMap.get(btn);
                     if (!section) return;
                     forcedSection = section;
-                    activeSection = section;
                     buttons.forEach((b => b.classList.remove(activeClass)));
                     btn.classList.add(activeClass);
                     scrollButtonIntoView(btn);
