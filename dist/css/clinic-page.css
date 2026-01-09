@@ -2790,6 +2790,7 @@ body::after {
 }
 
 .map {
+  background-color: var(--white-light-x);
   position: relative;
   height: 15.625rem;
   border-radius: 1.5rem;
