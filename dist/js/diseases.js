@@ -4114,7 +4114,7 @@
         }
     }
     function scrollToBlock() {
-        const btns = document.querySelectorAll("[data-go-to]");
+        const btns = document.querySelectorAll("[data-goto]");
         if (btns.length > 0) {
             btns.forEach((btn => {
                 btn.addEventListener("click", (e => {
@@ -4128,7 +4128,7 @@
                 }));
             }));
             function handleGoTo(e, btn) {
-                let [targetBlock, speed] = btn.dataset.goTo.split(",");
+                let [targetBlock, speed] = btn.dataset.goto.split(",");
                 if (!targetBlock) return;
                 const stickyTitlesOffset = document.querySelector("[data-sticky-titles]")?.offsetHeight + 12;
                 let offsetTop = stickyTitlesOffset ? stickyTitlesOffset : 20;

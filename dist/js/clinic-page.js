@@ -12438,7 +12438,7 @@
             };
         }
         function scrollToBlock() {
-            const btns = document.querySelectorAll("[data-go-to]");
+            const btns = document.querySelectorAll("[data-goto]");
             if (btns.length > 0) {
                 btns.forEach((btn => {
                     btn.addEventListener("click", (e => {
@@ -12452,7 +12452,7 @@
                     }));
                 }));
                 function handleGoTo(e, btn) {
-                    let [targetBlock, speed] = btn.dataset.goTo.split(",");
+                    let [targetBlock, speed] = btn.dataset.goto.split(",");
                     if (!targetBlock) return;
                     const stickyTitlesOffset = document.querySelector("[data-sticky-titles]")?.offsetHeight + 12;
                     let offsetTop = stickyTitlesOffset ? stickyTitlesOffset : 20;
@@ -12485,58 +12485,92 @@
                 input.addEventListener("input", setInputHeight);
             }));
         }
-        function scrollBasedNavigation({buttonSelector = "[data-go-to]", stickySelector = "[data-sticky-titles]", activeClass = "_active"} = {}) {
-            const buttons = document.querySelectorAll(buttonSelector);
-            if (!buttons.length) return;
+        function scrollBasedNavigation() {
+            const buttonSelector = "[data-goto]";
+            const stickySelector = "[data-sticky-titles]";
+            const activeClass = "_active";
             const sticky = document.querySelector(stickySelector);
-            const getStickyHeight = () => sticky ? sticky.offsetHeight + (window.innerWidth > 479.98 ? 32 : 24) : 0;
-            let observer = null;
-            let sectionMap = new Map;
-            let isClickScroll = false;
-            const setActiveButton = button => {
-                buttons.forEach((btn => btn.classList.remove(activeClass)));
-                button.classList.add(activeClass);
-                button.scrollIntoView({
+            if (!sticky) return;
+            const buttons = Array.from(sticky.querySelectorAll(buttonSelector));
+            if (!buttons.length) return;
+            const sectionMap = new Map;
+            const buttonMap = new Map;
+            const sections = buttons.map((btn => {
+                const id = btn.dataset.goto.split(",")[0].replace("#", "");
+                const section = document.getElementById(id);
+                if (!section) return null;
+                sectionMap.set(section, btn);
+                buttonMap.set(btn, section);
+                return section;
+            })).filter(Boolean);
+            let stickyHeight = getStickyHeight();
+            let activeSection = null;
+            let forcedSection = null;
+            let ticking = false;
+            function getStickyHeight() {
+                return sticky.offsetHeight + (window.innerWidth > 479.98 ? 32 : 24);
+            }
+            function scrollButtonIntoView(btn) {
+                btn.scrollIntoView({
                     behavior: "smooth",
                     block: "nearest",
                     inline: "center"
                 });
-            };
-            buttons.forEach((button => {
-                button.addEventListener("click", (() => {
-                    isClickScroll = true;
-                    setActiveButton(button);
-                    clearTimeout(button._scrollTimeout);
-                    button._scrollTimeout = setTimeout((() => {
-                        isClickScroll = false;
-                    }), 400);
+            }
+            function setActive(section) {
+                if (section === activeSection) return;
+                activeSection = section;
+                buttons.forEach((btn => btn.classList.remove(activeClass)));
+                const btn = sectionMap.get(section);
+                if (!btn) return;
+                btn.classList.add(activeClass);
+                scrollButtonIntoView(btn);
+            }
+            function updateActiveSection() {
+                let current = null;
+                for (let i = sections.length - 1; i >= 0; i--) {
+                    const section = sections[i];
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= stickyHeight) {
+                        current = section;
+                        break;
+                    }
+                }
+                if (!current || current === activeSection) return;
+                if (forcedSection) {
+                    if (current === forcedSection) {
+                        forcedSection = null;
+                        setActive(current);
+                    }
+                    return;
+                }
+                setActive(current);
+            }
+            function onScroll() {
+                if (ticking) return;
+                ticking = true;
+                requestAnimationFrame((() => {
+                    updateActiveSection();
+                    ticking = false;
+                }));
+            }
+            buttons.forEach((btn => {
+                btn.addEventListener("click", (() => {
+                    const section = buttonMap.get(btn);
+                    if (!section) return;
+                    forcedSection = section;
+                    activeSection = section;
+                    buttons.forEach((b => b.classList.remove(activeClass)));
+                    btn.classList.add(activeClass);
+                    scrollButtonIntoView(btn);
                 }));
             }));
-            const createObserver = () => {
-                if (observer) observer.disconnect();
-                sectionMap.clear();
-                const stickyHeight = getStickyHeight();
-                buttons.forEach((button => {
-                    const selector = button.dataset.goTo;
-                    const section = document.querySelector(selector);
-                    if (section) sectionMap.set(section, button);
-                }));
-                observer = new IntersectionObserver((entries => {
-                    if (isClickScroll) return;
-                    entries.forEach((entry => {
-                        if (!entry.isIntersecting) return;
-                        const activeButton = sectionMap.get(entry.target);
-                        if (activeButton && !activeButton.classList.contains(activeClass)) setActiveButton(activeButton);
-                    }));
-                }), {
-                    root: null,
-                    threshold: 0,
-                    rootMargin: `-${stickyHeight}px 0px -100% 0px`
-                });
-                sectionMap.forEach(((_, section) => observer.observe(section)));
-            };
-            createObserver();
-            window.addEventListener("resize", createObserver);
+            window.addEventListener("scroll", onScroll, {
+                passive: true
+            });
+            window.addEventListener("resize", (() => {
+                stickyHeight = getStickyHeight();
+            }));
         }
         function init_PopupSimple() {
             class PopupSimple {
@@ -12673,8 +12707,8 @@
         setGalleryItemsCountClass();
         autoResizeTextarea();
         scrollBasedNavigation();
-        const {removeStatus} = formValidate();
         formOrder();
+        const {removeStatus} = formValidate();
         function formOrder() {
             const form = document.querySelector("[data-online-quote]");
             if (!form) return;
