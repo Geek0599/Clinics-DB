@@ -2601,6 +2601,15 @@ body::after {
 .product-reviews-slider__slider {
   border-radius: 0.875rem;
 }
+.product-reviews-slider__slider.swiper:not(.swiper-initialized) {
+  opacity: initial;
+  visibility: visible;
+  background-color: var(--gray-xx-light-transp);
+}
+.product-reviews-slider__slider.swiper:not(.swiper-initialized) .product-reviews-slider__wrapper {
+  opacity: 0;
+  visibility: hidden;
+}
 .product-reviews-slider__slide {
   -ms-flex-negative: 0;
       flex-shrink: 0;
