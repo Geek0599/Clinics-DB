@@ -120,20 +120,24 @@
         }
     };
     function menuInit() {
+        const menuIconSelector = ".icon-menu";
         const menuOpenClass = "menu-open";
-        const btnMenuIcon = document.querySelector(".icon-menu");
+        const btnMenuIcon = document.querySelector(menuIconSelector);
+        const mainSection = document.querySelector(".main");
         if (btnMenuIcon) {
             const isOpen = () => document.documentElement.classList.contains(menuOpenClass);
             document.addEventListener("click", (function(e) {
-                if (bodyLockStatus && e.target.closest(".icon-menu")) {
-                    bodyLockToggle();
+                if (bodyLockStatus && e.target.closest(menuIconSelector)) {
+                    const scrolled = window.scrollY || document.documentElement.scrollTop;
                     document.documentElement.classList.toggle(menuOpenClass);
-                    if (isOpen() && btnMenuIcon.contains(e.target) && window.innerWidth <= 992.98 && window.scrollY > 0) window.scrollTo({
-                        top: 0
+                    if (window.innerWidth <= 992.98 && isOpen() && scrolled > 0 && (mainSection ? scrolled < mainSection.offsetHeightSaved : true)) window.scrollTo({
+                        top: -100,
+                        behavior: "smooth"
                     });
+                    bodyLockToggle(300);
                 }
-                if (isOpen() && bodyLockStatus && !e.target.closest(".icon-menu") && !e.target.closest(".header-menu-mobile")) {
-                    bodyUnlock();
+                if (isOpen() && bodyLockStatus && !e.target.closest(menuIconSelector) && !e.target.closest(".header-menu-mobile")) {
+                    bodyUnlock(300);
                     document.documentElement.classList.remove(menuOpenClass);
                 }
             }));
@@ -319,7 +323,10 @@
         const mainFullScrollClass = "_main-full-scroll";
         const offset = 20;
         let mainSectionHeight = mainSection.offsetHeight;
-        const updateHeight = () => mainSectionHeight = mainSection.offsetHeight;
+        const updateHeight = () => {
+            mainSectionHeight = mainSection.offsetHeight;
+            mainSection.offsetHeightSaved = mainSectionHeight;
+        };
         window.addEventListener("resize", updateHeight);
         window.addEventListener("load", updateHeight);
         let ticking = false;
