@@ -12551,10 +12551,9 @@
                 return res;
             }
             function setActive(index) {
-                if (index === activeIndex) return;
+                if (index === activeIndex || index === -1) return;
                 if (activeIndex !== -1) buttonsByIndex[activeIndex]?.classList.remove(activeClass);
                 activeIndex = index;
-                if (activeIndex === -1) activeIndex = 0;
                 if (activeIndex !== -1) {
                     const btn = buttonsByIndex[activeIndex];
                     btn.classList.add(activeClass);
