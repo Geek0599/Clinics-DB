@@ -132,7 +132,7 @@
                     document.documentElement.classList.toggle(menuOpenClass);
                     if (window.innerWidth <= 992.98 && isOpen() && scrolled > 0 && (mainSection ? scrolled < mainSection.offsetHeightSaved : true)) window.scrollTo({
                         top: -100,
-                        behavior: "smooth"
+                        behavior: "instant"
                     });
                     bodyLockToggle(300);
                 }
