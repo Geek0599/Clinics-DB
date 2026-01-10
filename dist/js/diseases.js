@@ -60,11 +60,11 @@
             document.addEventListener("click", (function(e) {
                 if (functions_bodyLockStatus && e.target.closest(menuIconSelector)) {
                     const scrolled = window.scrollY || document.documentElement.scrollTop;
-                    document.documentElement.classList.toggle(menuOpenClass);
-                    if (window.innerWidth <= 992.98 && isOpen() && scrolled > 0 && (mainSection ? scrolled < mainSection.offsetHeightSaved : true)) window.scrollTo({
+                    if (window.innerWidth <= 992.98 && !isOpen() && scrolled > 0 && (mainSection ? scrolled < mainSection.offsetHeightSaved : true)) window.scrollBy({
                         top: -100,
-                        behavior: "instant"
+                        behavior: "smooth"
                     });
+                    document.documentElement.classList.toggle(menuOpenClass);
                     bodyLockToggle(300);
                 }
                 if (isOpen() && functions_bodyLockStatus && !e.target.closest(menuIconSelector) && !e.target.closest(".header-menu-mobile")) {
