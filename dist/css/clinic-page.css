@@ -2181,8 +2181,8 @@ select.btn--select-ic {
 .loaded .input-item__input {
   -webkit-transition: background-color 0.3s ease, -webkit-box-shadow 0.3s ease;
   transition: background-color 0.3s ease, -webkit-box-shadow 0.3s ease;
-  transition: box-shadow 0.3s ease, background-color 0.3s ease;
-  transition: box-shadow 0.3s ease, background-color 0.3s ease, -webkit-box-shadow 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, -webkit-box-shadow 0.3s ease;
 }
 textarea.input-item__input {
   width: 100%;
@@ -2192,6 +2192,15 @@ textarea.input-item__input {
 }
 textarea.input-item__input::-webkit-scrollbar {
   display: none;
+}
+textarea.input-item__input:not(:-moz-placeholder-shown) ~ label {
+  background-color: var(--white);
+}
+textarea.input-item__input:not(:-ms-input-placeholder) ~ label {
+  background-color: var(--white);
+}
+textarea.input-item__input:not(:placeholder-shown) ~ label {
+  background-color: var(--white);
 }
 
 .input-item__input:focus {
@@ -2204,7 +2213,6 @@ textarea.input-item__input::-webkit-scrollbar {
   pointer-events: none;
   line-height: 1.2;
   letter-spacing: -0.018125rem;
-  background-color: var(--white);
   padding-top: 0.375rem;
 }
 .input-item__input:not(:-ms-input-placeholder) ~ label {
@@ -2213,7 +2221,6 @@ textarea.input-item__input::-webkit-scrollbar {
   pointer-events: none;
   line-height: 1.2;
   letter-spacing: -0.018125rem;
-  background-color: var(--white);
   padding-top: 0.375rem;
 }
 .input-item__input:focus ~ label, .input-item__input:not(:placeholder-shown) ~ label {
@@ -2222,14 +2229,13 @@ textarea.input-item__input::-webkit-scrollbar {
   pointer-events: none;
   line-height: 1.2;
   letter-spacing: -0.018125rem;
-  background-color: var(--white);
   padding-top: 0.375rem;
 }
 .input-item__input._no-validated {
   -webkit-box-shadow: var(--input-error-shadow);
           box-shadow: var(--input-error-shadow);
 }
-.input-item__input._no-validated, .input-item__input._no-validated:focus ~ label {
+.input-item__input._no-validated, .input-item__input._no-validated ~ label {
   background-color: var(--input-bg-error);
 }
 .input-item__input._validated {
@@ -2237,9 +2243,9 @@ textarea.input-item__input::-webkit-scrollbar {
           box-shadow: var(--input-active-shadow);
 }
 .input-item__label {
-  cursor: text;
+  pointer-events: none;
   position: absolute;
-  width: calc(100% - 2.125rem);
+  width: calc(100% - 2.25rem);
   left: 1.25rem;
   top: 1rem;
   margin: -0.125rem;
@@ -2247,8 +2253,8 @@ textarea.input-item__input::-webkit-scrollbar {
   border-radius: 0.25rem;
 }
 .loaded .input-item__label {
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
+  -webkit-transition: background-color 0.3s ease, font-size 0.3s ease, top 0.3s ease, letter-spacing 0.3s ease, padding-top 0.3s ease;
+  transition: background-color 0.3s ease, font-size 0.3s ease, top 0.3s ease, letter-spacing 0.3s ease, padding-top 0.3s ease;
 }
 
 .main-form {
@@ -2641,6 +2647,10 @@ body::after {
     gap: calc(2rem + 2 * (100vw - 78.125rem) / 7.875);
   }
 }
+.about-product__aside {
+  position: relative;
+  z-index: 1;
+}
 
 .product-content {
   display: -webkit-box;
@@ -2665,12 +2675,12 @@ body::after {
 .product-content__head-titles-body::before {
   content: "";
   position: absolute;
-  width: calc(100% + 6.25rem);
   height: 100%;
-  left: -3.125rem;
-  top: 0;
+  bottom: 0;
   background-color: var(--white);
   z-index: -1;
+  left: -3.125rem;
+  width: calc(100% + 6.25rem);
 }
 .product-content__head-titles {
   padding: 0.75rem 0;
@@ -3442,8 +3452,6 @@ body::after {
             flex: 1 1 65.1162790698%;
   }
   .about-product__aside {
-    position: relative;
-    z-index: 1;
     -webkit-box-flex: 1;
         -ms-flex: 1 1 30.2325581395%;
             flex: 1 1 30.2325581395%;
