@@ -4444,6 +4444,10 @@ body::after {
   }
   .product-gallery {
     border-radius: 1rem;
+    background-color: var(--gray-xx-light-transp);
+  }
+  .product-gallery.swiper-initialized {
+    background-color: initial;
   }
   .product-gallery__image-ibg {
     border-radius: 1rem;
