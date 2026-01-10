@@ -1734,7 +1734,7 @@ select.btn--select-ic {
           transform: scale(-1, 1) translateX(0.125rem);
 }
 .slider-btn:disabled {
-  cursor: initial;
+  pointer-events: none;
   opacity: 0.5;
 }
 .slider-btn--light {
