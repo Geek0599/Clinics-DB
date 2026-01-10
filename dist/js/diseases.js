@@ -4101,7 +4101,7 @@
             });
         }
     }
-    function gotoBlock({noHeader = false, targetBlock, offsetTop = 0, speed = 500}) {
+    function gotoBlock({noHeader = false, targetBlock, offsetTop = 0}) {
         const targetBlockElement = document.querySelector(targetBlock);
         if (targetBlockElement) {
             let headerItem = "";
@@ -4135,14 +4135,13 @@
                 }));
             }));
             function handleGoTo(e, btn) {
-                let [targetBlock, speed = 400] = btn.dataset.goto.split(",");
+                let [targetBlock] = btn.dataset.goto.split(",");
                 if (!targetBlock) return;
                 const stickyTitlesOffset = document.querySelector("[data-sticky-titles]")?.offsetHeight + 12;
                 let offsetTop = stickyTitlesOffset ? stickyTitlesOffset : 20;
                 gotoBlock({
                     targetBlock,
-                    offsetTop,
-                    speed
+                    offsetTop
                 });
             }
         }

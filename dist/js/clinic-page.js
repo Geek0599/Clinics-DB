@@ -12036,7 +12036,7 @@
                 if (selector.value === "") selector.setAttribute("placeholder", " ");
             }
         }
-        function gotoBlock({noHeader = false, targetBlock, offsetTop = 0, speed = 500}) {
+        function gotoBlock({noHeader = false, targetBlock, offsetTop = 0}) {
             const targetBlockElement = document.querySelector(targetBlock);
             if (targetBlockElement) {
                 let headerItem = "";
@@ -12459,14 +12459,13 @@
                     }));
                 }));
                 function handleGoTo(e, btn) {
-                    let [targetBlock, speed = 400] = btn.dataset.goto.split(",");
+                    let [targetBlock] = btn.dataset.goto.split(",");
                     if (!targetBlock) return;
                     const stickyTitlesOffset = document.querySelector("[data-sticky-titles]")?.offsetHeight + 12;
                     let offsetTop = stickyTitlesOffset ? stickyTitlesOffset : 20;
                     gotoBlock({
                         targetBlock,
-                        offsetTop,
-                        speed
+                        offsetTop
                     });
                 }
             }
@@ -12499,83 +12498,154 @@
             if (!sticky) return;
             const buttons = Array.from(sticky.querySelectorAll(buttonSelector));
             if (!buttons.length) return;
-            const sectionMap = new Map;
-            const buttonMap = new Map;
-            const sections = buttons.map((btn => {
+            const sections = [];
+            const buttonsByIndex = [];
+            const indexBySection = new Map;
+            buttons.forEach((btn => {
                 const id = btn.dataset.goto.split(",")[0].replace("#", "");
                 const section = document.getElementById(id);
-                if (!section) return null;
-                sectionMap.set(section, btn);
-                buttonMap.set(btn, section);
-                return section;
-            })).filter(Boolean);
-            let stickyHeight = getStickyHeight();
-            let activeSection = null;
-            let forcedSection = null;
+                if (!section) return;
+                const index = sections.length;
+                sections.push(section);
+                buttonsByIndex[index] = btn;
+                indexBySection.set(section, index);
+            }));
+            if (!sections.length) return;
+            let stickyHeight = 0;
+            let sectionTops = [];
+            let activeIndex = -1;
+            let forcedIndex = null;
             let ticking = false;
+            let recalcTimer = null;
+            let forcedTimer = null;
             function getStickyHeight() {
                 return sticky.offsetHeight + (window.innerWidth > 479.98 ? 32 : 24);
             }
+            function recalcPositions() {
+                stickyHeight = getStickyHeight();
+                sectionTops = sections.map((section => {
+                    const rect = section.getBoundingClientRect();
+                    return Math.round(window.scrollY + rect.top);
+                }));
+            }
+            function scheduleRecalc() {
+                if (recalcTimer) return;
+                recalcTimer = setTimeout((() => {
+                    recalcPositions();
+                    onScroll();
+                    recalcTimer = null;
+                }), 80);
+            }
+            function findIndex(scrollPos) {
+                let lo = 0;
+                let hi = sectionTops.length - 1;
+                let res = -1;
+                while (lo <= hi) {
+                    const mid = lo + hi >> 1;
+                    if (sectionTops[mid] <= scrollPos) {
+                        res = mid;
+                        lo = mid + 1;
+                    } else hi = mid - 1;
+                }
+                return res;
+            }
+            function setActive(index) {
+                if (index === activeIndex) return;
+                if (activeIndex !== -1) buttonsByIndex[activeIndex]?.classList.remove(activeClass);
+                activeIndex = index;
+                if (activeIndex !== -1) {
+                    const btn = buttonsByIndex[activeIndex];
+                    btn.classList.add(activeClass);
+                    scrollButtonIntoView(btn);
+                }
+            }
             function scrollButtonIntoView(btn) {
+                const container = sticky.getBoundingClientRect();
+                const rect = btn.getBoundingClientRect();
+                if (rect.left >= container.left && rect.right <= container.right) return;
                 btn.scrollIntoView({
                     behavior: "smooth",
                     block: "nearest",
                     inline: "center"
                 });
             }
-            function setActive(section) {
-                if (section === activeSection) return;
-                activeSection = section;
-                buttons.forEach((btn => btn.classList.remove(activeClass)));
-                const btn = sectionMap.get(section);
-                if (!btn) return;
-                btn.classList.add(activeClass);
-                scrollButtonIntoView(btn);
-            }
-            function updateActiveSection() {
-                let current = null;
-                for (let i = sections.length - 1; i >= 0; i--) {
-                    const section = sections[i];
-                    const rect = section.getBoundingClientRect();
-                    if (rect.top <= stickyHeight) {
-                        current = section;
-                        break;
-                    }
-                }
-                if (!current) return;
-                if (forcedSection) {
-                    if (current === forcedSection) {
-                        forcedSection = null;
-                        setActive(current);
-                    }
-                    return;
-                }
-                setActive(current);
+            function computeScrollTop(index) {
+                return Math.max(0, sectionTops[index] - stickyHeight + 1);
             }
             function onScroll() {
                 if (ticking) return;
                 ticking = true;
                 requestAnimationFrame((() => {
-                    updateActiveSection();
+                    const scrollPos = window.scrollY + stickyHeight;
+                    const index = findIndex(scrollPos);
+                    if (forcedIndex !== null) {
+                        if (index === forcedIndex) clearForced();
+                        ticking = false;
+                        return;
+                    }
+                    setActive(index);
                     ticking = false;
                 }));
             }
             buttons.forEach((btn => {
-                btn.addEventListener("click", (() => {
-                    const section = buttonMap.get(btn);
-                    if (!section) return;
-                    forcedSection = section;
-                    buttons.forEach((b => b.classList.remove(activeClass)));
-                    btn.classList.add(activeClass);
-                    scrollButtonIntoView(btn);
+                btn.addEventListener("click", (e => {
+                    e.preventDefault();
+                    const id = btn.dataset.goto.split(",")[0].replace("#", "");
+                    const section = document.getElementById(id);
+                    const index = indexBySection.get(section);
+                    if (index == null) return;
+                    setActive(index);
+                    forcedIndex = index;
+                    if (forcedTimer) clearTimeout(forcedTimer);
+                    forcedTimer = setTimeout(clearForced, 1600);
+                    window.scrollTo({
+                        top: computeScrollTop(index),
+                        behavior: "smooth"
+                    });
                 }));
             }));
+            function clearForced() {
+                forcedIndex = null;
+                if (forcedTimer) {
+                    clearTimeout(forcedTimer);
+                    forcedTimer = null;
+                }
+            }
+            const mutationObserver = new MutationObserver((() => {
+                scheduleRecalc();
+            }));
+            sections.forEach((section => {
+                mutationObserver.observe(section, {
+                    subtree: true,
+                    childList: true,
+                    attributes: true,
+                    attributeFilter: [ "class", "style" ]
+                });
+            }));
+            const resizeObserver = new ResizeObserver((() => {
+                scheduleRecalc();
+            }));
+            sections.forEach((section => resizeObserver.observe(section)));
+            recalcPositions();
+            onScroll();
             window.addEventListener("scroll", onScroll, {
                 passive: true
             });
-            window.addEventListener("resize", (() => {
-                stickyHeight = getStickyHeight();
-            }));
+            window.addEventListener("resize", scheduleRecalc, {
+                passive: true
+            });
+            window.addEventListener("load", scheduleRecalc, {
+                passive: true
+            });
+            return {
+                destroy() {
+                    window.removeEventListener("scroll", onScroll);
+                    window.removeEventListener("resize", scheduleRecalc);
+                    window.removeEventListener("load", scheduleRecalc);
+                    mutationObserver.disconnect();
+                    resizeObserver.disconnect();
+                }
+            };
         }
         function init_PopupSimple() {
             class PopupSimple {
