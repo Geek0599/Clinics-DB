@@ -12498,6 +12498,7 @@
             if (!sticky) return;
             const buttons = Array.from(sticky.querySelectorAll(buttonSelector));
             if (!buttons.length) return;
+            const isFirefox = navigator.userAgent.toLowerCase().includes("firefox");
             const sections = [];
             const buttonsByIndex = [];
             const indexBySection = new Map;
@@ -12560,9 +12561,11 @@
                 }
             }
             function scrollButtonIntoView(btn) {
-                const container = sticky.getBoundingClientRect();
-                const rect = btn.getBoundingClientRect();
-                if (rect.left >= container.left && rect.right <= container.right) return;
+                if (isFirefox) {
+                    const container = sticky.getBoundingClientRect();
+                    const rect = btn.getBoundingClientRect();
+                    if (rect.left >= container.left && rect.right <= container.right) return;
+                }
                 btn.scrollIntoView({
                     behavior: "smooth",
                     block: "nearest",
