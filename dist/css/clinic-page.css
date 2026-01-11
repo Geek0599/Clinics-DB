@@ -2325,10 +2325,10 @@ textarea.input-item__input:not(:placeholder-shown) ~ label {
       justify-self: start;
 }
 .main-form__btn._success {
-  -webkit-transition: background-color 0.3s ease, padding 0.3s ease, -webkit-box-shadow 0.3s ease;
-  transition: background-color 0.3s ease, padding 0.3s ease, -webkit-box-shadow 0.3s ease;
-  transition: box-shadow 0.3s ease, background-color 0.3s ease, padding 0.3s ease;
-  transition: box-shadow 0.3s ease, background-color 0.3s ease, padding 0.3s ease, -webkit-box-shadow 0.3s ease;
+  -webkit-transition: background-color 0.3s ease, -webkit-box-shadow 0.3s ease;
+  transition: background-color 0.3s ease, -webkit-box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease, -webkit-box-shadow 0.3s ease;
   padding-right: 1.5rem;
   pointer-events: none;
   -webkit-box-shadow: none;

@@ -12799,11 +12799,6 @@
             const ckeckboxAddComment = form.querySelector("#inp-add-comment");
             const textareaComment = form.querySelector("#inp-comment");
             const fortItemCommentTextarea = textareaComment.closest(".main-form__item");
-            ckeckboxAddComment.addEventListener("change", (() => {
-                const isChecked = ckeckboxAddComment.checked;
-                fortItemCommentTextarea.classList.toggle("_hide", !isChecked);
-                if (isChecked) setRequired([ textareaComment ]); else removeRequired([ textareaComment ]);
-            }));
             function removeRequired(inputs) {
                 inputs.forEach((input => input.removeAttribute("required")));
             }
@@ -12812,7 +12807,7 @@
             }
             radioGroup.forEach((radio => {
                 radio.addEventListener("change", (e => {
-                    [ inputName, inputPhone, inputEmail, inputSocial, inputSocialAddress ].forEach((input => removeStatus({
+                    [ inputName, inputPhone, inputEmail, inputSocial, inputSocialAddress, textareaComment ].forEach((input => removeStatus({
                         input
                     })));
                     switch (radio.value) {
@@ -12836,9 +12831,28 @@
                     }
                 }));
             }));
+            ckeckboxAddComment.addEventListener("change", (() => {
+                const isChecked = ckeckboxAddComment.checked;
+                fortItemCommentTextarea.classList.toggle("_hide", !isChecked);
+                isChecked ? setRequired([ textareaComment ]) : removeRequired([ textareaComment ]);
+            }));
+            form.addEventListener("reset", (e => {
+                setRequired([ inputPhone ]);
+                removeRequired([ inputEmail, inputSocial, inputSocialAddress, textareaComment ]);
+                fortItemCommentTextarea.classList.add("_hide");
+            }));
             form.addEventListener("form-validation-success", (e => {
                 const formData = new FormData(form);
+                const btnSubmit = document.querySelector(".main-form__btn");
+                const initialText = btnSubmit.textContent;
                 console.log(Object.fromEntries(formData));
+                btnSubmit.classList.add("_success");
+                btnSubmit.textContent = "Заявка отправлена!";
+                form.reset();
+                setTimeout((() => {
+                    btnSubmit.classList.remove("_success");
+                    btnSubmit.textContent = initialText;
+                }), 1e4);
             }));
         }
     })();
