@@ -3334,6 +3334,17 @@
             functions_bodyUnlock();
             document.documentElement.classList.remove("menu-open");
         }
+        function throttle(mainFunction, delay) {
+            let timerFlag = null;
+            return (...args) => {
+                if (timerFlag === null) {
+                    mainFunction(...args);
+                    timerFlag = setTimeout((() => {
+                        timerFlag = null;
+                    }), delay);
+                }
+            };
+        }
         function DynamicAdapt(type) {
             this.type = type;
             this.resizeTimeout = null;
@@ -12391,7 +12402,7 @@
                 const isShowNotice = isTextNotice || input.closest("[data-validate]")?.hasAttribute("data-validate-notice");
                 let notice = input.parentElement.parentElement.querySelector(".form-item__notice");
                 const textNotice = input.hasAttribute("data-error-notice") ? input.getAttribute("data-error-notice") : text;
-                if (isShowNotice) if (notice && notice.textContent !== textNotice) notice.textContent = textNotice; else if (!notice) {
+                if (isShowNotice && textNotice) if (notice && notice.textContent !== textNotice) notice.textContent = textNotice; else if (!notice) {
                     notice = document.createElement("label");
                     notice.classList.add("form-item__notice");
                     input.id ? notice.setAttribute("for", input.id) : null;
@@ -12459,10 +12470,11 @@
                     }));
                 }));
                 function handleGoTo(e, btn) {
-                    let [targetBlock] = btn.dataset.goto.split(",");
+                    e.preventDefault();
+                    let [targetBlock, offset] = btn.dataset.goto.split(",");
                     if (!targetBlock) return;
-                    const stickyTitlesOffset = document.querySelector("[data-sticky-titles]")?.offsetHeight + 12;
-                    let offsetTop = stickyTitlesOffset ? stickyTitlesOffset : 20;
+                    const stickyTitlesOffset = offset ? Number(offset) : document.querySelector("[data-sticky-titles]")?.offsetHeight + 20;
+                    let offsetTop = stickyTitlesOffset ? stickyTitlesOffset : 12;
                     gotoBlock({
                         targetBlock,
                         offsetTop
@@ -12514,7 +12526,7 @@
             if (!sections.length) return;
             let stickyHeight = 0;
             let sectionTops = [];
-            let activeIndex = -1;
+            let activeIndex = 0;
             let forcedIndex = null;
             let ticking = false;
             let recalcTimer = null;
@@ -12573,6 +12585,7 @@
                 });
             }
             function computeScrollTop(index) {
+                stickyHeight = getStickyHeight();
                 return Math.max(0, sectionTops[index] - stickyHeight + 1);
             }
             function onScroll() {
@@ -12649,6 +12662,201 @@
                     resizeObserver.disconnect();
                 }
             };
+        }
+        function showMoreHideGridElems() {
+            const wrapperBlock = document.querySelectorAll("[data-showmore-wrapper]");
+            const transitionTime = "500";
+            if (wrapperBlock.length) wrapperBlock.forEach((block => {
+                const gridContainer = block.querySelector("[data-showmore-container]");
+                const gridItems = gridContainer.children;
+                const btnShowHide = block.querySelector("[data-btn-showhide]");
+                const rowParameters = gridContainer.getAttribute("data-showmore-container").split(",");
+                const row = {
+                    pc: rowParameters[0],
+                    tablet: rowParameters[1],
+                    mobile: rowParameters[2]
+                };
+                if (gridItems && gridItems.length) {
+                    if (document.readyState === "complete") requestAnimationFrame((() => {
+                        requestAnimationFrame((() => {
+                            setMaxHeight(gridContainer, gridItems, row, btnShowHide);
+                        }));
+                    })); else window.addEventListener("load", (() => {
+                        document.fonts.ready.then((() => {
+                            requestAnimationFrame((() => {
+                                requestAnimationFrame((() => {
+                                    setMaxHeight(gridContainer, gridItems, row, btnShowHide);
+                                }));
+                            }));
+                        }));
+                    }), {
+                        once: true
+                    });
+                    setMaxHeight(gridContainer, gridItems, row, btnShowHide);
+                    setTimeout((() => setMaxHeight(gridContainer, gridItems, row, btnShowHide)), 500);
+                    let savedWidth = window.innerWidth;
+                    const debouncedSetMaxHeight = throttle(((gridContainer, gridItems, row, btnShowHide) => {
+                        requestAnimationFrame((() => {
+                            const updatedWidth = window.innerWidth;
+                            if (savedWidth !== updatedWidth) {
+                                savedWidth = updatedWidth;
+                                setMaxHeight(gridContainer, gridItems, row, btnShowHide);
+                                setTimeout((() => {
+                                    setMaxHeight(gridContainer, gridItems, row, btnShowHide);
+                                }), 35);
+                            }
+                        }));
+                    }), 20);
+                    window.addEventListener("resize", (() => debouncedSetMaxHeight(gridContainer, gridItems, row, btnShowHide)));
+                    btnShowHide.addEventListener("click", (() => toggleHeight(btnShowHide, gridContainer, gridItems, row)));
+                }
+            }));
+            function calculateHeight(gridContainer, gridItems, row) {
+                let rowOnMaxWidth = row.pc;
+                if (window.innerWidth <= 992) rowOnMaxWidth = row.tablet;
+                if (window.innerWidth <= 480) rowOnMaxWidth = row.mobile;
+                let totalHeight = calculateRowsHeight(gridContainer, gridItems, +rowOnMaxWidth);
+                return totalHeight;
+            }
+            function calculateRowsHeight(container, items, rowsToCalculate) {
+                if (!container || !items || !rowsToCalculate || rowsToCalculate < 1) return 0;
+                const computedStyle = window.getComputedStyle(container);
+                const isGrid = computedStyle.display === "grid";
+                const isFlex = computedStyle.display === "flex" && computedStyle.flexWrap === "wrap";
+                if (!isGrid && !isFlex) return 0;
+                const rowGap = Math.round(parseFloat(computedStyle.rowGap) || parseFloat(computedStyle.gap) || 0);
+                let totalHeight = 0;
+                let rowStartIndices = [ 0 ];
+                let totalRows = 0;
+                if (isGrid) {
+                    const gridTemplateColumns = computedStyle.gridTemplateColumns.split(" ").length;
+                    const itemsPerRow = gridTemplateColumns;
+                    totalRows = Math.ceil(items.length / itemsPerRow);
+                    const actualRowsToCalculate = Math.min(rowsToCalculate, totalRows);
+                    for (let row = 0; row < actualRowsToCalculate; row++) {
+                        let maxHeightInRow = 0;
+                        const startIndex = row * itemsPerRow;
+                        const endIndex = Math.min(startIndex + itemsPerRow, items.length);
+                        for (let i = startIndex; i < endIndex; i++) {
+                            const itemHeight = Math.round(items[i].getBoundingClientRect().height);
+                            maxHeightInRow = Math.max(maxHeightInRow, itemHeight);
+                        }
+                        totalHeight += maxHeightInRow;
+                        if (row < actualRowsToCalculate - 1) totalHeight += rowGap;
+                    }
+                } else if (isFlex) {
+                    const containerWidth = container.getBoundingClientRect().width;
+                    let currentRowWidth = 0;
+                    for (let i = 0; i < items.length; i++) {
+                        const itemWidth = items[i].getBoundingClientRect().width;
+                        const marginLeft = Math.round(parseFloat(window.getComputedStyle(items[i]).marginLeft) || 0);
+                        const marginRight = Math.round(parseFloat(window.getComputedStyle(items[i]).marginRight) || 0);
+                        const totalItemWidth = itemWidth + marginLeft + marginRight;
+                        if (currentRowWidth + totalItemWidth <= containerWidth) currentRowWidth += totalItemWidth; else {
+                            rowStartIndices.push(i);
+                            currentRowWidth = totalItemWidth;
+                            if (rowStartIndices.length > rowsToCalculate) break;
+                        }
+                    }
+                    totalRows = rowStartIndices.length + (currentRowWidth > 0 ? 1 : 0);
+                    const actualRowsToCalculate = Math.min(rowsToCalculate, totalRows);
+                    for (let row = 0; row < actualRowsToCalculate; row++) {
+                        let maxHeightInRow = 0;
+                        const startIndex = rowStartIndices[row];
+                        const nextRowStart = rowStartIndices[row + 1] || items.length;
+                        for (let i = startIndex; i < nextRowStart; i++) {
+                            const itemHeight = Math.round(items[i].getBoundingClientRect().height);
+                            maxHeightInRow = Math.max(maxHeightInRow, itemHeight);
+                        }
+                        totalHeight += maxHeightInRow;
+                        if (row < actualRowsToCalculate - 1) totalHeight += rowGap;
+                    }
+                }
+                return Math.round(totalHeight);
+            }
+            function setMaxHeight(gridContainer, gridItems, row, btnShowHide, isTransition = false) {
+                const height = calculateHeight(gridContainer, gridItems, row);
+                if (height < gridContainer.scrollHeight) {
+                    btnShowHide.classList.remove("_extended");
+                    gridContainer.classList.remove("_open");
+                    btnShowHide.removeAttribute("style");
+                    gridContainer.style.height = height + "px";
+                    gridContainer.style.overflow = "hidden";
+                    if (isTransition) gridContainer.style.transition = `height ${transitionTime}ms ease`; else gridContainer.style.transition = "none";
+                } else {
+                    btnShowHide.style.display = "none";
+                    gridContainer.classList.add("_open");
+                    gridContainer.removeAttribute("style");
+                }
+                return height;
+            }
+            function toggleHeight(btnShowHide, gridContainer, gridItems, row) {
+                const isOpen = btnShowHide.classList.contains("_extended");
+                const toggleText = btnShowHide.getAttribute("data-btn-showhide");
+                if (!isOpen) {
+                    extentGridHeight(gridContainer);
+                    gridContainer.style.transition = `height ${transitionTime}ms ease`;
+                    btnShowHide.classList.add("_extended");
+                    gridContainer.classList.add("_open");
+                } else {
+                    const rect = gridContainer.getBoundingClientRect();
+                    const isInView = rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth);
+                    const height = setMaxHeight(gridContainer, gridItems, row, btnShowHide, true);
+                    btnShowHide.classList.remove("_extended");
+                    gridContainer.classList.remove("_open");
+                    if (!isInView) {
+                        const top = rect.height - height;
+                        scroll(-top, transitionTime);
+                    }
+                }
+                if (toggleText) {
+                    const isItSpan = btnShowHide.querySelector("span");
+                    const initialText = isItSpan ? isItSpan.textContent : btnShowHide.textContent;
+                    btnShowHide.setAttribute("data-btn-showhide", initialText);
+                    isItSpan ? isItSpan.textContent = toggleText : btnShowHide.textContent = toggleText;
+                }
+            }
+            function scroll(pixels, duration) {
+                const start = window.pageYOffset;
+                const distance = pixels;
+                const startTime = performance.now();
+                function ease(t) {
+                    const x1 = .25, y1 = .1;
+                    const x2 = .25, y2 = 1;
+                    function calcX(t) {
+                        const mt = 1 - t;
+                        const mt2 = mt * mt;
+                        const t2 = t * t;
+                        return 3 * mt2 * t * x1 + 3 * mt * t2 * x2 + t * t2;
+                    }
+                    function calcY(t) {
+                        const mt = 1 - t;
+                        const mt2 = mt * mt;
+                        const t2 = t * t;
+                        return 3 * mt2 * t * y1 + 3 * mt * t2 * y2 + t * t2;
+                    }
+                    let uMin = 0;
+                    let uMax = 1;
+                    for (let i = 0; i < 20; i++) {
+                        const u = (uMin + uMax) / 2;
+                        const x = calcX(u);
+                        if (x < t) uMin = u; else uMax = u;
+                    }
+                    const u = (uMin + uMax) / 2;
+                    return calcY(u);
+                }
+                function animation(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const easedProgress = ease(progress);
+                    window.scrollTo(0, start + distance * easedProgress);
+                    if (progress < 1) requestAnimationFrame(animation);
+                }
+                requestAnimationFrame(animation);
+            }
+            function extentGridHeight(gridContainer) {
+                gridContainer.style.height = gridContainer.scrollHeight + "px";
+            }
         }
         function init_PopupSimple() {
             class PopupSimple {
@@ -12785,6 +12993,7 @@
         setGalleryItemsCountClass();
         autoResizeTextarea();
         scrollBasedNavigation();
+        showMoreHideGridElems();
         formOrder();
         const {removeStatus} = formValidate();
         function formOrder() {

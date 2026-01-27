@@ -4135,10 +4135,11 @@
                 }));
             }));
             function handleGoTo(e, btn) {
-                let [targetBlock] = btn.dataset.goto.split(",");
+                e.preventDefault();
+                let [targetBlock, offset] = btn.dataset.goto.split(",");
                 if (!targetBlock) return;
-                const stickyTitlesOffset = document.querySelector("[data-sticky-titles]")?.offsetHeight + 12;
-                let offsetTop = stickyTitlesOffset ? stickyTitlesOffset : 20;
+                const stickyTitlesOffset = offset ? Number(offset) : document.querySelector("[data-sticky-titles]")?.offsetHeight + 20;
+                let offsetTop = stickyTitlesOffset ? stickyTitlesOffset : 12;
                 gotoBlock({
                     targetBlock,
                     offsetTop
