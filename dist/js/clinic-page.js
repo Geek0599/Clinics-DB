@@ -12671,12 +12671,7 @@
                 const gridContainer = block.querySelector("[data-showmore-container]");
                 const gridItems = gridContainer.children;
                 const btnShowHide = block.querySelector("[data-btn-showhide]");
-                const rowParameters = gridContainer.getAttribute("data-showmore-container").split(",");
-                const row = {
-                    pc: rowParameters[0],
-                    tablet: rowParameters[1],
-                    mobile: rowParameters[2]
-                };
+                const row = parseRowConfig(gridContainer);
                 if (gridItems && gridItems.length) {
                     if (document.readyState === "complete") requestAnimationFrame((() => {
                         requestAnimationFrame((() => {
@@ -12713,12 +12708,24 @@
                     btnShowHide.addEventListener("click", (() => toggleHeight(btnShowHide, gridContainer, gridItems, row)));
                 }
             }));
-            function calculateHeight(gridContainer, gridItems, row) {
-                let rowOnMaxWidth = row.pc;
-                if (window.innerWidth <= 992) rowOnMaxWidth = row.tablet;
-                if (window.innerWidth <= 480) rowOnMaxWidth = row.mobile;
-                let totalHeight = calculateRowsHeight(gridContainer, gridItems, +rowOnMaxWidth);
-                return totalHeight;
+            function parseRowConfig(gridContainer) {
+                const attr = gridContainer.getAttribute("data-showmore-container");
+                return attr.split(",").map((item => {
+                    const [rows, maxWidth] = item.split(":").map((v => v.trim()));
+                    return {
+                        rows: Number(rows),
+                        maxWidth: Number(maxWidth)
+                    };
+                })).sort(((a, b) => b.maxWidth - a.maxWidth));
+            }
+            function getRowsForCurrentWidth(rowConfig) {
+                const width = window.innerWidth;
+                for (const config of rowConfig) if (width >= config.maxWidth) return config.rows;
+                return rowConfig[0].rows;
+            }
+            function calculateHeight(gridContainer, gridItems, rowConfig) {
+                const rowsToShow = getRowsForCurrentWidth(rowConfig);
+                return calculateRowsHeight(gridContainer, gridItems, rowsToShow);
             }
             function calculateRowsHeight(container, items, rowsToCalculate) {
                 if (!container || !items || !rowsToCalculate || rowsToCalculate < 1) return 0;

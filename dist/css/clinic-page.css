@@ -2790,10 +2790,10 @@ body::after {
           transform: translateY(100%);
 }
 .loaded .content-info--list-gradient:has(.points-content._open) .content-info__content-body::before {
-  -webkit-transition: -webkit-transform 0.35s ease-in 0.25s;
-  transition: -webkit-transform 0.35s ease-in 0.25s;
-  transition: transform 0.35s ease-in 0.25s;
-  transition: transform 0.35s ease-in 0.25s, -webkit-transform 0.35s ease-in 0.25s;
+  -webkit-transition: -webkit-transform 0.3s ease-in 0.25s;
+  transition: -webkit-transform 0.3s ease-in 0.25s;
+  transition: transform 0.3s ease-in 0.25s;
+  transition: transform 0.3s ease-in 0.25s, -webkit-transform 0.3s ease-in 0.25s;
 }
 .content-info__title {
   margin-bottom: 1.5rem;
