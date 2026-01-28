@@ -4092,7 +4092,7 @@
                         slidesPerView: 2,
                         spaceBetween: 7
                     },
-                    1250: {
+                    1250.98: {
                         slidesPerView: 3,
                         spaceBetween: 7
                     }

@@ -7188,7 +7188,7 @@
                         768: {
                             slidesPerView: 2
                         },
-                        1250: {
+                        1250.98: {
                             slidesPerView: 1
                         }
                     }

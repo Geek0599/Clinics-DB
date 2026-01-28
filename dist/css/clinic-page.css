@@ -2769,20 +2769,31 @@ body::after {
   height: 7.125rem;
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), color-stop(29%, #ffffff));
   background-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 29%);
+  will-change: transform;
 }
 .loaded .content-info--list-gradient .content-info__content-body::before {
-  -webkit-transition: opacity 0.4s ease;
-  transition: opacity 0.4s ease;
+  -webkit-transition: -webkit-transform 0.4s ease;
+  transition: -webkit-transform 0.4s ease;
+  transition: transform 0.4s ease;
+  transition: transform 0.4s ease, -webkit-transform 0.4s ease;
 }
 .loaded .content-info--list-gradient .content-info__btn {
-  -webkit-transition: margin-top 0.4s ease;
-  transition: margin-top 0.4s ease;
+  -webkit-transition: margin-top 0.3s ease-out;
+  transition: margin-top 0.3s ease-out;
 }
 .content-info--list-gradient:has(.points-content._open) .content-info__btn {
   margin-top: 2rem;
 }
 .content-info--list-gradient:has(.points-content._open) .content-info__content-body::before {
-  opacity: 0;
+  -webkit-transform: translateY(100%);
+      -ms-transform: translateY(100%);
+          transform: translateY(100%);
+}
+.loaded .content-info--list-gradient:has(.points-content._open) .content-info__content-body::before {
+  -webkit-transition: -webkit-transform 0.35s ease-in 0.25s;
+  transition: -webkit-transform 0.35s ease-in 0.25s;
+  transition: transform 0.35s ease-in 0.25s;
+  transition: transform 0.35s ease-in 0.25s, -webkit-transform 0.35s ease-in 0.25s;
 }
 .content-info__title {
   margin-bottom: 1.5rem;
@@ -4553,7 +4564,7 @@ body::after {
   }
   .content-info--list-gradient .content-info__content-body {
     margin: 0 -1.875rem -4.0625rem;
-    padding: 0 1.875rem 3.875rem;
+    padding: 0 1.875rem 4.0625rem;
   }
   .content-info--list-gradient:has(.points-content._open) .content-info__btn {
     margin-top: 0.5rem;
