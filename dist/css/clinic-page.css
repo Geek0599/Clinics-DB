@@ -2778,8 +2778,8 @@ body::after {
   transition: transform 0.4s ease, -webkit-transform 0.4s ease;
 }
 .loaded .content-info--list-gradient .content-info__btn {
-  -webkit-transition: margin-top 0.3s ease-out;
-  transition: margin-top 0.3s ease-out;
+  -webkit-transition: margin-top 0.3s ease-out, background-color 0.25s ease;
+  transition: margin-top 0.3s ease-out, background-color 0.25s ease;
 }
 .content-info--list-gradient:has(.points-content._open) .content-info__btn {
   margin-top: 2rem;
