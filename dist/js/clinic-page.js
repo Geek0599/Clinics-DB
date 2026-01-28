@@ -7219,7 +7219,8 @@
                     },
                     breakpoints: {
                         300: {
-                            slidesPerView: 1
+                            slidesPerView: 1,
+                            spaceBetween: 4
                         },
                         600: {
                             slidesPerView: 2,
@@ -12586,7 +12587,7 @@
             }
             function computeScrollTop(index) {
                 stickyHeight = getStickyHeight();
-                return Math.max(0, sectionTops[index] - stickyHeight + 1);
+                return Math.max(0, sectionTops[index] - stickyHeight + 13);
             }
             function onScroll() {
                 if (ticking) return;
@@ -12703,6 +12704,7 @@
                                 setMaxHeight(gridContainer, gridItems, row, btnShowHide);
                                 setTimeout((() => {
                                     setMaxHeight(gridContainer, gridItems, row, btnShowHide);
+                                    toggleBtnText(btnShowHide, "init");
                                 }), 35);
                             }
                         }));
@@ -12792,7 +12794,6 @@
             }
             function toggleHeight(btnShowHide, gridContainer, gridItems, row) {
                 const isOpen = btnShowHide.classList.contains("_extended");
-                const toggleText = btnShowHide.getAttribute("data-btn-showhide");
                 if (!isOpen) {
                     extentGridHeight(gridContainer);
                     gridContainer.style.transition = `height ${transitionTime}ms ease`;
@@ -12809,11 +12810,29 @@
                         scroll(-top, transitionTime);
                     }
                 }
-                if (toggleText) {
-                    const isItSpan = btnShowHide.querySelector("span");
-                    const initialText = isItSpan ? isItSpan.textContent : btnShowHide.textContent;
-                    btnShowHide.setAttribute("data-btn-showhide", initialText);
-                    isItSpan ? isItSpan.textContent = toggleText : btnShowHide.textContent = toggleText;
+                toggleBtnText(btnShowHide);
+            }
+            function toggleBtnText(btn, type = "toggle") {
+                const span = btn.querySelector("span");
+                const getText = () => span ? span.textContent : btn.textContent;
+                const setText = text => {
+                    if (span?.textContent === text || btn?.textContent === text) return;
+                    if (span) span.textContent = text; else btn.textContent = text;
+                };
+                if (!btn.dataset.defaultText) btn.dataset.defaultText = getText();
+                const activeText = btn.dataset.btnShowhide;
+                if (!activeText) return;
+                if (type === "init") {
+                    setText(btn.dataset.defaultText);
+                    btn.dataset.state = "default";
+                    return;
+                }
+                if (btn.dataset.state === "active") {
+                    setText(btn.dataset.defaultText);
+                    btn.dataset.state = "default";
+                } else {
+                    setText(activeText);
+                    btn.dataset.state = "active";
                 }
             }
             function scroll(pixels, duration) {

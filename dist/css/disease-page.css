@@ -781,21 +781,6 @@ Snippet (HTML): cnt
   background-color: var(--white);
 }
 
-.slider-catalog-actions__slide {
-  opacity: 0;
-  visibility: hidden;
-  will-change: opacity;
-}
-.loaded .swiper-initialized .slider-catalog-actions__slide {
-  -webkit-transition: opacity 0.5s ease, visibility 0.5s ease;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
-}
-.swiper-slide-visible.slider-catalog-actions__slide {
-  pointer-events: auto;
-  opacity: 1;
-  visibility: visible;
-}
-
 .wrapper {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -1909,7 +1894,19 @@ select.btn--select-ic {
   overflow: visible;
 }
 .slider-catalog-actions__slide {
+  opacity: 0;
+  visibility: hidden;
+  will-change: opacity;
   height: auto !important;
+}
+.loaded .swiper-initialized .slider-catalog-actions__slide {
+  -webkit-transition: opacity 0.5s ease, visibility 0.5s ease;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+.slider-catalog-actions__slide.swiper-slide-visible {
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
 }
 .slider-catalog-actions__slider-actions:has(.swiper-button-lock) {
   display: none;

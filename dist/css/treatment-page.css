@@ -781,21 +781,6 @@ Snippet (HTML): cnt
   background-color: var(--white);
 }
 
-.slider-reviews__slide, .slider-catalog-actions__slide {
-  opacity: 0;
-  visibility: hidden;
-  will-change: opacity;
-}
-.loaded .swiper-initialized .slider-reviews__slide, .loaded .swiper-initialized .slider-catalog-actions__slide {
-  -webkit-transition: opacity 0.5s ease, visibility 0.5s ease;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
-}
-.swiper-slide-visible.slider-reviews__slide, .swiper-slide-visible.slider-catalog-actions__slide {
-  pointer-events: auto;
-  opacity: 1;
-  visibility: visible;
-}
-
 .wrapper {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -2604,7 +2589,19 @@ body::after {
   overflow: visible;
 }
 .slider-catalog-actions__slide {
+  opacity: 0;
+  visibility: hidden;
+  will-change: opacity;
   height: auto !important;
+}
+.loaded .swiper-initialized .slider-catalog-actions__slide {
+  -webkit-transition: opacity 0.5s ease, visibility 0.5s ease;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+.slider-catalog-actions__slide.swiper-slide-visible {
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
 }
 .slider-catalog-actions__slider-actions:has(.swiper-button-lock) {
   display: none;
@@ -3076,6 +3073,20 @@ body::after {
   .catalog-nav-action__item:has(.action-card--all) {
     visibility: hidden;
     display: none;
+  }
+  .slider-reviews__slide {
+    opacity: 0;
+    visibility: hidden;
+    will-change: opacity;
+  }
+  .loaded .swiper-initialized .slider-reviews__slide {
+    -webkit-transition: opacity 0.5s ease, visibility 0.5s ease;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
+  .slider-reviews__slide.swiper-slide-visible {
+    pointer-events: auto;
+    opacity: 1;
+    visibility: visible;
   }
   .our-benefit--md {
     -ms-grid-column: 2;
@@ -4167,10 +4178,6 @@ body::after {
     font-size: 0.71875rem;
     line-height: 0.75rem;
     border-radius: 0.25rem;
-  }
-  .slider-reviews__slide {
-    opacity: 1;
-    visibility: visible;
   }
   .our-benefits__items {
     gap: 0.5rem;

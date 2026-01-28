@@ -785,21 +785,6 @@ Snippet (HTML): cnt
   background-color: var(--white);
 }
 
-.slider-products__slide {
-  opacity: 0;
-  visibility: hidden;
-  will-change: opacity;
-}
-.loaded .swiper-initialized .slider-products__slide {
-  -webkit-transition: opacity 0.5s ease, visibility 0.5s ease;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
-}
-.swiper-slide-visible.slider-products__slide {
-  pointer-events: auto;
-  opacity: 1;
-  visibility: visible;
-}
-
 .wrapper {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -2193,13 +2178,13 @@ textarea.input-item__input {
 textarea.input-item__input::-webkit-scrollbar {
   display: none;
 }
-textarea.input-item__input:not(:-moz-placeholder-shown) ~ label {
+textarea.input-item__input:not(:-moz-placeholder-shown):not(._no-validated) ~ label {
   background-color: var(--white);
 }
-textarea.input-item__input:not(:-ms-input-placeholder) ~ label {
+textarea.input-item__input:not(:-ms-input-placeholder):not(._no-validated) ~ label {
   background-color: var(--white);
 }
-textarea.input-item__input:not(:placeholder-shown) ~ label {
+textarea.input-item__input:not(:placeholder-shown):not(._no-validated) ~ label {
   background-color: var(--white);
 }
 
@@ -2764,16 +2749,16 @@ body::after {
   margin-bottom: 2rem;
 }
 
-.content-info--specialties .points-content {
+.content-info--list-gradient .points-content {
   overflow: visible !important;
 }
-.content-info--specialties .content-info__content-body {
+.content-info--list-gradient .content-info__content-body {
   margin: 0 -1.875rem -6rem;
   padding: 0 1.875rem 6rem;
   overflow: hidden;
   position: relative;
 }
-.content-info--specialties .content-info__content-body::before {
+.content-info--list-gradient .content-info__content-body::before {
   content: "";
   pointer-events: none;
   z-index: 1;
@@ -2785,18 +2770,18 @@ body::after {
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), color-stop(29%, #ffffff));
   background-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 29%);
 }
-.loaded .content-info--specialties .content-info__content-body::before {
+.loaded .content-info--list-gradient .content-info__content-body::before {
   -webkit-transition: opacity 0.4s ease;
   transition: opacity 0.4s ease;
 }
-.loaded .content-info--specialties .content-info__btn {
+.loaded .content-info--list-gradient .content-info__btn {
   -webkit-transition: margin-top 0.4s ease;
   transition: margin-top 0.4s ease;
 }
-.content-info--specialties:has(.points-content._open) .content-info__btn {
+.content-info--list-gradient:has(.points-content._open) .content-info__btn {
   margin-top: 2rem;
 }
-.content-info--specialties:has(.points-content._open) .content-info__content-body::before {
+.content-info--list-gradient:has(.points-content._open) .content-info__content-body::before {
   opacity: 0;
 }
 .content-info__title {
@@ -3251,11 +3236,11 @@ body::after {
   .product-gallery__pagination {
     display: none;
   }
-  .content-info--specialties .content-info__content-body::before {
-    bottom: -2.375rem;
+  .content-info--list-gradient .content-info__content-body::before {
+    bottom: -2.1875rem;
   }
-  .content-info--specialties .content-info__btn {
-    margin-top: 3.5rem;
+  .content-info--list-gradient .content-info__btn {
+    margin-top: 3.3125rem;
   }
   .review-list__items {
     grid-template-columns: repeat(auto-fit, minmax(21.875rem, 1fr));
@@ -3430,6 +3415,20 @@ body::after {
   }
   ._layout-row .product-card--active .product-card__images {
     aspect-ratio: 304/300;
+  }
+  .slider-products__slide {
+    opacity: 0;
+    visibility: hidden;
+    will-change: opacity;
+  }
+  .loaded .swiper-initialized .slider-products__slide {
+    -webkit-transition: opacity 0.5s ease, visibility 0.5s ease;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
+  .slider-products__slide.swiper-slide-visible {
+    pointer-events: auto;
+    opacity: 1;
+    visibility: visible;
   }
   .our-benefit--md {
     -ms-grid-column: 2;
@@ -4552,11 +4551,11 @@ body::after {
     padding-bottom: 1.5rem;
     margin-bottom: 1.5rem;
   }
-  .content-info--specialties .content-info__content-body {
+  .content-info--list-gradient .content-info__content-body {
     margin: 0 -1.875rem -4.0625rem;
-    padding: 0 1.875rem 4rem;
+    padding: 0 1.875rem 3.875rem;
   }
-  .content-info--specialties:has(.points-content._open) .content-info__btn {
+  .content-info--list-gradient:has(.points-content._open) .content-info__btn {
     margin-top: 0.5rem;
   }
   .content-info__title {
