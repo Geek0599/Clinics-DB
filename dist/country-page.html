@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Country Page</title>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta name="robots" content="noindex, nofollow">
+	<link rel="icon" type="image/png" href="./favicon/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/svg+xml" href="./favicon/favicon.svg">
+	<link rel="shortcut icon" href="./favicon/favicon.ico">
+	<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+	<meta name="apple-mobile-web-app-title" content="StemCell World">
+	<link rel="manifest" href="./favicon/site.webmanifest">
+	<link rel="preload" href="./fonts/VelaSans-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="./fonts/VelaSans-ExtraBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="./fonts/VelaSans-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="./fonts/VelaSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="./fonts/icons.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<style>
+		@font-face {
+			font-family: VelaSans;
+			font-display: swap;
+			src: url("./fonts/VelaSans-Bold.woff2") format("woff2"), url("./fonts/VelaSans-Bold.woff") format("woff");
+			font-weight: 700;
+			font-style: normal
+		}
+
+		@font-face {
+			font-family: VelaSans;
+			font-display: swap;
+			src: url("./fonts/VelaSans-ExtraBold.woff2") format("woff2"), url("./fonts/VelaSans-ExtraBold.woff") format("woff");
+			font-weight: 800;
+			font-style: normal
+		}
+
+		@font-face {
+			font-family: VelaSans;
+			font-display: swap;
+			src: url("./fonts/VelaSans-Medium.woff2") format("woff2"), url("./fonts/VelaSans-Medium.woff") format("woff");
+			font-weight: 500;
+			font-style: normal
+		}
+
+		@font-face {
+			font-family: VelaSans;
+			font-display: swap;
+			src: url("./fonts/VelaSans-SemiBold.woff2") format("woff2"), url("./fonts/VelaSans-SemiBold.woff") format("woff");
+			font-weight: 600;
+			font-style: normal
+		}
+
+		@font-face {
+			font-family: icons;
+			font-display: swap;
+			src: url("./fonts/icons.woff2") format("woff2"), url("./fonts/icons.woff") format("woff");
+			font-weight: 400;
+			font-style: normal
+		}
+	</style>
+	<link rel="preload" href="css/country-page.min.css?_v=20260129211542" as="style" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/country-page.min.css?_v=20260129211542">
+</head>
+
+<body>
+	<div class="wrapper">
+		<main class="page">
+			<section class="page__main main w-full w-full--bg">
+				<header class="header">
+					<div class="header__wrapper">
+						<div class="header__container">
+							<div class="header__left"> <a href="#" class="header__logo logo"> <img class="img" width="169" height="56" fetchpriority="high" loading="eager" decoding="async" src="img/logo/logo.svg" alt="Stem-Health logo"> </a> <select data-da=".header-menu-mobile__body, 1600, 3" id="lang-select" class="header__lang btn btn--light">
+									<option selected="selected" value="en">En</option>
+									<option value="ua">Ua</option>
+									<option value="ru">Ru</option>
+								</select> </div>
+							<nav data-da=".header-menu-mobile__body, 1600, 2" class="header__menu menu">
+								<ul class="menu__list">
+									<li data-submenu-item class="menu__item"> <a href="#" data-submenu-action data-menu-icon-link class="menu__link btn btn--light menu__link--arrow">
+											<div class="btn-icon"> <canvas width="128" height="128" class="btn-icon__canvas"></canvas> <video class="btn-icon__video" width="48" height="48" playsinline muted preload="none">
+													<source src="files/hospital.webm" type="video/webm">
+													<source src="files/hospital.mp4" type="video/mp4">
+												</video> </div> Clinics
+										</a>
+										<div data-submenu class="menu__sub-menu sub-menu">
+											<div class="sub-menu__body">
+												<div class="sub-menu__overflow">
+													<div class="sub-menu__content">
+														<div class="sub-menu__columns">
+															<div class="sub-menu__column">
+																<div class="sub-menu__column-title title-md">По странам</div>
+																<ul class="sub-menu__column-list">
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="24" height="24" loading="lazy" decoding="async" src="img/country-flags/DE.svg" alt="de flag"> </div>
+																			<div class="action-card__title text text--semibold">Германия</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="24" height="24" loading="lazy" decoding="async" src="img/country-flags/GB.svg" alt="gb flag"> </div>
+																			<div class="action-card__title text text--semibold">Великобритания</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="24" height="24" loading="lazy" decoding="async" src="img/country-flags/IT.svg" alt="it flag"> </div>
+																			<div class="action-card__title text text--semibold">Италия</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="24" height="24" loading="lazy" decoding="async" src="img/country-flags/FR.svg" alt="fr flag"> </div>
+																			<div class="action-card__title text text--semibold">Франция</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="24" height="24" loading="lazy" decoding="async" src="img/country-flags/US.svg" alt="us flag"> </div>
+																			<div class="action-card__title text text--semibold">США</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="24" height="24" loading="lazy" decoding="async" src="img/country-flags/SE.svg" alt="se flag"> </div>
+																			<div class="action-card__title text text--semibold">Швеция</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="24" height="24" loading="lazy" decoding="async" src="img/country-flags/CH.svg" alt="ch flag"> </div>
+																			<div class="action-card__title text text--semibold">Швейцария</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="24" height="24" loading="lazy" decoding="async" src="img/country-flags/TR.svg" alt="tr flag"> </div>
+																			<div class="action-card__title text text--semibold">Турция</div>
+																		</a> </li>
+																</ul>
+															</div>
+															<div class="sub-menu__column">
+																<div class="sub-menu__column-title title-md">По направлениям</div>
+																<ul class="sub-menu__column-list">
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg"> <img width="24" height="24" loading="lazy" decoding="async" src="img/treatment/ortopedia.svg" alt="Ортопедия"> </div>
+																			<div class="action-card__title text text--semibold">Ортопедия</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg"> <img width="24" height="24" loading="lazy" decoding="async" src="img/treatment/nevrologia.svg" alt="Неврология"> </div>
+																			<div class="action-card__title text text--semibold">Неврология</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg"> <img width="24" height="24" loading="lazy" decoding="async" src="img/treatment/cardiologia.svg" alt="Кардиология"> </div>
+																			<div class="action-card__title text text--semibold">Кардиология</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg"> <img width="24" height="24" loading="lazy" decoding="async" src="img/treatment/aesthetic.svg" alt="Эстетическая медицина"> </div>
+																			<div class="action-card__title text text--semibold">Эстетическая медицина</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg"> <img width="24" height="24" loading="lazy" decoding="async" src="img/treatment/pathologie.svg" alt="Патологии"> </div>
+																			<div class="action-card__title text text--semibold">Патологии</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg"> <img width="24" height="24" loading="lazy" decoding="async" src="img/treatment/autoimmune.svg" alt="Аутоимунные заболевания"> </div>
+																			<div class="action-card__title text text--semibold">Аутоимунные заболевания</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg"> <img width="24" height="24" loading="lazy" decoding="async" src="img/treatment/methabolic.svg" alt="Метаболические заболевания"> </div>
+																			<div class="action-card__title text text--semibold">Метаболические заболевания</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg"> <img width="24" height="24" loading="lazy" decoding="async" src="img/treatment/rejuvenation.svg" alt="Омоложение"> </div>
+																			<div class="action-card__title text text--semibold">Омоложение</div>
+																		</a> </li>
+																</ul>
+															</div>
+														</div> <a href="#" class="sub-menu__btn btn btn--dark btn--sm">Все клиники</a>
+														<div class="linearBlur" style="pointer-events:none;transform-origin:center bottom;height:72px;top:auto">
+															<div style="position:relative;z-index:0;width:100%;height:100%;background:linear-gradient(to top,rgba(255,255,255,.79) 0,rgba(255,255,255,0) 100%)">
+																<div style="position:absolute;z-index:1;inset:0px;mask-image:linear-gradient(to top,rgb(0,0,0) 10%,rgba(0,0,0,0) 20.5882%);backdrop-filter:blur(4px)"></div>
+																<div style="position:absolute;z-index:2;inset:0px;mask-image:linear-gradient(to top,rgb(0,0,0) 10%,rgb(0,0,0) 20.5882%,rgba(0,0,0,0) 31.1765%);backdrop-filter:blur(3.03143px)"></div>
+																<div style="position:absolute;z-index:2;inset:0px;mask-image:linear-gradient(to top,rgba(0,0,0,0) 10%,rgb(0,0,0) 20.5882%,rgb(0,0,0) 31.1765%,rgba(0,0,0,0) 41.7647%);backdrop-filter:blur(2.2974px)"></div>
+																<div style="position:absolute;z-index:3;inset:0px;mask-image:linear-gradient(to top,rgba(0,0,0,0) 20.5882%,rgb(0,0,0) 31.1765%,rgb(0,0,0) 41.7647%,rgba(0,0,0,0) 52.3529%);backdrop-filter:blur(1.7411px)"></div>
+																<div style="position:absolute;z-index:4;inset:0px;mask-image:linear-gradient(to top,rgba(0,0,0,0) 31.1765%,rgb(0,0,0) 41.7647%,rgb(0,0,0) 52.3529%,rgba(0,0,0,0) 62.9412%);backdrop-filter:blur(1.31951px)"></div>
+																<div style="position:absolute;z-index:5;inset:0px;mask-image:linear-gradient(to top,rgba(0,0,0,0) 41.7647%,rgb(0,0,0) 52.3529%,rgb(0,0,0) 62.9412%,rgba(0,0,0,0) 73.5294%);backdrop-filter:blur(1px)"></div>
+																<div style="position:absolute;z-index:6;inset:0px;mask-image:linear-gradient(to top,rgba(0,0,0,0) 52.3529%,rgb(0,0,0) 62.9412%,rgb(0,0,0) 73.5294%,rgba(0,0,0,0) 84.1176%);backdrop-filter:blur(0.757858px)"></div>
+																<div style="position:absolute;z-index:7;inset:0px;mask-image:linear-gradient(to top,rgba(0,0,0,0) 62.9412%,rgb(0,0,0) 73.5294%,rgb(0,0,0) 84.1176%,rgba(0,0,0,0) 94.7059%);backdrop-filter:blur(0.574349px)"></div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class="menu__item"> <a data-menu-icon-link href="#" class="menu__link btn btn--light">
+											<div class="btn-icon"> <canvas width="128" height="128" class="btn-icon__canvas"></canvas> <video class="btn-icon__video" width="48" height="48" playsinline muted preload="none">
+													<source src="files/treatments.webm" type="video/webm">
+													<source src="files/treatments.mp4" type="video/mp4">
+												</video> </div> Treatments
+										</a> </li>
+									<li class="menu__item"> <a data-menu-icon-link href="#" class="menu__link btn btn--light">
+											<div class="btn-icon"> <canvas width="128" height="128" class="btn-icon__canvas"></canvas> <video class="btn-icon__video" width="48" height="48" playsinline muted preload="none">
+													<source src="files/diseases.webm" type="video/webm">
+													<source src="files/diseases.mp4" type="video/mp4">
+												</video> </div> Diseases
+										</a> </li>
+								</ul>
+							</nav>
+							<div data-da=".header-menu-mobile__body, 850, 1" class="header__actions actions-header"> <a href="tel:+180034234234" class="actions-header__btn btn btn--light">+1(800)342-342-34</a> <a href="#" class="actions-header__btn btn btn--dark"> Free Consultation </a> </div>
+							<div class="header__menu-icon menu-icon"> <button aria-label="Open menu" type="button" class="menu-icon__icon icon-menu"><span></span></button>
+								<div class="menu-icon__menu-mobile header-menu-mobile">
+									<div class="header-menu-mobile__body scrollbar">
+										<div class="header-menu-mobile__head"> <a href="#" class="header-menu-mobile__logo logo"> <img class="img" width="149" height="64" fetchpriority="high" loading="eager" decoding="async" src="img/logo/logo.svg" alt="Stem-Health logo"> </a> <button aria-label="Open menu" type="button" class="header-menu-mobile__icon icon-menu"><span></span></button> </div>
+									</div>
+								</div>
+							</div>
+							<div class="header__mobile-float header-mobile-float">
+								<div class="header-mobile-float__search search-input search-input--mob">
+									<div class="search-input__body-input _icon-search"> <input class="search-input__input" required placeholder="Начните поиск…" name="q" type="text"> </div>
+								</div> <button aria-label="Open menu" type="button" class="header-mobile-float__btn icon-menu"><span></span></button>
+							</div>
+						</div>
+					</div>
+				</header>
+				<div class="main__container">
+					<div class="main__breadcrumbs breadcrumbs">
+						<ul class="breadcrumbs__list">
+							<li class="breadcrumbs__item"> <a href="#" class="breadcrumbs__link"><span>Главная страница</span></a> </li>
+							<li class="breadcrumbs__item"> <span class="breadcrumbs__link breadcrumbs__link--current">База клиник</span> </li>
+						</ul>
+					</div>
+					<h1 class="main__title main-title">Германия</h1>
+					<div class="main__text text text--lh">Клиники, специализирующиеся на лечении стволовыми клетками в Германии.</div>
+				</div>
+			</section>
+			<div class="page__sections-padding">
+				<div class="page__grid-actions grid-actions">
+					<div class="grid-actions__container">
+						<div class="grid-actions__list-items">
+							<div class="grid-actions__list-item">
+								<div class="find-by-letter">
+									<ul class="find-by-letter__list">
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-А">А</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-Б">Б</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-В">В</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-Г">Г</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-Д">Д</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-Е">Е</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-Ё">Ё</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-Ж">Ж</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-З">З</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-И">И</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-Й">Й</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-К">К</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-Л">Л</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-М">М</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-Н">Н</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-О">О</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-П">П</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-Р">Р</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-С">С</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-Т">Т</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-У">У</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-Ф">Ф</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-Х">Х</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-Ц">Ц</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-Ч">Ч</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-Ш">Ш</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-Щ">Щ</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-Э">Э</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-Ю">Ю</button> </li>
+										<li class="find-by-letter__item title-sm"> <button data-goto="#letter-Я">Я</button> </li>
+									</ul>
+								</div>
+							</div>
+							<div id="letter-А" class="grid-actions__list-item">
+								<div class="grid-actions__title title">А</div>
+								<ul class="grid-actions__list grid-actions__list--three-col">
+									<li class="grid-actions__item"> <a href="#" class="action-card action-card--p-md _icon-arrow-right">
+											<div class="action-card__content">
+												<div class="action-card__title title-sm">Аугсбург</div>
+												<div class="action-card__sub-title text text--semibold">2 клиники</div>
+											</div>
+										</a> </li>
+									<li class="grid-actions__item"> <a href="#" class="action-card action-card--p-md _icon-arrow-right">
+											<div class="action-card__content">
+												<div class="action-card__title title-sm">Ахен</div>
+												<div class="action-card__sub-title text text--semibold">5 клиники</div>
+											</div>
+										</a> </li>
+								</ul>
+							</div>
+							<div id="letter-Б" class="grid-actions__list-item">
+								<div class="grid-actions__title title">Б</div>
+								<ul class="grid-actions__list grid-actions__list--three-col">
+									<li class="grid-actions__item"> <a href="#" class="action-card action-card--p-md _icon-arrow-right">
+											<div class="action-card__content">
+												<div class="action-card__title title-sm">Берлин</div>
+												<div class="action-card__sub-title text text--semibold">2 клиники</div>
+											</div>
+										</a> </li>
+									<li class="grid-actions__item"> <a href="#" class="action-card action-card--p-md _icon-arrow-right">
+											<div class="action-card__content">
+												<div class="action-card__title title-sm">Бремен</div>
+												<div class="action-card__sub-title text text--semibold">2 клиники</div>
+											</div>
+										</a> </li>
+									<li class="grid-actions__item"> <a href="#" class="action-card action-card--p-md _icon-arrow-right">
+											<div class="action-card__content">
+												<div class="action-card__title title-sm">Бохум</div>
+												<div class="action-card__sub-title text text--semibold">2 клиники</div>
+											</div>
+										</a> </li>
+									<li class="grid-actions__item"> <a href="#" class="action-card action-card--p-md _icon-arrow-right">
+											<div class="action-card__content">
+												<div class="action-card__title title-sm">Билефельд</div>
+												<div class="action-card__sub-title text text--semibold">2 клиники</div>
+											</div>
+										</a> </li>
+									<li class="grid-actions__item"> <a href="#" class="action-card action-card--p-md _icon-arrow-right">
+											<div class="action-card__content">
+												<div class="action-card__title title-sm">Бонн</div>
+												<div class="action-card__sub-title text text--semibold">2 клиники</div>
+											</div>
+										</a> </li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<section class="page__slider-reviews slider-reviews">
+					<div class="slider-reviews__wrapper w-full w-full--bg w-full--padding">
+						<div data-slider="reviews" class="slider-reviews__container">
+							<h2 class="slider-reviews__title title">Наилучшие клиники <strong class="title-marked">TOP</strong></h2>
+							<div data-slider class="slider-reviews__slider swiper">
+								<ul class="slider-reviews__wrapper swiper-wrapper">
+									<li class="slider-reviews__slide swiper-slide">
+										<div class="review-card">
+											<div class="review-card__head"> <a href="#" class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </a>
+												<div class="review-card__head-content"> <a href="#" class="review-card__title title-sm">Asklepios Hospital Barmbek</a>
+													<div role="img" class="review-card__rating rating" data-rating="4.5" aria-label="Rating: 4.5 out of 5">
+														<div class="rating__value text text--semibold">4.5</div>
+														<div class="rating__body">
+															<div class="rating__active">
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+															</div>
+															<div class="rating__items">
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+															</div>
+														</div>
+													</div>
+													<div class="review-card__location-point location-point text text--semibold">
+														<div class="location-point__icon"> <img width="16" height="16" loading="lazy" decoding="async" src="img/country-flags/DE.svg" alt="de flag"> </div> Германия, Гамбург
+													</div>
+												</div>
+											</div>
+											<div class="review-card__item review-item review-item--tail review-item--sm">
+												<div class="review-item__img-ibg"> <picture><source srcset="img/clinics/user.webp" type="image/webp"><img width="32" height="32" loading="lazy" decoding="async" src="img/clinics/user.png" alt="user"></picture> </div>
+												<div class="review-item__content">
+													<div class="review-item__title text text--bold">Marianna Kowalska</div>
+													<div class="review-item__text text text--lh">
+														<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan!</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class="slider-reviews__slide swiper-slide">
+										<div class="review-card">
+											<div class="review-card__head"> <a href="#" class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </a>
+												<div class="review-card__head-content"> <a href="#" class="review-card__title title-sm">Center of ophthalmology and eye surgery Dr. Wobbe and Рartners</a>
+													<div role="img" class="review-card__rating rating" data-rating="4.5" aria-label="Rating: 4.5 out of 5">
+														<div class="rating__value text text--semibold">4.5</div>
+														<div class="rating__body">
+															<div class="rating__active">
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+															</div>
+															<div class="rating__items">
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+															</div>
+														</div>
+													</div>
+													<div class="review-card__location-point location-point text text--semibold">
+														<div class="location-point__icon"> <img width="16" height="16" loading="lazy" decoding="async" src="img/country-flags/GB.svg" alt="gb flag"> </div> Лондон, Великобритания
+													</div>
+												</div>
+											</div>
+											<div class="review-card__item review-item review-item--tail review-item--sm">
+												<div class="review-item__img-ibg"> <picture><source srcset="img/clinics/user.webp" type="image/webp"><img width="32" height="32" loading="lazy" decoding="async" src="img/clinics/user.png" alt="user"></picture> </div>
+												<div class="review-item__content">
+													<div class="review-item__title text text--bold">Marianna Kowalska</div>
+													<div class="review-item__text text text--lh">
+														<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam delectus id fugiat quia ullam. Excepturi numquam ratione iusto ad. Earum aperiam deserunt quibusdam.</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class="slider-reviews__slide swiper-slide">
+										<div class="review-card">
+											<div class="review-card__head"> <a href="#" class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </a>
+												<div class="review-card__head-content"> <a href="#" class="review-card__title title-sm">Medipol Mega University Hospital</a>
+													<div role="img" class="review-card__rating rating" data-rating="4.5" aria-label="Rating: 4.5 out of 5">
+														<div class="rating__value text text--semibold">4.5</div>
+														<div class="rating__body">
+															<div class="rating__active">
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+															</div>
+															<div class="rating__items">
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+															</div>
+														</div>
+													</div>
+													<div class="review-card__location-point location-point text text--semibold">
+														<div class="location-point__icon"> <img width="16" height="16" loading="lazy" decoding="async" src="img/country-flags/DE.svg" alt="de flag"> </div> Германия, Гамбург
+													</div>
+												</div>
+											</div>
+											<div class="review-card__item review-item review-item--tail review-item--sm">
+												<div class="review-item__img-ibg"> <picture><source srcset="img/clinics/user.webp" type="image/webp"><img width="32" height="32" loading="lazy" decoding="async" src="img/clinics/user.png" alt="user"></picture> </div>
+												<div class="review-item__content">
+													<div class="review-item__title text text--bold">Marianna Kowalska</div>
+													<div class="review-item__text text text--lh">
+														<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan!</p>
+														<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class="slider-reviews__slide swiper-slide">
+										<div class="review-card">
+											<div class="review-card__head"> <a href="#" class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </a>
+												<div class="review-card__head-content"> <a href="#" class="review-card__title title-sm">Asklepios Hospital Barmbek</a>
+													<div role="img" class="review-card__rating rating" data-rating="4.7" aria-label="Rating: 4.7 out of 5">
+														<div class="rating__value text text--semibold">4.7</div>
+														<div class="rating__body">
+															<div class="rating__active">
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+															</div>
+															<div class="rating__items">
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+															</div>
+														</div>
+													</div>
+													<div class="review-card__location-point location-point text text--semibold">
+														<div class="location-point__icon"> <img width="16" height="16" loading="lazy" decoding="async" src="img/country-flags/UA.svg" alt="ua flag"> </div> Киев, Украина
+													</div>
+												</div>
+											</div>
+											<div class="review-card__item review-item review-item--tail review-item--sm">
+												<div class="review-item__img-ibg"> <picture><source srcset="img/clinics/user.webp" type="image/webp"><img width="32" height="32" loading="lazy" decoding="async" src="img/clinics/user.png" alt="user"></picture> </div>
+												<div class="review-item__content">
+													<div class="review-item__title text text--bold">Marianna Kowalska</div>
+													<div class="review-item__text text text--lh">
+														<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan!</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class="slider-reviews__slide swiper-slide">
+										<div class="review-card">
+											<div class="review-card__head"> <a href="#" class="review-card__img-ibg-contain"> <picture><source srcset="img/clinics/clicic-logo.webp" type="image/webp"><img width="64" height="64" loading="lazy" decoding="async" src="img/clinics/clicic-logo.png" alt="clicic logo"></picture> </a>
+												<div class="review-card__head-content"> <a href="#" class="review-card__title title-sm">Asklepios Hospital Barmbek</a>
+													<div role="img" class="review-card__rating rating" data-rating="4.5" aria-label="Rating: 4.5 out of 5">
+														<div class="rating__value text text--semibold">4.5</div>
+														<div class="rating__body">
+															<div class="rating__active">
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+															</div>
+															<div class="rating__items">
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+																<div class="rating__item"></div>
+															</div>
+														</div>
+													</div>
+													<div class="review-card__location-point location-point text text--semibold">
+														<div class="location-point__icon"> <img width="16" height="16" loading="lazy" decoding="async" src="img/country-flags/DE.svg" alt="de flag"> </div> Германия, Гамбург
+													</div>
+												</div>
+											</div>
+											<div class="review-card__item review-item review-item--tail review-item--sm">
+												<div class="review-item__img-ibg"> <picture><source srcset="img/clinics/user.webp" type="image/webp"><img width="32" height="32" loading="lazy" decoding="async" src="img/clinics/user.png" alt="user"></picture> </div>
+												<div class="review-item__content">
+													<div class="review-item__title text text--bold">Marianna Kowalska</div>
+													<div class="review-item__text text text--lh">
+														<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan!</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="slider-reviews__slider-actions slider-actions"> <button data-slider-prevbtn aria-label="slide prev" class="slider-actions__btn slider-btn _icon-arrow-triangle"></button>
+								<div data-slider-pagination class="slider-actions__pagionation slider-pagination"></div> <button data-slider-nextbtn aria-label="slide next" class="slider-actions__btn slider-btn _icon-arrow-triangle"></button>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section class="page__cta-section cta-section">
+					<div class="cta-section__container">
+						<div class="cta-section__body">
+							<div class="cta-section__content">
+								<div class="cta-section__info">
+									<h2 class="cta-section__title title">Получите бесплатную консультацию</h2> <strong class="cta-section__text text text--semibold">По телефону или онлайн</strong>
+								</div>
+								<div class="cta-section__img-ibg-contain"> <picture><source srcset="img/backgrounds/women.webp, img/backgrounds/women@2x.webp 2x" type="image/webp"><img width="161" height="240" loading="lazy" decoding="async" src="img/backgrounds/women.png" srcset="img/backgrounds/women@2x.png 2x" alt="Women"></picture> </div>
+								<div class="cta-section__actions"> <a href="tel:+180034234234" class="cta-section__btn btn btn--lg btn--light">+1(800)342-342-34</a> <a href="#" class="cta-section__btn btn btn--lg btn--dark">Free Consultation</a> </div>
+							</div>
+							<div class="cta-section__img-ibg">
+								<picture>
+									<source type="image/webp" srcset="img/backgrounds/abstraction-bg-mobile.webp" media="(max-width: 600px)">
+									<source type="image/webp" srcset="img/backgrounds/abstraction-bg.webp" media="(min-width: 601px)">
+									<source srcset="img/backgrounds/abstraction-bg-mobile.png" media="(max-width: 600px)">
+									<source srcset="img/backgrounds/abstraction-bg.png" media="(min-width: 601px)"> <img width="1376" height="200" loading="lazy" decoding="async" src="img/backgrounds/abstraction-bg.png" alt="Abstraction background">
+								</picture>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section class="page__benefits our-benefits">
+					<div class="our-benefits__container">
+						<h2 class="our-benefits__title title">Наши преимущества</h2>
+						<ul class="our-benefits__items">
+							<li class="our-benefits__item our-benefit our-benefit--sm-r">
+								<div class="our-benefit__img-ibg-contain"> <picture><source srcset="img/our-benefits/woman.webp, img/our-benefits/woman@2x.webp 2x" type="image/webp"><img class="our-benefit__img" width="134" height="241" src="img/our-benefits/woman.png" srcset="img/our-benefits/woman@2x.png 2x" alt="Девушка"></picture> </div>
+								<div class="our-benefit__content">
+									<div class="our-benefit__title title-sm">Подбор лечения</div>
+									<div class="our-benefit__text text">
+										<p>Анализ диагноза и бюджета, чтобы предложить лучшее</p>
+									</div>
+								</div>
+							</li>
+							<li class="our-benefits__item our-benefit our-benefit--sm-l">
+								<div class="our-benefit__content">
+									<div class="our-benefit__title title-sm">Прозрачность</div>
+									<div class="our-benefit__text text">
+										<p>Все клиники прошли тщательную проверку.</p>
+									</div>
+								</div>
+								<div class="our-benefit__img-ibg-contain"> <picture><source srcset="img/our-benefits/transparency.webp, img/our-benefits/transparency@2x.webp 2x" type="image/webp"><img class="our-benefit__img" width="134" height="241" src="img/our-benefits/transparency.png" srcset="img/our-benefits/transparency@2x.png 2x" alt="Прозрачность"></picture> </div>
+							</li>
+							<li class="our-benefits__item our-benefit our-benefit--md">
+								<div class="our-benefit__content">
+									<div class="our-benefit__title title-sm">Полное сопровождение</div>
+									<div class="our-benefit__text text">
+										<p>От первого запроса до возвращения домой — мы помогаем с организацией лечения, перелётов, проживания и переводов.</p>
+									</div>
+								</div>
+								<div class="our-benefit__img-ibg-contain"> <picture><source srcset="img/our-benefits/plane.webp, img/our-benefits/plane@2x.webp 2x" type="image/webp"><img class="our-benefit__img" width="352" height="217" src="img/our-benefits/plane.png" srcset="img/our-benefits/plane@2x.png 2x" alt="Самолет"></picture> </div>
+							</li>
+							<li class="our-benefits__item our-benefit our-benefit--lg">
+								<div class="our-benefit__img-ibg-contain"> <picture><source srcset="img/our-benefits/clinic.webp, img/our-benefits/clinic@2x.webp 2x" type="image/webp"><img class="our-benefit__img" width="268" height="375" src="img/our-benefits/clinic.png" srcset="img/our-benefits/clinic@2x.png 2x" alt="Клиника"></picture> </div>
+								<div class="our-benefit__content">
+									<div class="our-benefit__title title-sm">Доступ к лучшим клиникам</div>
+									<div class="our-benefit__text text">
+										<p>Каталог медицинских центров, специализирующихся гна стволовых клетках и инновационных методах терапии </p>
+									</div> <a href="#" class="our-benefit__btn btn btn--light">Перейти к поиску</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="page__num-points num-points">
+					<div class="num-points__container">
+						<h2 class="num-points__title title">Мы в цифрах</h2>
+						<ul class="num-points__items">
+							<li class="num-points__item num-point">
+								<div class="num-point__value title-lg">70</div>
+								<div class="num-point__title title-sm">Направлений лечения</div>
+							</li>
+							<li class="num-points__item num-point">
+								<div class="num-point__value title-lg">30</div>
+								<div class="num-point__title title-sm">Работаем с 30-ю странами</div>
+							</li>
+							<li class="num-points__item num-point">
+								<div class="num-point__value title-lg">70</div>
+								<div class="num-point__title title-sm">Направлений лечения</div>
+							</li>
+							<li class="num-points__item num-point">
+								<div class="num-point__value title-lg">1231</div>
+								<div class="num-point__title title-sm">Проверенных клиник на сайте</div>
+							</li>
+						</ul>
+					</div>
+				</section>
+			</div>
+		</main>
+		<footer class="footer w-full">
+			<div class="footer__container">
+				<div class="footer__aside footer-aside"> <a href="#" class="footer-aside__logo logo-footer"> <img class="img" width="109" height="34" loading="lazy" decoding="async" src="img/logo/logo-dark.svg" alt="Stem-Health logo"> </a> </div>
+				<nav class="footer__menu footer-menu">
+					<div class="footer-menu__column">
+						<div class="footer-menu__title title-sm">Связь</div>
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item"> <a href="tel:+18008008000" class="footer-menu__link">+1 800 800 8000</a> </li>
+							<li class="footer-menu__item"> <a href="mailto:mail@mail.com" class="footer-menu__link">mail@mail.com</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Fort Lauderdale, FL, <br>United States</a> </li>
+						</ul>
+					</div>
+					<div class="footer-menu__column">
+						<div class="footer-menu__title title-sm">Соц сети</div>
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">
+									<div class="social-icon"> <img width="24" height="24" loading="lazy" decoding="async" src="img/icons/socials/facebook-fade.svg" alt="facebook icon"> </div> Facebook
+								</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">
+									<div class="social-icon"> <img width="24" height="24" loading="lazy" decoding="async" src="img/icons/socials/youtube-fade.svg" alt="youtube icon"> </div> Youtube
+								</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">
+									<div class="social-icon"> <img width="24" height="24" loading="lazy" decoding="async" src="img/icons/socials/instagram-fade.svg" alt="instagram icon"> </div> Instagram
+								</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">
+									<div class="social-icon"> <img width="24" height="24" loading="lazy" decoding="async" src="img/icons/socials/x-fade.svg" alt="X (Twitter) icon"> </div> X (Twitter)
+								</a> </li>
+						</ul>
+					</div>
+					<div class="footer-menu__column">
+						<div class="footer-menu__title title-sm">Компания</div>
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Как это работает</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Новости</a> </li>
+						</ul>
+					</div>
+					<div class="footer-menu__column">
+						<div class="footer-menu__title title-sm">Заболевания</div>
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Как это работает</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Новости</a> </li>
+						</ul>
+					</div>
+					<div class="footer-menu__column">
+						<div class="footer-menu__title title-sm">Частые вопросы</div>
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Как это работает</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Новости</a> </li>
+						</ul>
+					</div>
+					<div class="footer-menu__column">
+						<div class="footer-menu__title title-sm">Направления</div>
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Как это работает</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Новости</a> </li>
+						</ul>
+					</div>
+					<div class="footer-menu__column">
+						<div class="footer-menu__title title-sm">Направления</div>
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Как это работает</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Новости</a> </li>
+						</ul>
+					</div>
+					<div class="footer-menu__column footer-menu__column--full">
+						<div class="footer-menu__title title-sm">Нас находят</div>
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+						</ul>
+					</div>
+					<div class="footer-menu__bottom footer-bottom"> <a href="#" class="footer-bottom__link text-small">Terms & conditions</a> <a href="#" class="footer-bottom__link text-small">Privacy policy</a>
+						<div class="footer-bottom__text text-small">© 2025 Stemcell.com, LLC</div>
+					</div>
+					<div data-da=".footer-aside, 1250" class="footer-menu__column-actions"> <a href="tel:+180034234234" class="footer__btn btn btn--gray">+1(800)342-342-34</a> <a href="#" class="footer__btn btn btn--dark">Free Consultation</a> </div>
+				</nav>
+			</div>
+		</footer>
+	</div>
+	<script async src="js/country-page.min.js?_v=20260129211542"></script>
+</body>
+
+</html>

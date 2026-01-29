@@ -12586,7 +12586,6 @@
                 });
             }
             function computeScrollTop(index) {
-                stickyHeight = getStickyHeight();
                 return Math.max(0, sectionTops[index] - stickyHeight + 13);
             }
             function onScroll() {

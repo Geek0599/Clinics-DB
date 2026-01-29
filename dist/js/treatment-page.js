@@ -4414,6 +4414,59 @@
             }));
         }));
         filtersPopup();
+        searchItems();
+    }
+    function searchItems() {
+        const searchItems = document.querySelectorAll("[data-search-items]");
+        if (!searchItems.length) return;
+        const ACTIVE_CLASS = "_active";
+        searchItems.forEach((searchItem => {
+            const input = searchItem.querySelector("input");
+            const button = searchItem.querySelector("button");
+            const filterGroup = searchItem.closest("[data-filter-group]");
+            if (!filterGroup) return;
+            const btnMore = filterGroup.querySelector("[data-filter-group-items-btnMore]");
+            const itemsWrapper = filterGroup.querySelector("[data-filter-group-items]");
+            if (!itemsWrapper) return;
+            input.addEventListener("input", (() => {
+                const value = input.value.trim();
+                input.value = value;
+                button.classList.toggle(ACTIVE_CLASS, value !== "");
+                filterGroupItems(value, itemsWrapper, btnMore, input);
+            }));
+            button.addEventListener("click", (() => {
+                input.value = "";
+                button.classList.remove(ACTIVE_CLASS);
+                filterGroupItems("", itemsWrapper, btnMore, input);
+            }));
+        }));
+    }
+    function filterGroupItems(searchValue, itemsWrapper, btnMore, searchInput) {
+        const HIDDEN_CLASS = "hidden";
+        const NOT_FOUND_CLASS = "not-found-msg";
+        const items = Array.from(itemsWrapper.children);
+        const query = searchValue.toLowerCase();
+        let visibleCount = 0;
+        items.forEach((item => {
+            if (item.classList.contains(NOT_FOUND_CLASS)) return;
+            const input = item.querySelector("input");
+            const value = input?.value?.toLowerCase() || "";
+            const isRadio = item.querySelector('[type="radio"]');
+            const isMatch = !query || value.includes(query);
+            const shouldHide = query && (isRadio || !isMatch);
+            item.classList.toggle(HIDDEN_CLASS, shouldHide);
+            if (!shouldHide) visibleCount++;
+        }));
+        btnMore?.classList.toggle(HIDDEN_CLASS, !!query);
+        const notFound = itemsWrapper.querySelector(`.${NOT_FOUND_CLASS}`);
+        if (query && visibleCount === 0) {
+            if (!notFound) {
+                const li = document.createElement("li");
+                li.className = NOT_FOUND_CLASS;
+                li.textContent = searchInput.dataset.notFountMsg || "Not found";
+                itemsWrapper.appendChild(li);
+            }
+        } else notFound?.remove();
     }
     function mobilePlaceholder(breakpoint = 479.98) {
         const inputs = document.querySelectorAll("[data-mobile-placeholder]");
