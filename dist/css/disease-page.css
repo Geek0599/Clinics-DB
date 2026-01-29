@@ -2559,8 +2559,8 @@ body::after {
   inset-inline-start: auto;
   opacity: 0;
   visibility: hidden;
-  -webkit-transition: opacity 0.25s ease;
-  transition: opacity 0.25s ease;
+  -webkit-transition: opacity 0.25s ease, visibility 0.25s ease;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
 }
 .search-items__btn-reset::before {
   font-size: 0.65625rem;
