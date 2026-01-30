@@ -716,6 +716,13 @@ Snippet (HTML): cnt
       -ms-flex: 0 0 4rem;
           flex: 0 0 4rem;
 }
+.action-card__img-ibg img {
+  width: calc(100% + 0.125rem);
+  height: calc(100% + 0.125rem);
+  left: -0.0625rem;
+  top: -0.0625rem;
+  max-width: unset;
+}
 .action-card__img-ibg--round {
   border-radius: 50%;
   overflow: hidden;

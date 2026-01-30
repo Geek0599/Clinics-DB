@@ -4240,6 +4240,49 @@
             }));
         }));
     }
+    function mobilePlaceholder(breakpoint = 479.98) {
+        const inputs = document.querySelectorAll("[data-mobile-placeholder]");
+        if (!inputs.length) return;
+        function updatePlaceholders() {
+            const isMobile = window.innerWidth <= breakpoint;
+            inputs.forEach((input => {
+                if (!input.dataset.originalPlaceholder) input.dataset.originalPlaceholder = input.dataset.placeholder || input.placeholder || "";
+                const mobilePlaceholder = input.dataset.mobilePlaceholder;
+                const originalPlaceholder = input.dataset.originalPlaceholder;
+                input.placeholder = isMobile ? mobilePlaceholder : originalPlaceholder;
+            }));
+        }
+        updatePlaceholders();
+        window.addEventListener("resize", updatePlaceholders);
+    }
+    function filtersPopup() {
+        const filtersPopup = document.querySelector("[data-filters]");
+        const activeClass = "filters-open";
+        let isClosedSpollers = false;
+        if (document.querySelector("[data-filters-open]")) document.addEventListener("click", (function(e) {
+            if (bodyLockStatus && e.target.closest("[data-filters-open]")) {
+                filtersOpen();
+                !isClosedSpollers && closeSpollers();
+            }
+            if (bodyLockStatus && e.target.closest("[data-filters-close]")) filtersClose();
+        }));
+        function filtersOpen() {
+            bodyLock();
+            document.documentElement.classList.add(activeClass);
+        }
+        function filtersClose() {
+            bodyUnlock();
+            document.documentElement.classList.remove(activeClass);
+        }
+        function closeSpollers() {
+            const spollers = filtersPopup.querySelectorAll("[data-spoller]");
+            spollers.forEach((spoller => {
+                spoller.classList.remove("_spoller-active");
+                spoller.nextElementSibling.setAttribute("hidden", "");
+            }));
+            isClosedSpollers = true;
+        }
+    }
     function initFilters() {
         const groups = document.querySelectorAll("[data-filter-group]");
         const activeFiltersHead = document.querySelector("[data-active-filters-head]");
@@ -4290,7 +4333,7 @@
                 if (!anyChecked && radios.length) radios[0].checked = true;
             }
         }
-        activeFiltersWrap.addEventListener("click", (e => {
+        document.addEventListener("click", (e => {
             const btn = e.target.closest("[data-active-filter]");
             if (!btn) return;
             const {group, value} = btn.dataset;
@@ -4308,22 +4351,27 @@
                 once: true
             });
         }));
-        groups.forEach((group => {
-            const checkboxes = group.querySelectorAll('input[type="checkbox"]');
-            const radios = group.querySelectorAll('input[type="radio"]');
-            checkboxes.forEach((cb => {
-                cb.addEventListener("change", (() => onCheckboxChange(cb, group)));
-            }));
-            radios.forEach((radio => {
-                radio.addEventListener("change", (() => {
-                    if (radio.checked) checkboxes.forEach((cb => {
+        document.addEventListener("change", (e => {
+            const target = e.target;
+            if (target.matches('input[type="checkbox"]')) {
+                const group = target.closest("[data-filter-group]");
+                if (!group) return;
+                onCheckboxChange(target, group);
+                return;
+            }
+            if (target.matches('input[type="radio"]')) {
+                const group = target.closest("[data-filter-group]");
+                if (!group) return;
+                if (target.checked) {
+                    const checkboxes = group.querySelectorAll('input[type="checkbox"]');
+                    checkboxes.forEach((cb => {
                         if (cb.checked) {
                             cb.checked = false;
                             removeActiveFilter(cb.name, cb.value);
                         }
                     }));
-                }));
-            }));
+                }
+            }
         }));
         if (resetBtn) resetBtn.addEventListener("click", (() => {
             activeFiltersWrap.innerHTML = "";
@@ -4336,102 +4384,99 @@
             }));
         }));
         filtersPopup();
-        searchItems();
+        initSearchItems();
     }
-    function searchItems() {
-        const searchItems = document.querySelectorAll("[data-search-items]");
-        if (!searchItems.length) return;
-        const ACTIVE_CLASS = "_active";
-        searchItems.forEach((searchItem => {
-            const input = searchItem.querySelector("input");
-            const button = searchItem.querySelector("button");
-            const filterGroup = searchItem.closest("[data-filter-group]");
-            if (!filterGroup) return;
-            const btnMore = filterGroup.querySelector("[data-filter-group-items-btnMore]");
-            const itemsWrapper = filterGroup.querySelector("[data-filter-group-items]");
+    function initSearchItems() {
+        const SEARCH_SELECTOR = "[data-search-items]";
+        const FILTER_GROUP_SELECTOR = "[data-filter-group]";
+        const ITEMS_SELECTOR = "[data-filter-group-items]";
+        const BTN_MORE_SELECTOR = "[data-filter-group-items-btnMore]";
+        const NOT_FOUND_CLASS = "filter-catalog-not-found-msg";
+        const LOADER_CLASS = "filter-catalog-loader";
+        const ACTIVE_BTN_RESET_CLASS = "_active";
+        const HIDDEN_CLASS = "hidden";
+        const NOT_FOUND_ATR_MSG = "data-not-fount-msg";
+        const FILTER_GROUP_ITEMS_ATR = "data-filter-group-items";
+        const LOADER_SRC = "img/icons/loader.svg";
+        const searchBlocks = document.querySelectorAll(SEARCH_SELECTOR);
+        if (!searchBlocks.length) return;
+        searchBlocks.forEach((searchBlock => {
+            const input = searchBlock.querySelector("input");
+            const resetBtn = searchBlock.querySelector("button");
+            const filterGroup = searchBlock.closest(FILTER_GROUP_SELECTOR);
+            if (!input || !resetBtn || !filterGroup) return;
+            const itemsWrapper = filterGroup.querySelector(ITEMS_SELECTOR);
+            const btnMore = filterGroup.querySelector(BTN_MORE_SELECTOR);
             if (!itemsWrapper) return;
+            const renderNotFound = ({query, visibleCount}) => {
+                const existingMsg = itemsWrapper.querySelector(`.${NOT_FOUND_CLASS}`);
+                if (query && visibleCount === 0) {
+                    if (!existingMsg) {
+                        const li = document.createElement("li");
+                        li.className = NOT_FOUND_CLASS;
+                        li.textContent = input.getAttribute(NOT_FOUND_ATR_MSG) || "Not found";
+                        itemsWrapper.appendChild(li);
+                    }
+                    return;
+                }
+                existingMsg?.remove();
+            };
+            const renderLoader = () => {
+                const loader = document.createElement("li");
+                loader.className = LOADER_CLASS;
+                const img = new Image;
+                img.src = LOADER_SRC;
+                img.width = 30;
+                img.height = 30;
+                img.alt = "loader";
+                img.decoding = "async";
+                loader.appendChild(img);
+                itemsWrapper.appendChild(loader);
+            };
+            const filterItems = query => {
+                const normalizedQuery = query.toLowerCase();
+                const items = Array.from(itemsWrapper.children);
+                let visibleCount = 0;
+                items.forEach((item => {
+                    if (item.classList.contains(NOT_FOUND_CLASS)) return;
+                    const control = item.querySelector("input");
+                    const value = control?.value?.toLowerCase() || "";
+                    const isRadio = control?.type === "radio";
+                    const isMatch = !normalizedQuery || value.includes(normalizedQuery);
+                    const shouldHide = normalizedQuery && (isRadio || !isMatch);
+                    item.classList.toggle(HIDDEN_CLASS, shouldHide);
+                    if (!shouldHide) visibleCount++;
+                }));
+                btnMore?.classList.toggle(HIDDEN_CLASS, Boolean(normalizedQuery));
+                renderNotFound({
+                    query: normalizedQuery,
+                    visibleCount
+                });
+            };
+            const fakeLoadMore = () => {
+                renderLoader();
+                btnMore?.remove();
+                setTimeout((() => {
+                    const response = [ "Лос-Анджелес", "Чикаго", "Сан-Франциско", "Лас-Вегас", "Майами" ];
+                    const inputName = itemsWrapper.getAttribute(FILTER_GROUP_ITEMS_ATR);
+                    const markup = response.map((item => `\n\t\t\t\t\t\t<li class="item-filter-catalog__item">\n\t\t\t\t\t\t\t<label class="item-filter-catalog__checkbox checkbox-item">\n\t\t\t\t\t\t\t\t<input type="checkbox" name="${inputName}" value="${item}">\n\t\t\t\t\t\t\t\t<span>${item}</span>\n\t\t\t\t\t\t\t</label>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t`)).join("");
+                    itemsWrapper.insertAdjacentHTML("beforeend", markup);
+                    itemsWrapper.querySelector(`.${LOADER_CLASS}`)?.remove();
+                }), 500);
+            };
             input.addEventListener("input", (() => {
                 const value = input.value.trim();
                 input.value = value;
-                button.classList.toggle(ACTIVE_CLASS, value !== "");
-                filterGroupItems(value, itemsWrapper, btnMore, input);
+                resetBtn.classList.toggle(ACTIVE_BTN_RESET_CLASS, Boolean(value));
+                filterItems(value);
             }));
-            button.addEventListener("click", (() => {
+            resetBtn.addEventListener("click", (() => {
                 input.value = "";
-                button.classList.remove(ACTIVE_CLASS);
-                filterGroupItems("", itemsWrapper, btnMore, input);
+                resetBtn.classList.remove(ACTIVE_BTN_RESET_CLASS);
+                filterItems("");
             }));
+            btnMore?.addEventListener("click", fakeLoadMore);
         }));
-    }
-    function filterGroupItems(searchValue, itemsWrapper, btnMore, searchInput) {
-        const HIDDEN_CLASS = "hidden";
-        const NOT_FOUND_CLASS = "not-found-msg";
-        const items = Array.from(itemsWrapper.children);
-        const query = searchValue.toLowerCase();
-        let visibleCount = 0;
-        items.forEach((item => {
-            if (item.classList.contains(NOT_FOUND_CLASS)) return;
-            const input = item.querySelector("input");
-            const value = input?.value?.toLowerCase() || "";
-            const isRadio = item.querySelector('[type="radio"]');
-            const isMatch = !query || value.includes(query);
-            const shouldHide = query && (isRadio || !isMatch);
-            item.classList.toggle(HIDDEN_CLASS, shouldHide);
-            if (!shouldHide) visibleCount++;
-        }));
-        btnMore?.classList.toggle(HIDDEN_CLASS, !!query);
-        const notFound = itemsWrapper.querySelector(`.${NOT_FOUND_CLASS}`);
-        if (query && visibleCount === 0) {
-            if (!notFound) {
-                const li = document.createElement("li");
-                li.className = NOT_FOUND_CLASS;
-                li.textContent = searchInput.dataset.notFountMsg || "Not found";
-                itemsWrapper.appendChild(li);
-            }
-        } else notFound?.remove();
-    }
-    function mobilePlaceholder(breakpoint = 479.98) {
-        const inputs = document.querySelectorAll("[data-mobile-placeholder]");
-        if (!inputs.length) return;
-        function updatePlaceholders() {
-            const isMobile = window.innerWidth <= breakpoint;
-            inputs.forEach((input => {
-                if (!input.dataset.originalPlaceholder) input.dataset.originalPlaceholder = input.dataset.placeholder || input.placeholder || "";
-                const mobilePlaceholder = input.dataset.mobilePlaceholder;
-                const originalPlaceholder = input.dataset.originalPlaceholder;
-                input.placeholder = isMobile ? mobilePlaceholder : originalPlaceholder;
-            }));
-        }
-        updatePlaceholders();
-        window.addEventListener("resize", updatePlaceholders);
-    }
-    function filtersPopup() {
-        const filtersPopup = document.querySelector("[data-filters]");
-        const activeClass = "filters-open";
-        let isClosedSpollers = false;
-        if (document.querySelector("[data-filters-open]")) document.addEventListener("click", (function(e) {
-            if (bodyLockStatus && e.target.closest("[data-filters-open]")) {
-                filtersOpen();
-                !isClosedSpollers && closeSpollers();
-            }
-            if (bodyLockStatus && e.target.closest("[data-filters-close]")) filtersClose();
-        }));
-        function filtersOpen() {
-            bodyLock();
-            document.documentElement.classList.add(activeClass);
-        }
-        function filtersClose() {
-            bodyUnlock();
-            document.documentElement.classList.remove(activeClass);
-        }
-        function closeSpollers() {
-            const spollers = filtersPopup.querySelectorAll("[data-spoller]");
-            spollers.forEach((spoller => {
-                spoller.classList.remove("_spoller-active");
-                spoller.nextElementSibling.setAttribute("hidden", "");
-            }));
-            isClosedSpollers = true;
-        }
     }
     function spollers() {
         const spollersArray = document.querySelectorAll("[data-spollers]");
