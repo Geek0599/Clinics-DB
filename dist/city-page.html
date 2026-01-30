@@ -59,8 +59,8 @@
 			font-style: normal
 		}
 	</style>
-	<link rel="preload" href="css/city-page.min.css?_v=20260130183104" as="style" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/city-page.min.css?_v=20260130183104">
+	<link rel="preload" href="css/city-page.min.css?_v=20260130190658" as="style" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/city-page.min.css?_v=20260130190658">
 </head>
 
 <body>
@@ -464,7 +464,8 @@
 											</div>
 											<div data-filter-group class="filter-catalog__item item-filter-catalog"> <button data-spoller data-spollers-speed="400" class="item-filter-catalog__title-btn title-sm _icon-arrow-down _spoller-active">Направление</button>
 												<div class="item-filter-catalog__content">
-													<ul class="item-filter-catalog__items">
+													<div data-search-items class="item-filter-catalog__search search-items"> <input data-not-fount-msg="Не найдено" placeholder="Поиск" name="search_treatment" type="text" class="search-items__input"> <button aria-label="Очистить поле" class="search-items__btn-reset _icon-cross"></button> </div>
+													<ul data-filter-group-items="treatment" class="item-filter-catalog__items">
 														<li class="item-filter-catalog__item"> <label class="item-filter-catalog__checkbox checkbox-item"> <input name="treatment" value="Неврология" type="checkbox"> <span>Неврология</span> <img class="checkbox-item__image" width="16" height="16" loading="lazy" decoding="async" src="img/treatment/nevrologia.svg" alt="Nevrologia"> </label> </li>
 														<li class="item-filter-catalog__item"> <label class="item-filter-catalog__checkbox checkbox-item"> <input name="treatment" value="Ортопедия" type="checkbox"> <span>Ортопедия</span> <img class="checkbox-item__image" width="16" height="16" loading="lazy" decoding="async" src="img/treatment/ortopedia.svg" alt="Ortopedia"> </label> </li>
 														<li class="item-filter-catalog__item"> <label class="item-filter-catalog__checkbox checkbox-item"> <input name="treatment" value="Кардиология" type="checkbox"> <span>Кардиология</span> <img class="checkbox-item__image" width="16" height="16" loading="lazy" decoding="async" src="img/treatment/cardiologia.svg" alt="Cardiologia"> </label> </li>
@@ -652,7 +653,7 @@
 												</div>
 											</div> <a href="#" class="product-card__title title-md">Medical Center in Solingen</a>
 											<div class="product-card__text text text--lh">
-												<p>Solingen Municipal Hospital/Academic Hospital of the University of Cologne is among top clinics in Germany according to Focus magazine - one of the most widely circulated German editions.</p>
+												<p>Solingen Municipal Hospital/Academic Hospital of the University of Cologne is among top clinics in Germany according to Focus magazine - one of the most widely circulated German editions. </p>
 											</div>
 											<div class="product-card__actions"> <a href="#" class="product-card__btn btn btn--sm btn--dark">Консультация</a> <a href="#" class="product-card__btn btn btn--sm btn--gray">Детали</a> </div>
 										</div>
@@ -784,20 +785,20 @@
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="catalog__actions catalog-actions"> <button class="catalog-actions__btn btn btn--gray">Загрузить еще</button> <button class="catalog-actions__btn btn btn--gray btn--loader"> <img width="40" height="40" loading="lazy" decoding="async" src="img/icons/loader.svg" alt="loader icon"> </button>
-								<div class="catalog-actions__pagination pagination">
-									<div class="pagination__container pagination__container--no-padding"> <a href="#" class="pagination__arrow pagination__arrow--disabled pagination__arrow--left _icon-arrow-right">Previous page</a>
-										<ul class="pagination__list">
-											<li class="pagination__item">
-												<div class="pagination__link _active">1</div>
-											</li>
-											<li class="pagination__item"> <a href="#" class="pagination__link">2</a> </li>
-											<li class="pagination__item">
-												<div class="pagination__link pagination__link--more">...</div>
-											</li>
-											<li class="pagination__item"> <a href="#" class="pagination__link">5</a> </li>
-										</ul> <a href="#" class="pagination__arrow pagination__arrow--right _icon-arrow-right">Next page</a>
+								<div class="catalog__actions catalog-actions"> <button class="catalog-actions__btn btn btn--gray">Загрузить еще</button> <button class="catalog-actions__btn btn btn--gray btn--loader"> <img width="40" height="40" loading="lazy" decoding="async" src="img/icons/loader.svg" alt="loader icon"> </button>
+									<div class="catalog-actions__pagination pagination">
+										<div class="pagination__container pagination__container--no-padding"> <a href="#" class="pagination__arrow pagination__arrow--disabled pagination__arrow--left _icon-arrow-right">Previous page</a>
+											<ul class="pagination__list">
+												<li class="pagination__item">
+													<div class="pagination__link _active">1</div>
+												</li>
+												<li class="pagination__item"> <a href="#" class="pagination__link">2</a> </li>
+												<li class="pagination__item">
+													<div class="pagination__link pagination__link--more">...</div>
+												</li>
+												<li class="pagination__item"> <a href="#" class="pagination__link">5</a> </li>
+											</ul> <a href="#" class="pagination__arrow pagination__arrow--right _icon-arrow-right">Next page</a>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -1154,7 +1155,7 @@
 			</div>
 		</footer>
 	</div>
-	<script async src="js/city-page.min.js?_v=20260130183104"></script>
+	<script async src="js/city-page.min.js?_v=20260130190658"></script>
 </body>
 
 </html>
