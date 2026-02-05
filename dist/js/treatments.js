@@ -379,6 +379,23 @@
         }));
     }
     showHideSubMenu();
+    function topLoader() {
+        const loader = document.querySelector(".top-loader");
+        if (!loader) return;
+        const activeClass = "show-top-loader";
+        const root = document.documentElement;
+        function show() {
+            root.classList.add(activeClass);
+        }
+        function hide() {
+            root.classList.remove(activeClass);
+        }
+        window.topLoader = {
+            show,
+            hide
+        };
+    }
+    topLoader();
     function ssr_window_esm_isObject(obj) {
         return obj !== null && typeof obj === "object" && "constructor" in obj && obj.constructor === Object;
     }

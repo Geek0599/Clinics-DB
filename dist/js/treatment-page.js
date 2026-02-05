@@ -491,6 +491,23 @@
         }));
     }
     showHideSubMenu();
+    function topLoader() {
+        const loader = document.querySelector(".top-loader");
+        if (!loader) return;
+        const activeClass = "show-top-loader";
+        const root = document.documentElement;
+        function show() {
+            root.classList.add(activeClass);
+        }
+        function hide() {
+            root.classList.remove(activeClass);
+        }
+        window.topLoader = {
+            show,
+            hide
+        };
+    }
+    topLoader();
     function spollers() {
         const spollersArray = document.querySelectorAll("[data-spollers]");
         if (spollersArray.length > 0) {
