@@ -1,0 +1,24 @@
+"use strict";
+
+(self["webpackChunkstart_template_multipage"] = self["webpackChunkstart_template_multipage"] || []).push([ [ 6471 ], {
+    6471: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+        __webpack_require__.r(__webpack_exports__);
+        __webpack_require__.d(__webpack_exports__, {
+            default: () => __WEBPACK_DEFAULT_EXPORT__
+        });
+        const interfaceTranslations = {
+            selectedCountryAriaLabel: "ఎంచుకున్న దేశం",
+            noCountrySelected: "ఏ దేశం ఎంచుకోబడలేదు",
+            countryListAriaLabel: "దేశాల జాబితా",
+            searchPlaceholder: "వెతకండి",
+            clearSearchAriaLabel: "శోధనను క్లియర్ చేయండి",
+            searchEmptyState: "ఎటువంటి ఫలితాలు లభించలేదు",
+            searchSummaryAria(count) {
+                if (count === 0) return "ఎటువంటి ఫలితాలు లభించలేదు";
+                if (count === 1) return "1 ఫలితం కనుగొనబడింది";
+                return `${count} ఫలితాలు కనుగొనబడ్డాయి`;
+            }
+        };
+        const __WEBPACK_DEFAULT_EXPORT__ = interfaceTranslations;
+    }
+} ]);
