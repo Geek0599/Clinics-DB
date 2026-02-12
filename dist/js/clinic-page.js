@@ -9099,9 +9099,9 @@
                     i18n: translations,
                     loadUtils: () => Promise.resolve(utils)
                 });
-                initEvents();
+                initEvents(iti);
             };
-            function initEvents() {
+            function initEvents(iti) {
                 const label = document.querySelector(`label[for="${input.id}"]`);
                 const setActiveLabel = () => label?.classList.add("_focus");
                 const setUnActiveLabel = () => label?.classList.remove("_focus");
@@ -9112,6 +9112,12 @@
                     if (!input.value && !input.placeholder.trim()) setUnActiveLabel();
                 }));
                 input.addEventListener("focus", setActiveLabel);
+                requestIdleCallback((async () => {
+                    const res = await fetch("https://ipapi.co/json");
+                    const data = await res.json();
+                    iti?.setCountry(data.country_code);
+                    setActiveLabel();
+                }));
             }
             const observer = new IntersectionObserver((([entry]) => {
                 if (!entry.isIntersecting) return;
