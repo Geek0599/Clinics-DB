@@ -9112,10 +9112,6 @@
                     if (!input.value && !input.placeholder.trim()) setUnActiveLabel();
                 }));
                 input.addEventListener("focus", setActiveLabel);
-                function onIdle(callback) {
-                    if ("requestIdleCallback" in window) return requestIdleCallback(callback);
-                    return setTimeout(callback, 1);
-                }
                 onIdle((async () => {
                     const res = await fetch("https://ipapi.co/json");
                     const data = await res.json();
@@ -9136,6 +9132,10 @@
             }), {
                 once: true
             });
+        }
+        function onIdle(callback) {
+            if ("requestIdleCallback" in window) return requestIdleCallback(callback);
+            return setTimeout(callback, 1);
         }
         function getCurrentLang() {
             return (document.documentElement.lang || "en").toLowerCase().split("-")[0];
