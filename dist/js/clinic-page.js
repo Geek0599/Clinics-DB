@@ -9112,7 +9112,11 @@
                     if (!input.value && !input.placeholder.trim()) setUnActiveLabel();
                 }));
                 input.addEventListener("focus", setActiveLabel);
-                requestIdleCallback((async () => {
+                function onIdle(callback) {
+                    if ("requestIdleCallback" in window) return requestIdleCallback(callback);
+                    return setTimeout(callback, 1);
+                }
+                onIdle((async () => {
                     const res = await fetch("https://ipapi.co/json");
                     const data = await res.json();
                     iti?.setCountry(data.country_code);
