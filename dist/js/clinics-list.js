@@ -3964,21 +3964,6 @@
             }));
         }));
     }
-    function mobilePlaceholder(breakpoint = 479.98) {
-        const inputs = document.querySelectorAll("[data-mobile-placeholder]");
-        if (!inputs.length) return;
-        function updatePlaceholders() {
-            const isMobile = window.innerWidth <= breakpoint;
-            inputs.forEach((input => {
-                if (!input.dataset.originalPlaceholder) input.dataset.originalPlaceholder = input.dataset.placeholder || input.placeholder || "";
-                const mobilePlaceholder = input.dataset.mobilePlaceholder;
-                const originalPlaceholder = input.dataset.originalPlaceholder;
-                input.placeholder = isMobile ? mobilePlaceholder : originalPlaceholder;
-            }));
-        }
-        updatePlaceholders();
-        window.addEventListener("resize", updatePlaceholders);
-    }
     function filtersPopup() {
         const filtersPopup = document.querySelector("[data-filters]");
         const activeClass = "filters-open";
@@ -4206,5 +4191,4 @@
     init_ProductCardsSlider();
     setContentLayout();
     initFilters();
-    mobilePlaceholder();
 })();

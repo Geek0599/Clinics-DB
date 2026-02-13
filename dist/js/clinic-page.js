@@ -238,7 +238,7 @@
         };
         __webpack_require__.f.miniCss = (chunkId, promises) => {
             var cssChunks = {
-                8877: 1
+                1285: 1
             };
             if (installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]); else if (installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) promises.push(installedCssChunks[chunkId] = loadStylesheet(chunkId).then((() => {
                 installedCssChunks[chunkId] = 0;
@@ -9089,7 +9089,7 @@
             const loadPhoneMask = async () => {
                 if (iti || isLoading) return;
                 isLoading = true;
-                const [{default: intlTelInput}, utils, translations, styles] = await Promise.all([ __webpack_require__.e(436).then(__webpack_require__.t.bind(__webpack_require__, 436, 19)), __webpack_require__.e(4183).then(__webpack_require__.bind(__webpack_require__, 4183)), loadLocale(getCurrentLang()), __webpack_require__.e(8877).then(__webpack_require__.bind(__webpack_require__, 8877)) ]);
+                const [{default: intlTelInput}, utils, translations, styles] = await Promise.all([ __webpack_require__.e(436).then(__webpack_require__.t.bind(__webpack_require__, 436, 19)), __webpack_require__.e(4183).then(__webpack_require__.bind(__webpack_require__, 4183)), loadLocale(getCurrentLang()), __webpack_require__.e(1285).then(__webpack_require__.bind(__webpack_require__, 1285)) ]);
                 iti = intlTelInput(input, {
                     countryNameLocale: getCurrentLang(),
                     nationalMode: true,
@@ -9433,7 +9433,6 @@
                     if (input.iti) {
                         const iti = input.iti;
                         const isValid = iti.isValidNumber();
-                        console.log(iti, iti.isValidNumber());
                         if (!isValid && value !== "") {
                             showTextNotice({
                                 input,
@@ -9997,6 +9996,77 @@
                 gridContainer.style.height = gridContainer.scrollHeight + "px";
             }
         }
+        function formOrder() {
+            const {removeStatus} = formValidate();
+            const form = document.querySelector("[data-online-quote]");
+            if (!form) return;
+            const radioGroup = form.querySelectorAll('input[type="radio"]');
+            const inputName = form.querySelector("#inp-name");
+            const inputPhone = form.querySelector("#inp-phone");
+            const inputEmail = form.querySelector("#inp-email");
+            const inputSocial = form.querySelector("#inp-social");
+            const inputSocialAddress = form.querySelector("#inp-social-address");
+            const ckeckboxAddComment = form.querySelector("#inp-add-comment");
+            const textareaComment = form.querySelector("#inp-comment");
+            const inputYearsOld = form.querySelector("#inp-years-old");
+            const inputRegion = form.querySelector("#inp-region");
+            const fortItemCommentTextarea = textareaComment.closest(".main-form__item");
+            function removeRequired(inputs) {
+                inputs.forEach((input => input.removeAttribute("required")));
+            }
+            function setRequired(inputs) {
+                inputs.forEach((input => input.setAttribute("required", "")));
+            }
+            radioGroup.forEach((radio => {
+                radio.addEventListener("change", (e => {
+                    [ inputName, inputPhone, inputEmail, inputSocial, inputSocialAddress, textareaComment, inputYearsOld, inputRegion ].forEach((input => input && removeStatus({
+                        input
+                    })));
+                    switch (radio.value) {
+                      case "phone":
+                        setRequired([ inputPhone ]);
+                        removeRequired([ inputEmail, inputSocial, inputSocialAddress ]);
+                        break;
+
+                      case "email":
+                        setRequired([ inputEmail ]);
+                        removeRequired([ inputPhone, inputSocial, inputSocialAddress ]);
+                        break;
+
+                      case "social":
+                        setRequired([ inputSocial, inputSocialAddress ]);
+                        removeRequired([ inputPhone, inputEmail ]);
+                        break;
+
+                      default:
+                        break;
+                    }
+                }));
+            }));
+            ckeckboxAddComment.addEventListener("change", (() => {
+                const isChecked = ckeckboxAddComment.checked;
+                fortItemCommentTextarea.classList.toggle("_hide", !isChecked);
+                isChecked ? setRequired([ textareaComment ]) : removeRequired([ textareaComment ]);
+            }));
+            form.addEventListener("reset", (e => {
+                setRequired([ inputPhone ]);
+                removeRequired([ inputEmail, inputSocial, inputSocialAddress, textareaComment ]);
+                fortItemCommentTextarea.classList.add("_hide");
+            }));
+            form.addEventListener("form-validation-success", (e => {
+                const formData = new FormData(form);
+                const btnSubmit = document.querySelector(".main-form__btn");
+                const initialText = btnSubmit.textContent;
+                console.log(Object.fromEntries(formData));
+                btnSubmit.classList.add("_success");
+                btnSubmit.textContent = "Заявка отправлена!";
+                form.reset();
+                setTimeout((() => {
+                    btnSubmit.classList.remove("_success");
+                    btnSubmit.textContent = initialText;
+                }), 1e4);
+            }));
+        }
         function init_PopupSimple() {
             class PopupSimple {
                 constructor(bodyLock, bodyUnlock) {
@@ -10134,74 +10204,5 @@
         scrollBasedNavigation();
         showMoreHideGridElems();
         formOrder();
-        const {removeStatus} = formValidate();
-        function formOrder() {
-            const form = document.querySelector("[data-online-quote]");
-            if (!form) return;
-            const radioGroup = form.querySelectorAll('input[type="radio"]');
-            const inputName = form.querySelector("#inp-name");
-            const inputPhone = form.querySelector("#inp-phone");
-            const inputEmail = form.querySelector("#inp-email");
-            const inputSocial = form.querySelector("#inp-social");
-            const inputSocialAddress = form.querySelector("#inp-social-address");
-            const ckeckboxAddComment = form.querySelector("#inp-add-comment");
-            const textareaComment = form.querySelector("#inp-comment");
-            const fortItemCommentTextarea = textareaComment.closest(".main-form__item");
-            function removeRequired(inputs) {
-                inputs.forEach((input => input.removeAttribute("required")));
-            }
-            function setRequired(inputs) {
-                inputs.forEach((input => input.setAttribute("required", "")));
-            }
-            radioGroup.forEach((radio => {
-                radio.addEventListener("change", (e => {
-                    [ inputName, inputPhone, inputEmail, inputSocial, inputSocialAddress, textareaComment ].forEach((input => removeStatus({
-                        input
-                    })));
-                    switch (radio.value) {
-                      case "phone":
-                        setRequired([ inputPhone ]);
-                        removeRequired([ inputEmail, inputSocial, inputSocialAddress ]);
-                        break;
-
-                      case "email":
-                        setRequired([ inputEmail ]);
-                        removeRequired([ inputPhone, inputSocial, inputSocialAddress ]);
-                        break;
-
-                      case "social":
-                        setRequired([ inputSocial, inputSocialAddress ]);
-                        removeRequired([ inputPhone, inputEmail ]);
-                        break;
-
-                      default:
-                        break;
-                    }
-                }));
-            }));
-            ckeckboxAddComment.addEventListener("change", (() => {
-                const isChecked = ckeckboxAddComment.checked;
-                fortItemCommentTextarea.classList.toggle("_hide", !isChecked);
-                isChecked ? setRequired([ textareaComment ]) : removeRequired([ textareaComment ]);
-            }));
-            form.addEventListener("reset", (e => {
-                setRequired([ inputPhone ]);
-                removeRequired([ inputEmail, inputSocial, inputSocialAddress, textareaComment ]);
-                fortItemCommentTextarea.classList.add("_hide");
-            }));
-            form.addEventListener("form-validation-success", (e => {
-                const formData = new FormData(form);
-                const btnSubmit = document.querySelector(".main-form__btn");
-                const initialText = btnSubmit.textContent;
-                console.log(Object.fromEntries(formData));
-                btnSubmit.classList.add("_success");
-                btnSubmit.textContent = "Заявка отправлена!";
-                form.reset();
-                setTimeout((() => {
-                    btnSubmit.classList.remove("_success");
-                    btnSubmit.textContent = initialText;
-                }), 1e4);
-            }));
-        }
     })();
 })();

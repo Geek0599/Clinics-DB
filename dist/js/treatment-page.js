@@ -4086,7 +4086,7 @@
             destroy
         });
     }
-    function Grid(_ref) {
+    function grid_Grid(_ref) {
         let {swiper, extendParams, on} = _ref;
         extendParams({
             grid: {
@@ -4208,7 +4208,7 @@
             const btnNext = sliderBlock.querySelector("[data-slider-nextbtn]");
             const btnPrev = sliderBlock.querySelector("[data-slider-prevbtn]");
             if (slider) new swiper_core_Swiper(slider, {
-                modules: [ navigation_Navigation, pagination_Pagination, Grid ],
+                modules: [ navigation_Navigation, pagination_Pagination, grid_Grid ],
                 slidesPerView: 3,
                 watchSlidesProgress: true,
                 grid: {
@@ -4334,21 +4334,6 @@
                 content.classList.toggle("_layout-row", btn.dataset.btnLayout === "row");
             }));
         }));
-    }
-    function mobilePlaceholder(breakpoint = 479.98) {
-        const inputs = document.querySelectorAll("[data-mobile-placeholder]");
-        if (!inputs.length) return;
-        function updatePlaceholders() {
-            const isMobile = window.innerWidth <= breakpoint;
-            inputs.forEach((input => {
-                if (!input.dataset.originalPlaceholder) input.dataset.originalPlaceholder = input.dataset.placeholder || input.placeholder || "";
-                const mobilePlaceholder = input.dataset.mobilePlaceholder;
-                const originalPlaceholder = input.dataset.originalPlaceholder;
-                input.placeholder = isMobile ? mobilePlaceholder : originalPlaceholder;
-            }));
-        }
-        updatePlaceholders();
-        window.addEventListener("resize", updatePlaceholders);
     }
     function filtersPopup() {
         const filtersPopup = document.querySelector("[data-filters]");
@@ -4578,6 +4563,5 @@
     init_CatalogActionsSlider();
     init_ReviewsSlider();
     setContentLayout();
-    mobilePlaceholder();
     initFilters();
 })();

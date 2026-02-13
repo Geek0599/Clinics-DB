@@ -21,33 +21,33 @@
             }), 0);
         }));
     }
-    let functions_bodyLockStatus = true;
+    let bodyLockStatus = true;
     let bodyLockToggle = (delay = 500) => {
-        if (document.documentElement.classList.contains("lock")) functions_bodyUnlock(delay); else functions_bodyLock(delay);
+        if (document.documentElement.classList.contains("lock")) bodyUnlock(delay); else bodyLock(delay);
     };
-    let functions_bodyUnlock = (delay = 500) => {
-        if (functions_bodyLockStatus) {
-            functions_bodyLockStatus = false;
+    let bodyUnlock = (delay = 500) => {
+        if (bodyLockStatus) {
+            bodyLockStatus = false;
             if (delay) setTimeout((function() {
-                functions_bodyLockStatus = true;
+                bodyLockStatus = true;
                 document.documentElement.style.removeProperty("--scrollbar-compensate");
                 document.documentElement.classList.remove("lock");
             }), delay); else {
-                functions_bodyLockStatus = true;
+                bodyLockStatus = true;
                 document.documentElement.style.removeProperty("--scrollbar-compensate");
                 document.documentElement.classList.remove("lock");
             }
         }
     };
-    let functions_bodyLock = (delay = 500) => {
-        if (functions_bodyLockStatus) {
+    let bodyLock = (delay = 500) => {
+        if (bodyLockStatus) {
             const scrollbarCompensate = window.innerWidth - document.querySelector(".wrapper").offsetWidth;
             if (scrollbarCompensate > 0) document.documentElement.style.setProperty("--scrollbar-compensate", scrollbarCompensate + "px");
             document.documentElement.classList.add("lock");
-            functions_bodyLockStatus = false;
+            bodyLockStatus = false;
             if (delay) setTimeout((function() {
-                functions_bodyLockStatus = true;
-            }), delay); else functions_bodyLockStatus = true;
+                bodyLockStatus = true;
+            }), delay); else bodyLockStatus = true;
         }
     };
     function menuInit() {
@@ -58,7 +58,7 @@
         if (btnMenuIcon) {
             const isOpen = () => document.documentElement.classList.contains(menuOpenClass);
             document.addEventListener("click", (function(e) {
-                if (functions_bodyLockStatus && e.target.closest(menuIconSelector)) {
+                if (bodyLockStatus && e.target.closest(menuIconSelector)) {
                     const scrolled = window.scrollY || document.documentElement.scrollTop;
                     if (window.innerWidth <= 992.98 && !isOpen() && scrolled > 0 && (mainSection ? scrolled < mainSection.offsetHeightSaved : true)) window.scrollBy({
                         top: -100,
@@ -67,8 +67,8 @@
                     document.documentElement.classList.toggle(menuOpenClass);
                     bodyLockToggle(300);
                 }
-                if (isOpen() && functions_bodyLockStatus && !e.target.closest(menuIconSelector) && !e.target.closest(".header-menu-mobile")) {
-                    functions_bodyUnlock(300);
+                if (isOpen() && bodyLockStatus && !e.target.closest(menuIconSelector) && !e.target.closest(".header-menu-mobile")) {
+                    bodyUnlock(300);
                     document.documentElement.classList.remove(menuOpenClass);
                 }
             }));
@@ -3896,7 +3896,7 @@
             destroy
         });
     }
-    function Grid(_ref) {
+    function grid_Grid(_ref) {
         let {swiper, extendParams, on} = _ref;
         extendParams({
             grid: {
@@ -4018,7 +4018,7 @@
             const btnNext = sliderBlock.querySelector("[data-slider-nextbtn]");
             const btnPrev = sliderBlock.querySelector("[data-slider-prevbtn]");
             if (slider) new swiper_core_Swiper(slider, {
-                modules: [ navigation_Navigation, pagination_Pagination, Grid ],
+                modules: [ navigation_Navigation, pagination_Pagination, grid_Grid ],
                 slidesPerView: 3,
                 watchSlidesProgress: true,
                 grid: {
@@ -4114,22 +4114,6 @@
             });
         }
     }
-    function mobilePlaceholder(breakpoint = 479.98) {
-        const inputs = document.querySelectorAll("[data-mobile-placeholder]");
-        if (!inputs.length) return;
-        function updatePlaceholders() {
-            const isMobile = window.innerWidth <= breakpoint;
-            inputs.forEach((input => {
-                if (!input.dataset.originalPlaceholder) input.dataset.originalPlaceholder = input.dataset.placeholder || input.placeholder || "";
-                const mobilePlaceholder = input.dataset.mobilePlaceholder;
-                const originalPlaceholder = input.dataset.originalPlaceholder;
-                input.placeholder = isMobile ? mobilePlaceholder : originalPlaceholder;
-            }));
-        }
-        updatePlaceholders();
-        window.addEventListener("resize", updatePlaceholders);
-    }
     init_CatalogActionsSlider();
     init_ReviewsSlider();
-    mobilePlaceholder();
 })();

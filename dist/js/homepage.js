@@ -3896,7 +3896,7 @@
             destroy
         });
     }
-    function Grid(_ref) {
+    function grid_Grid(_ref) {
         let {swiper, extendParams, on} = _ref;
         extendParams({
             grid: {
@@ -4018,7 +4018,7 @@
             const btnNext = sliderBlock.querySelector("[data-slider-nextbtn]");
             const btnPrev = sliderBlock.querySelector("[data-slider-prevbtn]");
             if (slider) new swiper_core_Swiper(slider, {
-                modules: [ navigation_Navigation, pagination_Pagination, Grid ],
+                modules: [ navigation_Navigation, pagination_Pagination, grid_Grid ],
                 slidesPerView: 3,
                 watchSlidesProgress: true,
                 grid: {
@@ -4074,46 +4074,6 @@
             });
         }
     }
-    function init_ReviewsSlider() {
-        const sliderBlock = document.querySelector('[data-slider="reviews"]');
-        if (sliderBlock) {
-            const slider = sliderBlock.querySelector(`[data-slider]`);
-            const sliderPagination = sliderBlock.querySelector("[data-slider-pagination]");
-            const btnNext = sliderBlock.querySelector("[data-slider-nextbtn]");
-            const btnPrev = sliderBlock.querySelector("[data-slider-prevbtn]");
-            if (slider) new swiper_core_Swiper(slider, {
-                modules: [ navigation_Navigation, pagination_Pagination ],
-                slidesPerView: 3,
-                watchSlidesProgress: true,
-                spaceBetween: 7,
-                speed: 600,
-                lazy: true,
-                pagination: {
-                    el: sliderPagination,
-                    clickable: true
-                },
-                navigation: {
-                    prevEl: btnPrev,
-                    nextEl: btnNext
-                },
-                breakpoints: {
-                    300: {
-                        slidesPerView: 1,
-                        spaceBetween: 2
-                    },
-                    992: {
-                        slidesPerView: 2,
-                        spaceBetween: 7
-                    },
-                    1250.98: {
-                        slidesPerView: 3,
-                        spaceBetween: 7
-                    }
-                },
-                on: {}
-            });
-        }
-    }
     function init_ArticlesSlider() {
         const sliderBlock = document.querySelector('[data-slider="articles"]');
         if (sliderBlock) {
@@ -4150,20 +4110,67 @@
             });
         }
     }
-    function mobilePlaceholder(breakpoint = 479.98) {
-        const inputs = document.querySelectorAll("[data-mobile-placeholder]");
-        if (!inputs.length) return;
-        function updatePlaceholders() {
-            const isMobile = window.innerWidth <= breakpoint;
-            inputs.forEach((input => {
-                if (!input.dataset.originalPlaceholder) input.dataset.originalPlaceholder = input.dataset.placeholder || input.placeholder || "";
-                const mobilePlaceholder = input.dataset.mobilePlaceholder;
-                const originalPlaceholder = input.dataset.originalPlaceholder;
-                input.placeholder = isMobile ? mobilePlaceholder : originalPlaceholder;
-            }));
+    function init_ProductCardsSlider() {
+        const procuctCardSliders = document.querySelectorAll('[data-slider="product-card"]');
+        procuctCardSliders.forEach((procuctCardSlider => {
+            const slider = procuctCardSlider.querySelector(`[data-slider]`);
+            const sliderPagination = procuctCardSlider.querySelector("[data-slider-pagination]");
+            if (slider) new swiper_core_Swiper(slider, {
+                modules: [ pagination_Pagination ],
+                slidesPerView: 1,
+                spaceBetween: .5,
+                speed: 600,
+                lazy: true,
+                pagination: {
+                    el: sliderPagination,
+                    clickable: true
+                }
+            });
+        }));
+    }
+    function init_ProductsSlider() {
+        const sliderBlock = document.querySelector('[data-slider="products"]');
+        if (sliderBlock) {
+            const slider = sliderBlock.querySelector(`[data-slider]`);
+            const sliderPagination = sliderBlock.querySelector(".slider-actions [data-slider-pagination]");
+            const btnNext = sliderBlock.querySelector(".slider-actions [data-slider-nextbtn]");
+            const btnPrev = sliderBlock.querySelector(".slider-actions [data-slider-prevbtn]");
+            if (slider) new swiper_core_Swiper(slider, {
+                modules: [ navigation_Navigation, pagination_Pagination ],
+                slidesPerView: 4,
+                spaceBetween: `${32 / 1376 * 100}%`,
+                speed: 600,
+                lazy: true,
+                watchSlidesProgress: true,
+                pagination: {
+                    el: sliderPagination,
+                    clickable: true
+                },
+                navigation: {
+                    prevEl: btnPrev,
+                    nextEl: btnNext
+                },
+                breakpoints: {
+                    300: {
+                        slidesPerView: 1,
+                        spaceBetween: 4
+                    },
+                    600: {
+                        slidesPerView: 2,
+                        spaceBetween: 18
+                    },
+                    992: {
+                        slidesPerView: 3,
+                        spaceBetween: `${24 / 1376 * 100}%`
+                    },
+                    1200: {
+                        slidesPerView: 4,
+                        spaceBetween: `${32 / 1376 * 100}%`
+                    }
+                },
+                on: {}
+            });
         }
-        updatePlaceholders();
-        window.addEventListener("resize", updatePlaceholders);
     }
     function inifiteScrollDublicateGroup() {
         const groups = document.querySelectorAll("[data-infinite-scroll]");
@@ -4176,8 +4183,8 @@
         }));
     }
     init_CatalogActionsSlider();
-    init_ReviewsSlider();
+    init_ProductsSlider();
+    init_ProductCardsSlider();
     init_ArticlesSlider();
-    mobilePlaceholder();
     inifiteScrollDublicateGroup();
 })();

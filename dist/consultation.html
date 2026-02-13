@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Запись на консультацию</title>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta name="robots" content="noindex, nofollow">
+	<link rel="icon" type="image/png" href="./favicon/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/svg+xml" href="./favicon/favicon.svg">
+	<link rel="shortcut icon" href="./favicon/favicon.ico">
+	<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+	<meta name="apple-mobile-web-app-title" content="StemCell World">
+	<link rel="manifest" href="./favicon/site.webmanifest">
+	<link rel="preload" href="./fonts/VelaSans-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="./fonts/VelaSans-ExtraBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="./fonts/VelaSans-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="./fonts/VelaSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<link rel="preload" href="./fonts/icons.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	<style>
+		@font-face {
+			font-family: VelaSans;
+			font-display: swap;
+			src: url("./fonts/VelaSans-Bold.woff2") format("woff2"), url("./fonts/VelaSans-Bold.woff") format("woff");
+			font-weight: 700;
+			font-style: normal
+		}
+
+		@font-face {
+			font-family: VelaSans;
+			font-display: swap;
+			src: url("./fonts/VelaSans-ExtraBold.woff2") format("woff2"), url("./fonts/VelaSans-ExtraBold.woff") format("woff");
+			font-weight: 800;
+			font-style: normal
+		}
+
+		@font-face {
+			font-family: VelaSans;
+			font-display: swap;
+			src: url("./fonts/VelaSans-Medium.woff2") format("woff2"), url("./fonts/VelaSans-Medium.woff") format("woff");
+			font-weight: 500;
+			font-style: normal
+		}
+
+		@font-face {
+			font-family: VelaSans;
+			font-display: swap;
+			src: url("./fonts/VelaSans-SemiBold.woff2") format("woff2"), url("./fonts/VelaSans-SemiBold.woff") format("woff");
+			font-weight: 600;
+			font-style: normal
+		}
+
+		@font-face {
+			font-family: icons;
+			font-display: swap;
+			src: url("./fonts/icons.woff2") format("woff2"), url("./fonts/icons.woff") format("woff");
+			font-weight: 400;
+			font-style: normal
+		}
+	</style>
+	<link rel="preload" href="css/consultation.min.css?_v=20260213192436" as="style" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/consultation.min.css?_v=20260213192436">
+</head>
+
+<body>
+	<div class="top-loader"></div>
+	<div class="wrapper">
+		<main class="page">
+			<section class="page__main main w-full w-full--bg">
+				<header class="header">
+					<div class="header__wrapper">
+						<div class="header__container">
+							<div class="header__left"> <a href="#" class="header__logo logo"> <img class="img" width="169" height="56" fetchpriority="high" loading="eager" decoding="async" src="img/logo/logo.svg" alt="Stem-Health logo"> </a> <select data-da=".header-menu-mobile__body, 1600, 3" id="lang-select" class="header__lang btn btn--light">
+									<option selected="selected" value="en">En</option>
+									<option value="ua">Ua</option>
+									<option value="ru">Ru</option>
+								</select> </div>
+							<nav data-da=".header-menu-mobile__body, 1600, 2" class="header__menu menu">
+								<ul class="menu__list">
+									<li data-submenu-item class="menu__item"> <a href="#" data-submenu-action data-menu-icon-link class="menu__link btn btn--light menu__link--arrow">
+											<div class="btn-icon"> <canvas width="128" height="128" class="btn-icon__canvas"></canvas> <video class="btn-icon__video" width="48" height="48" playsinline muted preload="none">
+													<source src="files/hospital.webm" type="video/webm">
+													<source src="files/hospital.mp4" type="video/mp4">
+												</video> </div> Clinics
+										</a>
+										<div data-submenu class="menu__sub-menu sub-menu">
+											<div class="sub-menu__body">
+												<div class="sub-menu__overflow">
+													<div class="sub-menu__content">
+														<div class="sub-menu__columns">
+															<div class="sub-menu__column"> <a href="#" class="sub-menu__column-title title-md _icon-arrow-right">По странам</a>
+																<ul class="sub-menu__column-list">
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="24" height="24" loading="lazy" decoding="async" src="img/country-flags/de.svg" alt="de flag"> </div>
+																			<div class="action-card__title text text--semibold">Германия</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="24" height="24" loading="lazy" decoding="async" src="img/country-flags/gb.svg" alt="gb flag"> </div>
+																			<div class="action-card__title text text--semibold">Великобритания</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="24" height="24" loading="lazy" decoding="async" src="img/country-flags/it.svg" alt="it flag"> </div>
+																			<div class="action-card__title text text--semibold">Италия</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="24" height="24" loading="lazy" decoding="async" src="img/country-flags/fr.svg" alt="fr flag"> </div>
+																			<div class="action-card__title text text--semibold">Франция</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="24" height="24" loading="lazy" decoding="async" src="img/country-flags/us.svg" alt="us flag"> </div>
+																			<div class="action-card__title text text--semibold">США</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="24" height="24" loading="lazy" decoding="async" src="img/country-flags/se.svg" alt="se flag"> </div>
+																			<div class="action-card__title text text--semibold">Швеция</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="24" height="24" loading="lazy" decoding="async" src="img/country-flags/ch.svg" alt="ch flag"> </div>
+																			<div class="action-card__title text text--semibold">Швейцария</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg action-card__img-ibg--round"> <img class="img" width="24" height="24" loading="lazy" decoding="async" src="img/country-flags/tr.svg" alt="tr flag"> </div>
+																			<div class="action-card__title text text--semibold">Турция</div>
+																		</a> </li>
+																</ul>
+															</div>
+															<div class="sub-menu__column"> <a href="#" class="sub-menu__column-title title-md _icon-arrow-right">По направлениям</a>
+																<ul class="sub-menu__column-list">
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg"> <img width="24" height="24" loading="lazy" decoding="async" src="img/treatment/ortopedia.svg" alt="Ортопедия"> </div>
+																			<div class="action-card__title text text--semibold">Ортопедия</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg"> <img width="24" height="24" loading="lazy" decoding="async" src="img/treatment/nevrologia.svg" alt="Неврология"> </div>
+																			<div class="action-card__title text text--semibold">Неврология</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg"> <img width="24" height="24" loading="lazy" decoding="async" src="img/treatment/cardiologia.svg" alt="Кардиология"> </div>
+																			<div class="action-card__title text text--semibold">Кардиология</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg"> <img width="24" height="24" loading="lazy" decoding="async" src="img/treatment/aesthetic.svg" alt="Эстетическая медицина"> </div>
+																			<div class="action-card__title text text--semibold">Эстетическая медицина</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg"> <img width="24" height="24" loading="lazy" decoding="async" src="img/treatment/pathologie.svg" alt="Патологии"> </div>
+																			<div class="action-card__title text text--semibold">Патологии</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg"> <img width="24" height="24" loading="lazy" decoding="async" src="img/treatment/autoimmune.svg" alt="Аутоимунные заболевания"> </div>
+																			<div class="action-card__title text text--semibold">Аутоимунные заболевания</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg"> <img width="24" height="24" loading="lazy" decoding="async" src="img/treatment/methabolic.svg" alt="Метаболические заболевания"> </div>
+																			<div class="action-card__title text text--semibold">Метаболические заболевания</div>
+																		</a> </li>
+																	<li class="sub-menu__item"> <a href="#" class="action-card action-card--small">
+																			<div class="action-card__img-ibg"> <img width="24" height="24" loading="lazy" decoding="async" src="img/treatment/rejuvenation.svg" alt="Омоложение"> </div>
+																			<div class="action-card__title text text--semibold">Омоложение</div>
+																		</a> </li>
+																</ul>
+															</div>
+														</div> <a href="#" class="sub-menu__btn btn btn--dark btn--sm">Все клиники</a>
+														<div class="linearBlur" style="pointer-events:none;transform-origin:center bottom;height:72px;top:auto">
+															<div style="position:relative;z-index:0;width:100%;height:100%;background:linear-gradient(to top,rgba(255,255,255,.79) 0,rgba(255,255,255,0) 100%)">
+																<div style="position:absolute;z-index:1;inset:0px;mask-image:linear-gradient(to top,rgb(0,0,0) 10%,rgba(0,0,0,0) 20.5882%);backdrop-filter:blur(4px)"></div>
+																<div style="position:absolute;z-index:2;inset:0px;mask-image:linear-gradient(to top,rgb(0,0,0) 10%,rgb(0,0,0) 20.5882%,rgba(0,0,0,0) 31.1765%);backdrop-filter:blur(3.03143px)"></div>
+																<div style="position:absolute;z-index:2;inset:0px;mask-image:linear-gradient(to top,rgba(0,0,0,0) 10%,rgb(0,0,0) 20.5882%,rgb(0,0,0) 31.1765%,rgba(0,0,0,0) 41.7647%);backdrop-filter:blur(2.2974px)"></div>
+																<div style="position:absolute;z-index:3;inset:0px;mask-image:linear-gradient(to top,rgba(0,0,0,0) 20.5882%,rgb(0,0,0) 31.1765%,rgb(0,0,0) 41.7647%,rgba(0,0,0,0) 52.3529%);backdrop-filter:blur(1.7411px)"></div>
+																<div style="position:absolute;z-index:4;inset:0px;mask-image:linear-gradient(to top,rgba(0,0,0,0) 31.1765%,rgb(0,0,0) 41.7647%,rgb(0,0,0) 52.3529%,rgba(0,0,0,0) 62.9412%);backdrop-filter:blur(1.31951px)"></div>
+																<div style="position:absolute;z-index:5;inset:0px;mask-image:linear-gradient(to top,rgba(0,0,0,0) 41.7647%,rgb(0,0,0) 52.3529%,rgb(0,0,0) 62.9412%,rgba(0,0,0,0) 73.5294%);backdrop-filter:blur(1px)"></div>
+																<div style="position:absolute;z-index:6;inset:0px;mask-image:linear-gradient(to top,rgba(0,0,0,0) 52.3529%,rgb(0,0,0) 62.9412%,rgb(0,0,0) 73.5294%,rgba(0,0,0,0) 84.1176%);backdrop-filter:blur(0.757858px)"></div>
+																<div style="position:absolute;z-index:7;inset:0px;mask-image:linear-gradient(to top,rgba(0,0,0,0) 62.9412%,rgb(0,0,0) 73.5294%,rgb(0,0,0) 84.1176%,rgba(0,0,0,0) 94.7059%);backdrop-filter:blur(0.574349px)"></div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class="menu__item"> <a data-menu-icon-link href="#" class="menu__link btn btn--light">
+											<div class="btn-icon"> <canvas width="128" height="128" class="btn-icon__canvas"></canvas> <video class="btn-icon__video" width="48" height="48" playsinline muted preload="none">
+													<source src="files/treatments.webm" type="video/webm">
+													<source src="files/treatments.mp4" type="video/mp4">
+												</video> </div> Treatments
+										</a> </li>
+									<li class="menu__item"> <a data-menu-icon-link href="#" class="menu__link btn btn--light">
+											<div class="btn-icon"> <canvas width="128" height="128" class="btn-icon__canvas"></canvas> <video class="btn-icon__video" width="48" height="48" playsinline muted preload="none">
+													<source src="files/diseases.webm" type="video/webm">
+													<source src="files/diseases.mp4" type="video/mp4">
+												</video> </div> Diseases
+										</a> </li>
+								</ul>
+							</nav>
+							<div data-da=".header-menu-mobile__body, 850, 1" class="header__actions actions-header"> <a href="tel:+180034234234" class="actions-header__btn btn btn--light">+1(800)342-342-34</a> </div>
+							<div class="header__menu-icon menu-icon"> <button aria-label="Open menu" type="button" class="menu-icon__icon icon-menu"><span></span></button>
+								<div class="menu-icon__menu-mobile header-menu-mobile">
+									<div class="header-menu-mobile__body scrollbar">
+										<div class="header-menu-mobile__head"> <a href="#" class="header-menu-mobile__logo logo"> <img class="img" width="149" height="64" fetchpriority="high" loading="eager" decoding="async" src="img/logo/logo.svg" alt="Stem-Health logo"> </a> <button aria-label="Open menu" type="button" class="header-menu-mobile__icon icon-menu"><span></span></button> </div>
+									</div>
+								</div>
+							</div>
+							<div class="header__mobile-float header-mobile-float">
+								<div class="header-mobile-float__search search-input search-input--mob">
+									<div class="search-input__body-input _icon-search"> <input class="search-input__input" required placeholder="Начните поиск…" name="q" type="text"> </div>
+								</div> <button aria-label="Open menu" type="button" class="header-mobile-float__btn icon-menu"><span></span></button>
+							</div>
+						</div>
+					</div>
+				</header>
+				<div class="main__container main-form-page">
+					<div class="main-form-page__head">
+						<h1 class="main-form-page__title title">Запись на консультацию</h1>
+						<h2 class="main-form-page__sub-title title-sm">Medipol Mega University Hospital</h2>
+					</div>
+					<div class="main-form-page__form main-form main-form--bg w-full w-full--bg w-full--no-indent">
+						<form data-online-quote data-validate action="#" class="main-form__body">
+							<div class="main-form__item">
+								<div class="main-form__input-body">
+									<div class="input-item"> <input required data-text-format data-minlength="2" autocomplete="name" id="inp-name" placeholder=" " class="input-item__input" name="name" type="text"> <label for="inp-name" class="input-item__label title-sm c-gray-x-dark">Имя пациента</label> </div>
+								</div>
+								<div class="main-form__input-body">
+									<div class="input-item"> <select required autocomplete="off" name="years_old" id="inp-years-old" class="input-item__input">
+											<option disabled="disabled" value="" selected="selected">Возраст</option>
+											<option value="1">1</option>
+											<option value="10">10</option>
+											<option value="100">100</option>
+										</select> </div>
+								</div>
+								<div class="main-form__input-body">
+									<div class="input-item"> <select required autocomplete="off" name="years_old" id="inp-region" class="input-item__input">
+											<option disabled="disabled" value="" selected="selected">Регион проживания</option>
+											<option value="-">Какой-то регион</option>
+										</select> </div>
+								</div>
+							</div>
+							<div class="main-form__item main-form__item--full">
+								<div class="main-form__item-title text text--bold">Предпочтительный способ связи</div>
+								<div class="main-form__radio-group"> <label class="main-form__radio-item radio-item"> <input checked="checked" type="radio" name="method_communication" value="phone"> <span>Телефон</span> </label> <label class="main-form__radio-item radio-item"> <input type="radio" name="method_communication" value="email"> <span>Email</span> </label> <label class="main-form__radio-item radio-item"> <input type="radio" name="method_communication" value="social"> <span>Социльная сеть</span> </label> </div>
+							</div>
+							<div class="main-form__item">
+								<div class="main-form__input-body">
+									<div class="input-item"> <input required data-phone-mask data-inputmode="numeric" autocomplete="tel" id="inp-phone" placeholder=" " class="input-item__input" name="phone" type="tel"> <label for="inp-phone" class="input-item__label title-sm c-gray-x-dark">Контактный телефон</label> </div>
+								</div>
+								<div class="main-form__input-body">
+									<div class="input-item"> <input autocomplete="email" id="inp-email" placeholder=" " class="input-item__input" name="email" type="email"> <label for="inp-email" class="input-item__label title-sm c-gray-x-dark">Email</label> </div>
+								</div>
+								<div class="main-form__input-body">
+									<div class="input-item"> <input autocomplete="off" id="inp-social" placeholder=" " class="input-item__input" name="social_link" type="text"> <label for="inp-social" class="input-item__label title-sm c-gray-x-dark">Социальная сеть</label> </div>
+								</div>
+								<div class="main-form__input-body">
+									<div class="input-item"> <input autocomplete="off" id="inp-social-address" placeholder=" " class="input-item__input" name="social_url" type="text"> <label for="inp-social-address" class="input-item__label title-sm c-gray-x-dark">Адрес профиля</label> </div>
+								</div>
+							</div>
+							<div class="main-form__item main-form__item--full"> <label class="main-form__checkbox checkbox-item"> <input id="inp-add-comment" name="add_comment" type="checkbox"> <span>Добавить комментарий</span> </label> </div>
+							<div class="main-form__item main-form__item--full _hide">
+								<div class="input-item"> <textarea data-input-auto-resize autocomplete="off" id="inp-comment" placeholder=" " class="input-item__input" name="comment"></textarea> <label for="inp-comment" class="input-item__label title-sm c-gray-x-dark">Комментарий</label> </div>
+							</div>
+							<div class="main-form__actions"> <button type="submit" class="main-form__btn btn btn--dark">Отправить заявку</button>
+								<div class="main-form__text text-small">Нажимая на кнопку “Отправить заявку”, вы соглашаетесь с политикой конфиденциальности</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="w-full__img-bg">
+					<picture>
+						<source type="image/webp" srcset="img/backgrounds/main-bg-abstraction-mobile.webp, img/backgrounds/main-bg-abstraction-mobile@2x.webp 2x" media="(max-width: 490px)">
+						<source type="image/webp" srcset="img/backgrounds/main-bg-abstraction-tablet.webp, img/backgrounds/main-bg-abstraction-tablet@2x.webp 2x" media="(max-width: 992px)">
+						<source type="image/webp" srcset="img/backgrounds/main-bg-abstraction.webp, img/backgrounds/main-bg-abstraction@2x.webp 2x" media="(min-width: 601px)">
+						<source srcset="img/backgrounds/main-bg-abstraction-mobile.png, img/backgrounds/main-bg-abstraction-mobile@2x.png 2x" media="(max-width: 490px)">
+						<source srcset="img/backgrounds/main-bg-abstraction-tablet.png, img/backgrounds/main-bg-abstraction-tablet@2x.png 2x" media="(max-width: 992px)">
+						<source srcset="img/backgrounds/main-bg-abstraction.png, img/backgrounds/main-bg-abstraction@2x.png 2x" media="(min-width: 601px)"> <img fetchpriority="high" loading="eager" decoding="async" width="1888" height="613" src="img/backgrounds/main-bg.png" alt="main background">
+					</picture>
+				</div>
+			</section>
+		</main>
+		<footer class="footer w-full">
+			<div class="footer__container">
+				<div class="footer__aside footer-aside"> <a href="#" class="footer-aside__logo logo-footer"> <img class="img" width="109" height="34" loading="lazy" decoding="async" src="img/logo/logo-dark.svg" alt="Stem-Health logo"> </a> </div>
+				<nav class="footer__menu footer-menu">
+					<div class="footer-menu__column">
+						<div class="footer-menu__title title-sm">Связь</div>
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item"> <a href="tel:+18008008000" class="footer-menu__link">+1 800 800 8000</a> </li>
+							<li class="footer-menu__item"> <a href="mailto:mail@mail.com" class="footer-menu__link">mail@mail.com</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Fort Lauderdale, FL, <br>United States</a> </li>
+						</ul>
+					</div>
+					<div class="footer-menu__column">
+						<div class="footer-menu__title title-sm">Соц сети</div>
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">
+									<div class="social-icon"> <img width="24" height="24" loading="lazy" decoding="async" src="img/icons/socials/facebook-fade.svg" alt="facebook icon"> </div> Facebook
+								</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">
+									<div class="social-icon"> <img width="24" height="24" loading="lazy" decoding="async" src="img/icons/socials/youtube-fade.svg" alt="youtube icon"> </div> Youtube
+								</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">
+									<div class="social-icon"> <img width="24" height="24" loading="lazy" decoding="async" src="img/icons/socials/instagram-fade.svg" alt="instagram icon"> </div> Instagram
+								</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">
+									<div class="social-icon"> <img width="24" height="24" loading="lazy" decoding="async" src="img/icons/socials/x-fade.svg" alt="X (Twitter) icon"> </div> X (Twitter)
+								</a> </li>
+						</ul>
+					</div>
+					<div class="footer-menu__column">
+						<div class="footer-menu__title title-sm">Компания</div>
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Как это работает</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Новости</a> </li>
+						</ul>
+					</div>
+					<div class="footer-menu__column">
+						<div class="footer-menu__title title-sm">Заболевания</div>
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Как это работает</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Новости</a> </li>
+						</ul>
+					</div>
+					<div class="footer-menu__column">
+						<div class="footer-menu__title title-sm">Частые вопросы</div>
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Как это работает</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Новости</a> </li>
+						</ul>
+					</div>
+					<div class="footer-menu__column">
+						<div class="footer-menu__title title-sm">Направления</div>
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Как это работает</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Новости</a> </li>
+						</ul>
+					</div>
+					<div class="footer-menu__column">
+						<div class="footer-menu__title title-sm">Направления</div>
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Как это работает</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Новости</a> </li>
+						</ul>
+					</div>
+					<div class="footer-menu__column footer-menu__column--full">
+						<div class="footer-menu__title title-sm">Нас находят</div>
+						<ul class="footer-menu__list">
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">О нас</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Частые вопросы</a> </li>
+							<li class="footer-menu__item"> <a href="#" class="footer-menu__link">Контакты</a> </li>
+						</ul>
+					</div>
+					<div class="footer-menu__bottom footer-bottom"> <a href="#" class="footer-bottom__link text-small">Terms & conditions</a> <a href="#" class="footer-bottom__link text-small">Privacy policy</a>
+						<div class="footer-bottom__text text-small">© 2026 Stemcell.com, LLC</div>
+					</div>
+					<div data-da=".footer-aside, 1250" class="footer-menu__column-actions"> <a href="tel:+180034234234" class="footer__btn btn btn--gray">+1(800)342-342-34</a> </div>
+				</nav>
+			</div>
+		</footer>
+	</div>
+	<script async src="js/consultation.min.js?_v=20260213192436"></script>
+</body>
+
+</html>
