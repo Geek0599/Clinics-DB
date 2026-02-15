@@ -4183,8 +4183,8 @@
         }));
     }
     init_CatalogActionsSlider();
-    init_ProductsSlider();
     init_ProductCardsSlider();
+    init_ProductsSlider();
     init_ArticlesSlider();
     inifiteScrollDublicateGroup();
 })();
