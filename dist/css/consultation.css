@@ -2091,6 +2091,124 @@ textarea.input-item__input:not(:placeholder-shown):not(._no-validated) ~ label {
   line-height: 1.4;
 }
 
+body::after {
+  content: "";
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 149;
+  -webkit-transition: opacity 0.35s ease 0s;
+  transition: opacity 0.35s ease 0s;
+}
+.popup-open body::after {
+  opacity: 1;
+  -webkit-transition: opacity 0.55s ease 0s;
+  transition: opacity 0.55s ease 0s;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 1.875rem 0.625rem;
+  -webkit-transition: visibility 0.55s ease 0s;
+  transition: visibility 0.55s ease 0s;
+  visibility: hidden;
+  pointer-events: none;
+}
+.popup--show {
+  z-index: 150;
+  visibility: visible;
+  overflow: auto;
+  pointer-events: auto;
+}
+.popup--show .popup__content {
+  visibility: visible;
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
+  opacity: 1;
+  -webkit-transition: opacity 0.5s ease 0s, visibility 0.5s ease, -webkit-transform 0.4s ease 0s;
+  transition: opacity 0.5s ease 0s, visibility 0.5s ease, -webkit-transform 0.4s ease 0s;
+  transition: transform 0.4s ease 0s, opacity 0.5s ease 0s, visibility 0.5s ease;
+  transition: transform 0.4s ease 0s, opacity 0.5s ease 0s, visibility 0.5s ease, -webkit-transform 0.4s ease 0s;
+}
+.popup__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 100%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  align-items: center;
+}
+.popup__content {
+  outline: none;
+  visibility: hidden;
+  -webkit-transform: scale(0);
+      -ms-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: -webkit-transform 0.3s ease 0s;
+  transition: -webkit-transform 0.3s ease 0s;
+  transition: transform 0.3s ease 0s;
+  transition: transform 0.3s ease 0s, -webkit-transform 0.3s ease 0s;
+  background-color: var(--white);
+  padding: 2rem 1.5625rem 1.5625rem;
+  width: 100%;
+  max-width: 56.25rem;
+  border-radius: 1.5rem;
+  -webkit-box-shadow: var(--shadow-x);
+          box-shadow: var(--shadow-x);
+  display: -ms-grid;
+  display: grid;
+  justify-items: center;
+  gap: 1.5rem;
+  -webkit-transform: scale(0.9);
+      -ms-transform: scale(0.9);
+          transform: scale(0.9);
+  opacity: 0;
+  -webkit-transition: opacity 0.15s ease 0s, background-color 0.15s ease 0s, visibility 0.15s ease, -webkit-transform 0.15s ease 0s;
+  transition: opacity 0.15s ease 0s, background-color 0.15s ease 0s, visibility 0.15s ease, -webkit-transform 0.15s ease 0s;
+  transition: transform 0.15s ease 0s, opacity 0.15s ease 0s, background-color 0.15s ease 0s, visibility 0.15s ease;
+  transition: transform 0.15s ease 0s, opacity 0.15s ease 0s, background-color 0.15s ease 0s, visibility 0.15s ease, -webkit-transform 0.15s ease 0s;
+}
+.lock .popup__content {
+  visibility: visible;
+}
+.popup__icon {
+  width: 2rem;
+  height: 2rem;
+}
+.popup__icon img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+#custom-alert.popup .popup__content {
+  max-width: 18.8125rem;
+}
+
 .main-form-page {
   max-width: 55.875rem;
 }

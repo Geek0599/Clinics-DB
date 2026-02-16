@@ -4188,7 +4188,6 @@
     }
     function init_CatalogActionsSlider_Row3() {
         const sliderBlock = document.querySelector('[data-slider="catalog-actions-row-3"]');
-        console.log(sliderBlock);
         if (sliderBlock) {
             const slider = sliderBlock.querySelector(`[data-slider]`);
             const sliderPagination = sliderBlock.querySelector("[data-slider-pagination]");

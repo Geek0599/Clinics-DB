@@ -2070,22 +2070,14 @@ select.btn--select-ic {
   gap: 0.75rem;
 }
 .find-by-letter__list {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-column-gap: 1.01875rem;
-     -moz-column-gap: 1.01875rem;
-          column-gap: 1.01875rem;
-  row-gap: 0.75rem;
+  margin: 0 -0.3125rem;
   overflow: auto;
-  margin: -0.1875rem -1rem;
-  padding: 0 0.5625rem;
+  -webkit-column-gap: 1.055rem;
+     -moz-column-gap: 1.055rem;
+          column-gap: 1.055rem;
+  row-gap: 0.75rem;
 }
 .find-by-letter__item {
-  max-width: 2rem;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
   color: var(--blue);
 }
 .find-by-letter__item button {
@@ -2496,6 +2488,11 @@ select.btn--select-ic {
   }
   .action-card.action-card--images {
     padding-left: 3rem;
+  }
+  .find-by-letter__list {
+    display: -ms-grid;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(1.8125rem, 1fr));
   }
 }
 @media (min-width: 78.125em) {
@@ -2915,6 +2912,13 @@ select.btn--select-ic {
   }
   .review-item {
     gap: 1.125rem;
+  }
+  .find-by-letter__list {
+    padding: 0 0.5625rem;
+    margin: -0.1875rem -1rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
   }
   .num-points__items {
     --flex-gap: 0.875rem;

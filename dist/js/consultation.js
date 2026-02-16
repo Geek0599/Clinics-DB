@@ -1196,6 +1196,129 @@
                 }), 1e4);
             }));
         }
+        function init_PopupSimple() {
+            class PopupSimple {
+                constructor(bodyLock, bodyUnlock) {
+                    this.bodyLock = bodyLock;
+                    this.bodyUnlock = bodyUnlock;
+                    this.popUps = document.querySelectorAll(".popup");
+                    this.popUpsLinks = document.querySelectorAll("[data-popup]");
+                    this.lastFocusedElement = null;
+                    this.init();
+                }
+                init() {
+                    window.addEventListener("click", (e => {
+                        const target = e.target;
+                        if (target.closest(".popup") && !target.closest(".popup").hasAttribute("data-no-close-outside") && !target.closest(".popup__content") && target.closest(".popup").classList.contains("popup--show")) this.close(null, target.closest(".popup"));
+                        if (target.closest("[data-close]") && target.closest(".popup").classList.contains("popup--show")) this.close(null, target.closest(".popup"));
+                    }));
+                    if (this.popUps.length) {
+                        this.popUpsLinks.forEach((popUpLink => {
+                            popUpLink.addEventListener("click", (e => {
+                                e.preventDefault();
+                                const popupId = popUpLink.dataset.popup || popUpLink.hash;
+                                if (popupId) this.open(popupId);
+                            }));
+                        }));
+                        this.popUps.forEach((popup => {
+                            this.initPopupEvents(popup);
+                        }));
+                    }
+                    document.addEventListener("keydown", (e => {
+                        if (e.key === "Escape") {
+                            e.preventDefault();
+                            this.popUps = document.querySelectorAll(".popup");
+                            this.popUps.forEach((popup => {
+                                if (popup.classList.contains("popup--show") && !popup.hasAttribute("data-no-close-outside")) {
+                                    this.close(null, popup);
+                                    this.hideAlert();
+                                }
+                            }));
+                        }
+                    }));
+                }
+                initPopupEvents(popup) {
+                    popup.addEventListener("keydown", (event => {
+                        if (event.key === "Tab") {
+                            const focusableElements = popup.querySelectorAll("button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])");
+                            if (focusableElements.length === 0) return;
+                            const firstElement = focusableElements[0];
+                            const lastElement = focusableElements[focusableElements.length - 1];
+                            if (event.shiftKey && document.activeElement === firstElement) {
+                                lastElement.focus();
+                                event.preventDefault();
+                            } else if (!event.shiftKey && document.activeElement === lastElement) {
+                                firstElement.focus();
+                                event.preventDefault();
+                            }
+                        }
+                    }));
+                }
+                open(popUpID, popupElement) {
+                    const popUp = popupElement ? popupElement : document.querySelector(popUpID);
+                    if (popUp) {
+                        this.lastFocusedElement = document.activeElement;
+                        popUp.setAttribute("aria-hidden", "false");
+                        document.documentElement.classList.add("popup-open");
+                        popUp.classList.add("popup--show");
+                        this.bodyLock(0);
+                        const popupContent = popUp.querySelector(".popup__content");
+                        if (popupContent) {
+                            popupContent.setAttribute("tabindex", "-1");
+                            setTimeout((() => {
+                                popupContent.focus();
+                            }), 50);
+                        }
+                    }
+                }
+                close(popUpID, popupElement) {
+                    const popUp = popupElement ? popupElement : document.querySelector(popUpID);
+                    if (popUp) {
+                        popUp.addEventListener("transitionend", (() => {
+                            document.body.focus();
+                            const popupContent = popUp.querySelector(".popup__content");
+                            popupContent ? popupContent.removeAttribute("tabindex") : null;
+                            if (this.lastFocusedElement) this.lastFocusedElement.focus();
+                            popUp.setAttribute("aria-hidden", "true");
+                            if (popUp.id === "custom-alert") {
+                                this.bodyUnlock(0);
+                                popUp.remove();
+                            } else this.bodyUnlock(300);
+                        }), {
+                            once: true
+                        });
+                        document.documentElement.classList.remove("popup-open");
+                        popUp.classList.remove("popup--show");
+                    }
+                }
+                showAlert({title = "Warning!", text = "", textBtn = "Close", typeIcon = "warn", classModificator}) {
+                    this.hideOtherAlerts();
+                    const icons = {
+                        warn: "warn.svg",
+                        error: "error.svg"
+                    };
+                    const isDev = "production" === "development";
+                    const basePath = isDev ? "/img" : "./img";
+                    const alertPopupTemplate = `<div id="custom-alert" role="dialog" aria-modal="true" aria-label="${title}" class="popup ${classModificator ? "popup--" + classModificator : ""}">\n                    <div class="popup__wrapper">\n                        <div class="popup__content text-center">\n                            <div class="popup__icon">\n                                <img width="32" height="32" src="${basePath}/icons/${icons[typeIcon]}" alt="${typeIcon} icon">\n                            </div>\n                            <div class="popup__title title-md">${title}</div>\n                            <div class="popup__text text text--lh">${text}</div>\n                            <div class="popup__actions">\n                                <button data-close type="button" class="popup__btn btn btn--dark btn--sm">${textBtn}</button>\n                            </div>\n                        </div>\n                    </div>\n                </div>`;
+                    document.body.insertAdjacentHTML("beforeend", alertPopupTemplate);
+                    const newPopup = document.querySelector("#custom-alert");
+                    this.initPopupEvents(newPopup);
+                    setTimeout((() => {
+                        this.open("#custom-alert", newPopup);
+                    }), 50);
+                }
+                hideAlert() {
+                    const alertPopup = document.querySelector("#custom-alert");
+                    this.close(null, alertPopup);
+                }
+                hideOtherAlerts() {
+                    const isOtherAlerts = document.querySelectorAll("#custom-alert");
+                    if (isOtherAlerts.length > 0) isOtherAlerts.forEach((el => el.remove()));
+                }
+            }
+            window.popupSimple = new PopupSimple(functions_bodyLock, functions_bodyUnlock);
+        }
+        init_PopupSimple();
         init_PhoneMask();
         formOrder();
     })();
