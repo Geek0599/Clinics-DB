@@ -816,6 +816,7 @@ Snippet (HTML): cnt
   --white-light: #ffffffa6;
   --blue: #1f80e7;
   --blue-x-light: #459cf9;
+  --gray-xxx-light: rgba(255, 255, 255, 0.8);
   --gray-xx-light: #ebebeb;
   --gray-xx-light-transp: rgba(255, 255, 255, 0.65);
   --gray-x-light: oklab(0% 0 0 / 0.149);
@@ -1988,7 +1989,7 @@ textarea.input-item__input:not(:placeholder-shown):not(._no-validated) ~ label {
   padding: 2rem;
 }
 .main-form--bg {
-  background-color: var(--white-light-x);
+  background: var(--gray-xxx-light);
 }
 .main-form__title {
   margin-bottom: 2rem;
@@ -2348,6 +2349,12 @@ body::after {
     grid-column: -3/-1;
     -ms-grid-row: 1;
     grid-row: 1;
+  }
+}
+@media (min-width: 90em) {
+  .footer__container {
+    padding-right: 2rem;
+    padding-left: 2rem;
   }
 }
 @media (min-width: 100em) {
