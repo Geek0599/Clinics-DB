@@ -2242,6 +2242,9 @@ body::after {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  margin-bottom: 0;
+}
+.main-form-page__title:not(:last-child) {
   margin-bottom: 0.5rem;
 }
 @media (min-width: 29.99875em) {
