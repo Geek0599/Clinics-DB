@@ -1309,7 +1309,7 @@
                 inputs.forEach((input => {
                     input.setAttribute("required", "");
                     const inputLable = document.querySelector(`label[for="${input.id}"]`);
-                    if (inputLable) inputLable.textContent = inputLable.textContent + " *";
+                    if (inputLable && !inputLable.textContent.endsWith("*")) inputLable.textContent += " *";
                 }));
             }
             radioGroup.forEach((radio => {
@@ -1344,8 +1344,8 @@
                 isChecked ? setRequired([ textareaComment ]) : removeRequired([ textareaComment ]);
             }));
             form.addEventListener("reset", (e => {
-                setRequired([ inputPhone ]);
                 removeRequired([ inputEmail, inputSocial, textareaComment ]);
+                setRequired([ inputPhone ]);
                 fortItemCommentTextarea.classList.add("_hide");
             }));
             form.addEventListener("form-validation-success", (() => {
