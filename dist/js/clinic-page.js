@@ -10138,6 +10138,7 @@
             }
         }
         function formOrder() {
+            autoResizeTextarea();
             uploadFile();
             const {removeStatus} = formValidate();
             const form = document.querySelector("[data-online-quote]");
@@ -10388,7 +10389,6 @@
         showMoreStaticElems();
         setInputMode();
         setGalleryItemsCountClass();
-        autoResizeTextarea();
         scrollBasedNavigation();
         showMoreHideGridElems();
         formOrder();

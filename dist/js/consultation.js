@@ -1140,6 +1140,22 @@
                 scrollToInput
             };
         }
+        function autoResizeTextarea() {
+            const inputs = document.querySelectorAll("[data-input-auto-resize]");
+            if (!inputs.length) return;
+            inputs.forEach((input => {
+                const MAX_HEIGHT = parseFloat(getComputedStyle(input).maxHeight);
+                const setInputHeight = () => {
+                    const prevHeight = input.offsetHeight;
+                    input.style.height = "auto";
+                    const newHeight = Math.min(input.scrollHeight, MAX_HEIGHT);
+                    input.style.height = prevHeight + "px";
+                    void input.offsetHeight;
+                    input.style.height = newHeight + "px";
+                };
+                input.addEventListener("input", setInputHeight);
+            }));
+        }
         function uploadFile() {
             const fileBlocks = document.querySelectorAll("[data-upload-file]");
             if (!fileBlocks.length) return;
@@ -1267,6 +1283,7 @@
             }
         }
         function formOrder() {
+            autoResizeTextarea();
             uploadFile();
             const {removeStatus} = formValidate();
             const form = document.querySelector("[data-online-quote]");
