@@ -59,8 +59,8 @@
 			font-style: normal
 		}
 	</style>
-	<link rel="preload" href="css/homepage.min.css?_v=20260216142446" as="style" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/homepage.min.css?_v=20260216142446">
+	<link rel="preload" href="css/homepage.min.css?_v=20260219141752" as="style" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/homepage.min.css?_v=20260219141752">
 	<link rel="preload" as="image" type="image/webp" imagesrcset="
 		img/backgrounds/main-bg-mobile.webp 1x,
 		img/backgrounds/main-bg-mobile@2x.webp 2x
@@ -206,9 +206,9 @@
 								</div>
 							</div>
 							<div class="header__mobile-float header-mobile-float">
-								<div class="header-mobile-float__search search-input search-input--mob">
-									<div class="search-input__body-input _icon-search"> <input class="search-input__input" required placeholder="Начните поиск…" name="q" type="text"> </div>
-								</div> <button aria-label="Open menu" type="button" class="header-mobile-float__btn icon-menu"><span></span></button>
+								<form action="#" class="header-mobile-float__search search-input search-input--mob">
+									<div class="search-input__body-input _icon-search"> <input data-main-search required class="search-input__input" placeholder="Начните поиск…" name="q" type="text"> <button class="search-input__btn btn btn--accent _icon-search" type="submit"><span>Найти</span></button> </div>
+								</form> <button aria-label="Open menu" type="button" class="header-mobile-float__btn icon-menu"><span></span></button>
 							</div>
 						</div>
 					</div>
@@ -216,7 +216,7 @@
 				<div class="main__container">
 					<h1 class="main__title main-title text-center">Найдите лучшие клиники для передового лечения</h1>
 					<form action="#" class="main__search search-input">
-						<div class="search-input__body-input _icon-search"> <input required class="search-input__input" placeholder="Начните поиск..." name="q" type="text"> <button class="search-input__btn btn btn--accent" type="submit">Найти</button> </div>
+						<div class="search-input__body-input _icon-search"> <input data-main-search required class="search-input__input" placeholder="Начните поиск..." name="q" type="text"> <button class="search-input__btn btn btn--accent _icon-search" type="submit"><span>Найти</span></button> </div>
 					</form>
 					<div class="main__info-total info-total">
 						<div class="info-total__count text-title"><span class="title">129</span>Клиник</div>
@@ -973,7 +973,7 @@
 			</div>
 		</footer>
 	</div>
-	<script async src="js/homepage.min.js?_v=20260216142446"></script>
+	<script async src="js/homepage.min.js?_v=20260219141752"></script>
 </body>
 
 </html>

@@ -1440,6 +1440,13 @@
 .iti__selected-country-primary, .iti__selected-country {
   border-radius: 0.75rem;
 }
+.iti__selected-country:focus-visible {
+  outline: none;
+}
+.iti__selected-country:focus-visible .iti__selected-country-primary {
+  outline: 0.09375rem solid var(--blue);
+  outline-offset: -0.0625rem;
+}
 .iti__dropdown-content {
   border-radius: 1rem;
   overflow: hidden;

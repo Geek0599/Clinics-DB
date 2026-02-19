@@ -364,7 +364,7 @@
                         document.documentElement.classList.toggle(menuOpenClass);
                         bodyLockToggle(300);
                     }
-                    if (isOpen() && functions_bodyLockStatus && !e.target.closest(menuIconSelector) && !e.target.closest(".header-menu-mobile")) {
+                    if (isOpen() && functions_bodyLockStatus && !e.target.closest(menuIconSelector) && !e.target.closest(".header-menu-mobile") && !e.target.closest(".header-mobile-float__search")) {
                         functions_bodyUnlock(300);
                         document.documentElement.classList.remove(menuOpenClass);
                     }
@@ -561,7 +561,7 @@
                 let direction = 1;
                 let loaded = false;
                 function renderFrame(timestamp) {
-                    if (!isPlaying) return;
+                    if (!isPlaying || video.readyState < 1) return;
                     if (!startTime) startTime = timestamp;
                     const elapsed = timestamp - startTime;
                     const delta = elapsed / 1e3 / duration;
@@ -708,6 +708,16 @@
             };
         }
         topLoader();
+        function mainSearch() {
+            const searchInputs = document.querySelectorAll("[data-main-search]");
+            if (!searchInputs.length) return;
+            searchInputs.forEach((searchInput => {
+                searchInput.addEventListener("input", (e => {
+                    searchInput.parentElement.classList.toggle("_active", searchInput.value);
+                }));
+            }));
+        }
+        mainSearch();
         function ssr_window_esm_isObject(obj) {
             return obj !== null && typeof obj === "object" && "constructor" in obj && obj.constructor === Object;
         }
@@ -9249,15 +9259,20 @@
                                 setTimeout((() => {
                                     if (input.value !== "") checkInput({
                                         input
+                                    }); else if (!input.wasError) removeStatus({
+                                        input
                                     });
                                 }), 0);
                             }));
                         }
                     }));
                     form.addEventListener("reset", (e => {
-                        inputs.forEach((input => removeStatus({
-                            input
-                        })));
+                        inputs.forEach((input => {
+                            removeStatus({
+                                input
+                            });
+                            input.wasError = false;
+                        }));
                     }));
                 }
             }));
@@ -9996,7 +10011,134 @@
                 gridContainer.style.height = gridContainer.scrollHeight + "px";
             }
         }
+        function uploadFile() {
+            const fileBlocks = document.querySelectorAll("[data-upload-file]");
+            if (!fileBlocks.length) return;
+            const fallbackI18n = {
+                en: {
+                    popupBtnClose: "Close",
+                    maxFiles: {
+                        one: "Only :count file can be uploaded.",
+                        other: "Only :count files can be uploaded."
+                    },
+                    invalidType: "Allowed file types are: :types",
+                    maxSize: "The size of the file should not exceed :size MB",
+                    titleMaxFiles: "Maximum files reached!",
+                    titleInvalidType: "Invalid file type!",
+                    titleMaxSize: "File size is too big!"
+                },
+                uk: {
+                    popupBtnClose: "Закрити",
+                    maxFiles: {
+                        one: "Можна завантажити лише :count файл.",
+                        few: "Можна завантажити лише :count файли.",
+                        many: "Можна завантажити лише :count файлів.",
+                        other: "Можна завантажити лише :count файлів."
+                    },
+                    invalidType: "Дозволені типи файлів: :types",
+                    maxSize: "Розмір файлу не повинен перевищувати :size МБ",
+                    titleMaxFiles: "Перевищено кількість файлів!",
+                    titleInvalidType: "Недопустимий тип файлу!",
+                    titleMaxSize: "Файл занадто великий!"
+                },
+                ru: {
+                    popupBtnClose: "Закрыть",
+                    maxFiles: {
+                        one: "Можно загрузить только :count файл.",
+                        few: "Можно загрузить только :count файла.",
+                        many: "Можно загрузить только :count файлов.",
+                        other: "Можно загрузить только :count файлов."
+                    },
+                    invalidType: "Допустимые типы файлов: :types",
+                    maxSize: "Размер файла не должен превышать :size МБ",
+                    titleMaxFiles: "Превышено количество файлов!",
+                    titleInvalidType: "Недопустимый тип файла!",
+                    titleMaxSize: "Файл слишком большой!"
+                }
+            };
+            const locale = document.documentElement.lang || "en";
+            const pluralRules = new Intl.PluralRules(locale);
+            const dict = window.i18n?.upload || fallbackI18n[locale] || fallbackI18n.en;
+            const activeClass = "_attached";
+            fileBlocks.forEach((block => {
+                const input = block.querySelector("[data-upload-file-input]");
+                const label = block.querySelector("[data-upload-file-label]");
+                const form = input.form;
+                const labelContent = label?.querySelector("span");
+                if (!input || !label || !labelContent) return;
+                const placeholder = labelContent.textContent;
+                const maxFilesAllowed = 1;
+                const maxSizeMB = 10;
+                const maxSize = maxSizeMB * 1024 * 1024;
+                const acceptTypes = input.getAttribute("accept") || "";
+                const allowedExtensions = acceptTypes.split(",").map((t => t.trim().replace(".", "").toLowerCase())).filter(Boolean);
+                const showAlert = (title, text) => {
+                    window.popupSimple?.showAlert({
+                        title,
+                        text,
+                        typeIcon: "warn",
+                        textBtn: dict.popupBtnClose
+                    });
+                };
+                const reset = () => {
+                    input.value = "";
+                    labelContent.textContent = placeholder;
+                    label.classList.remove(activeClass);
+                };
+                input.addEventListener("change", (() => {
+                    const file = input.files?.[0];
+                    if (!file) return;
+                    if (input.files.length > maxFilesAllowed) {
+                        reset();
+                        showAlert(dict.titleMaxFiles, translatePlural(dict.maxFiles, maxFilesAllowed));
+                        return;
+                    }
+                    const ext = file.name.split(".").pop().toLowerCase();
+                    if (allowedExtensions.length && !allowedExtensions.includes(ext)) {
+                        reset();
+                        showAlert(dict.titleInvalidType, replaceParams(dict.invalidType, {
+                            types: acceptTypes.replace(/,/g, ", ")
+                        }));
+                        return;
+                    }
+                    if (file.size > maxSize) {
+                        reset();
+                        showAlert(dict.titleMaxSize, replaceParams(dict.maxSize, {
+                            size: maxSizeMB
+                        }));
+                        return;
+                    }
+                    labelContent.textContent = file.name;
+                    label.classList.add(activeClass);
+                }));
+                label.addEventListener("click", (e => {
+                    if (input.files.length) {
+                        e.preventDefault();
+                        reset();
+                    }
+                }));
+                label.addEventListener("keydown", (e => {
+                    if (e.key !== "Enter") return;
+                    if (!input.value) input.click(); else {
+                        e.preventDefault();
+                        reset();
+                    }
+                }));
+                form && form.addEventListener("reset", reset);
+            }));
+            function translatePlural(forms, count) {
+                const rule = pluralRules.select(count);
+                const text = forms[rule] || forms.other;
+                return replaceParams(text, {
+                    count
+                });
+            }
+            function replaceParams(text, params) {
+                return Object.keys(params).reduce(((str, key) => str.replace(`:${key}`, params[key])), text);
+            }
+        }
         function formOrder() {
+            uploadFile();
             const {removeStatus} = formValidate();
             const form = document.querySelector("[data-online-quote]");
             if (!form) return;
@@ -10005,36 +10147,43 @@
             const inputPhone = form.querySelector("#inp-phone");
             const inputEmail = form.querySelector("#inp-email");
             const inputSocial = form.querySelector("#inp-social");
-            const inputSocialAddress = form.querySelector("#inp-social-address");
             const ckeckboxAddComment = form.querySelector("#inp-add-comment");
             const textareaComment = form.querySelector("#inp-comment");
             const inputYearsOld = form.querySelector("#inp-years-old");
             const inputRegion = form.querySelector("#inp-region");
             const fortItemCommentTextarea = textareaComment.closest(".main-form__item");
             function removeRequired(inputs) {
-                inputs.forEach((input => input.removeAttribute("required")));
+                inputs.forEach((input => {
+                    input.removeAttribute("required");
+                    const inputLable = document.querySelector(`label[for="${input.id}"]`);
+                    if (inputLable) inputLable.textContent = inputLable.textContent.replace(" *", "");
+                }));
             }
             function setRequired(inputs) {
-                inputs.forEach((input => input.setAttribute("required", "")));
+                inputs.forEach((input => {
+                    input.setAttribute("required", "");
+                    const inputLable = document.querySelector(`label[for="${input.id}"]`);
+                    if (inputLable) inputLable.textContent = inputLable.textContent + " *";
+                }));
             }
             radioGroup.forEach((radio => {
                 radio.addEventListener("change", (e => {
-                    [ inputName, inputPhone, inputEmail, inputSocial, inputSocialAddress, textareaComment, inputYearsOld, inputRegion ].forEach((input => input && removeStatus({
+                    [ inputName, inputPhone, inputEmail, inputSocial, textareaComment, inputYearsOld, inputRegion ].forEach((input => input && removeStatus({
                         input
                     })));
                     switch (radio.value) {
                       case "phone":
                         setRequired([ inputPhone ]);
-                        removeRequired([ inputEmail, inputSocial, inputSocialAddress ]);
+                        removeRequired([ inputEmail, inputSocial ]);
                         break;
 
                       case "email":
                         setRequired([ inputEmail ]);
-                        removeRequired([ inputPhone, inputSocial, inputSocialAddress ]);
+                        removeRequired([ inputPhone, inputSocial ]);
                         break;
 
                       case "social":
-                        setRequired([ inputSocial, inputSocialAddress ]);
+                        setRequired([ inputSocial ]);
                         removeRequired([ inputPhone, inputEmail ]);
                         break;
 
@@ -10050,21 +10199,49 @@
             }));
             form.addEventListener("reset", (e => {
                 setRequired([ inputPhone ]);
-                removeRequired([ inputEmail, inputSocial, inputSocialAddress, textareaComment ]);
+                removeRequired([ inputEmail, inputSocial, textareaComment ]);
                 fortItemCommentTextarea.classList.add("_hide");
             }));
-            form.addEventListener("form-validation-success", (e => {
+            form.addEventListener("form-validation-success", (() => {
                 const formData = new FormData(form);
-                const btnSubmit = document.querySelector(".main-form__btn");
-                const initialText = btnSubmit.textContent;
-                console.log(Object.fromEntries(formData));
-                btnSubmit.classList.add("_success");
-                btnSubmit.textContent = "Заявка отправлена!";
-                form.reset();
-                setTimeout((() => {
-                    btnSubmit.classList.remove("_success");
-                    btnSubmit.textContent = initialText;
-                }), 1e4);
+                const btnSubmit = form.querySelector('button[type="submit"]');
+                const popupSubmiting = document.querySelector("#popup-form-submiting");
+                const popupSubmitedSucces = document.querySelector("#popup-form-success-submission");
+                const progressLine = document.querySelector("[data-progress-bar]");
+                btnSubmit.disabled = true;
+                window.popupSimple.open(popupSubmiting);
+                const xhr = new XMLHttpRequest;
+                xhr.open("POST", "https://httpbin.org/post");
+                xhr.upload.onprogress = e => {
+                    if (e.lengthComputable) {
+                        const percent = Math.round(e.loaded / e.total * 100);
+                        progressLine.style.width = percent + "%";
+                    }
+                };
+                xhr.onload = () => {
+                    window.popupSimple.close(popupSubmiting);
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        window.popupSimple.open(popupSubmitedSucces);
+                        form.reset();
+                    } else showError();
+                    btnSubmit.disabled = false;
+                    progressLine.style.width = "0%";
+                };
+                xhr.onerror = () => {
+                    window.popupSimple.close(popupSubmiting);
+                    showError();
+                    btnSubmit.disabled = false;
+                    progressLine.style.width = "0%";
+                };
+                xhr.send(formData);
+                function showError() {
+                    window.popupSimple.showAlert({
+                        title: "Ошибка",
+                        text: "Не удалось отправить форму. Попробуйте позже.",
+                        textBtn: "Закрыть",
+                        typeIcon: "warn"
+                    });
+                }
             }));
         }
         function init_PopupSimple() {
@@ -10072,16 +10249,23 @@
                 constructor(bodyLock, bodyUnlock) {
                     this.bodyLock = bodyLock;
                     this.bodyUnlock = bodyUnlock;
-                    this.popUps = document.querySelectorAll(".popup");
-                    this.popUpsLinks = document.querySelectorAll("[data-popup]");
+                    this.selectors = {
+                        popup: ".popup",
+                        popupContent: ".popup__content",
+                        popupShow: "popup--show",
+                        popupLink: "[data-popup]",
+                        closeBtn: "[data-close]"
+                    };
+                    this.popUps = document.querySelectorAll(this.selectors.popup);
+                    this.popUpsLinks = document.querySelectorAll(this.selectors.popupLink);
                     this.lastFocusedElement = null;
                     this.init();
                 }
                 init() {
                     window.addEventListener("click", (e => {
                         const target = e.target;
-                        if (target.closest(".popup") && !target.closest(".popup").hasAttribute("data-no-close-outside") && !target.closest(".popup__content") && target.closest(".popup").classList.contains("popup--show")) this.close(null, target.closest(".popup"));
-                        if (target.closest("[data-close]") && target.closest(".popup").classList.contains("popup--show")) this.close(null, target.closest(".popup"));
+                        if (target.closest(this.selectors.popup) && !target.closest(this.selectors.popup).hasAttribute("data-no-close-outside") && !target.closest(this.selectors.popupContent) && target.closest(this.selectors.popup).classList.contains(this.selectors.popupShow)) this.close(target.closest(this.selectors.popup));
+                        if (target.closest(this.selectors.closeBtn) && target.closest(this.selectors.popup).classList.contains(this.selectors.popupShow)) this.close(target.closest(this.selectors.popup));
                     }));
                     if (this.popUps.length) {
                         this.popUpsLinks.forEach((popUpLink => {
@@ -10098,10 +10282,10 @@
                     document.addEventListener("keydown", (e => {
                         if (e.key === "Escape") {
                             e.preventDefault();
-                            this.popUps = document.querySelectorAll(".popup");
+                            this.popUps = document.querySelectorAll(this.selectors.popup);
                             this.popUps.forEach((popup => {
-                                if (popup.classList.contains("popup--show") && !popup.hasAttribute("data-no-close-outside")) {
-                                    this.close(null, popup);
+                                if (popup.classList.contains(this.selectors.popupShow) && !popup.hasAttribute("data-no-close-outside")) {
+                                    this.close(popup);
                                     this.hideAlert();
                                 }
                             }));
@@ -10125,42 +10309,46 @@
                         }
                     }));
                 }
-                open(popUpID, popupElement) {
-                    const popUp = popupElement ? popupElement : document.querySelector(popUpID);
-                    if (popUp) {
-                        this.lastFocusedElement = document.activeElement;
-                        popUp.setAttribute("aria-hidden", "false");
-                        document.documentElement.classList.add("popup-open");
-                        popUp.classList.add("popup--show");
-                        this.bodyLock(0);
-                        const popupContent = popUp.querySelector(".popup__content");
-                        if (popupContent) {
-                            popupContent.setAttribute("tabindex", "-1");
-                            setTimeout((() => {
-                                popupContent.focus();
-                            }), 50);
-                        }
+                open(popUp) {
+                    const popupElement = typeof popUp === "string" ? document.querySelector(popUp) : popUp;
+                    if (!popupElement) {
+                        console.warn("Popup not found for:", popUp);
+                        return;
+                    }
+                    this.lastFocusedElement = document.activeElement;
+                    popupElement.removeAttribute("inert");
+                    document.documentElement.classList.add("popup-open");
+                    popupElement.classList.add(this.selectors.popupShow);
+                    this.bodyLock(0);
+                    const popupContent = popupElement.querySelector(this.selectors.popupContent);
+                    if (popupContent) {
+                        popupContent.setAttribute("tabindex", "-1");
+                        setTimeout((() => {
+                            popupContent.focus();
+                        }), 50);
                     }
                 }
-                close(popUpID, popupElement) {
-                    const popUp = popupElement ? popupElement : document.querySelector(popUpID);
-                    if (popUp) {
-                        popUp.addEventListener("transitionend", (() => {
-                            document.body.focus();
-                            const popupContent = popUp.querySelector(".popup__content");
-                            popupContent ? popupContent.removeAttribute("tabindex") : null;
-                            if (this.lastFocusedElement) this.lastFocusedElement.focus();
-                            popUp.setAttribute("aria-hidden", "true");
-                            if (popUp.id === "custom-alert") {
-                                this.bodyUnlock(0);
-                                popUp.remove();
-                            } else this.bodyUnlock(300);
-                        }), {
-                            once: true
-                        });
-                        document.documentElement.classList.remove("popup-open");
-                        popUp.classList.remove("popup--show");
+                close(popUp) {
+                    const popupElement = typeof popUp === "string" ? document.querySelector(popUp) : popUp;
+                    if (!popupElement) {
+                        console.warn("Popup not found for:", popUp);
+                        return;
                     }
+                    const isCustomAlert = popupElement.id === "custom-alert";
+                    const isAnotherPopupOpen = () => document.querySelector(`${this.selectors.popup}.${this.selectors.popupShow}`);
+                    const onTransitionEnd = () => {
+                        const popupContent = popupElement.querySelector(this.selectors.popupContent);
+                        popupContent?.removeAttribute("tabindex");
+                        this.lastFocusedElement?.focus();
+                        popupElement.setAttribute("inert", "");
+                        if (!isAnotherPopupOpen()) this.bodyUnlock(isCustomAlert ? 0 : 300);
+                        if (isCustomAlert) popupElement.remove();
+                    };
+                    popupElement.addEventListener("transitionend", onTransitionEnd, {
+                        once: true
+                    });
+                    popupElement.classList.remove(this.selectors.popupShow);
+                    if (!isAnotherPopupOpen()) document.documentElement.classList.remove("popup-open");
                 }
                 showAlert({title = "Warning!", text = "", textBtn = "Close", typeIcon = "warn", classModificator}) {
                     this.hideOtherAlerts();
@@ -10170,17 +10358,17 @@
                     };
                     const isDev = "production" === "development";
                     const basePath = isDev ? "/img" : "./img";
-                    const alertPopupTemplate = `<div id="custom-alert" role="dialog" aria-modal="true" aria-label="${title}" class="popup ${classModificator ? "popup--" + classModificator : ""}">\n                    <div class="popup__wrapper">\n                        <div class="popup__content text-center">\n                            <div class="popup__icon">\n                                <img width="32" height="32" src="${basePath}/icons/${icons[typeIcon]}" alt="${typeIcon} icon">\n                            </div>\n                            <div class="popup__title title-md">${title}</div>\n                            <div class="popup__text text text--lh">${text}</div>\n                            <div class="popup__actions">\n                                <button data-close type="button" class="popup__btn btn btn--dark btn--sm">${textBtn}</button>\n                            </div>\n                        </div>\n                    </div>\n                </div>`;
+                    const alertPopupTemplate = `<div id="custom-alert" role="dialog" aria-modal="true" inert aria-label="${title}" class="popup ${classModificator ? "popup--" + classModificator : ""}">\n                    <div class="popup__wrapper">\n                        <div class="popup__content popup-alert">\n                            <div class="popup-alert__icon">\n                                <img width="32" height="32" src="${basePath}/icons/${icons[typeIcon]}" alt="${typeIcon} icon">\n                            </div>\n                            <div class="popup-alert__title title-md">${title}</div>\n                            <div class="popup-alert__text text text--lh">${text}</div>\n                            <div class="popup-alert__actions">\n                                <button data-close type="button" class="popup-alert__btn btn btn--dark btn--sm">${textBtn}</button>\n                            </div>\n                        </div>\n                    </div>\n                </div>`;
                     document.body.insertAdjacentHTML("beforeend", alertPopupTemplate);
                     const newPopup = document.querySelector("#custom-alert");
                     this.initPopupEvents(newPopup);
                     setTimeout((() => {
-                        this.open("#custom-alert", newPopup);
+                        this.open(newPopup);
                     }), 50);
                 }
                 hideAlert() {
                     const alertPopup = document.querySelector("#custom-alert");
-                    this.close(null, alertPopup);
+                    this.close(alertPopup);
                 }
                 hideOtherAlerts() {
                     const isOtherAlerts = document.querySelectorAll("#custom-alert");

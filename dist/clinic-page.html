@@ -59,8 +59,8 @@
 			font-style: normal
 		}
 	</style>
-	<link rel="preload" href="css/clinic-page.min.css?_v=20260216142446" as="style" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/clinic-page.min.css?_v=20260216142446">
+	<link rel="preload" href="css/clinic-page.min.css?_v=20260219141752" as="style" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/clinic-page.min.css?_v=20260219141752">
 </head>
 
 <body>
@@ -202,9 +202,9 @@
 								</div>
 							</div>
 							<div class="header__mobile-float header-mobile-float">
-								<div class="header-mobile-float__search search-input search-input--mob">
-									<div class="search-input__body-input _icon-search"> <input class="search-input__input" required placeholder="Начните поиск…" name="q" type="text"> </div>
-								</div> <button aria-label="Open menu" type="button" class="header-mobile-float__btn icon-menu"><span></span></button>
+								<form action="#" class="header-mobile-float__search search-input search-input--mob">
+									<div class="search-input__body-input _icon-search"> <input data-main-search required class="search-input__input" placeholder="Начните поиск…" name="q" type="text"> <button class="search-input__btn btn btn--accent _icon-search" type="submit"><span>Найти</span></button> </div>
+								</form> <button aria-label="Open menu" type="button" class="header-mobile-float__btn icon-menu"><span></span></button>
 							</div>
 						</div>
 					</div>
@@ -773,7 +773,22 @@
 							<form data-online-quote data-validate action="#" class="main-form__body">
 								<div class="main-form__item">
 									<div class="main-form__input-body">
-										<div class="input-item"> <input required data-text-format data-minlength="2" autocomplete="name" id="inp-name" placeholder=" " class="input-item__input" name="name" type="text"> <label for="inp-name" class="input-item__label title-sm c-gray-x-dark">Имя пациента</label> </div>
+										<div class="input-item"> <input required data-text-format data-minlength="2" autocomplete="name" id="inp-name" placeholder=" " class="input-item__input" name="name" type="text"> <label for="inp-name" class="input-item__label title-sm c-gray-x-dark">Имя пациента *</label> </div>
+									</div>
+									<div class="main-form__input-body">
+										<div class="input-item"> <input required data-number-format min="0" max="110" step="1" data-min-value="0" data-max-value="110" data-inputmode="numeric" autocomplete="off" id="inp-years-old" placeholder=" " class="input-item__input" name="years_old" type="number"> <label for="inp-years-old" class="input-item__label title-sm c-gray-x-dark">Возраст (лет) *</label> </div>
+									</div>
+									<div class="main-form__input-body">
+										<div class="input-item"> <select required autocomplete="off" name="region" id="inp-region" class="input-item__input">
+												<option disabled="disabled" value="" selected="selected">Регион проживания *</option>
+												<option value="Europe">Europe</option>
+												<option value="Latin America">Latin America</option>
+												<option value="Asia">Asia</option>
+												<option value="Middle East">Middle East</option>
+												<option value="North America">North America</option>
+												<option value="Africa">Africa</option>
+												<option value="Oceania">Oceania</option>
+											</select> <label for="inp-region" class="input-item__label title-sm c-gray-x-dark">Регион проживания *</label> </div>
 									</div>
 								</div>
 								<div class="main-form__item main-form__item--full">
@@ -782,7 +797,7 @@
 								</div>
 								<div class="main-form__item">
 									<div class="main-form__input-body">
-										<div class="input-item"> <input required data-phone-mask data-inputmode="numeric" autocomplete="tel" id="inp-phone" placeholder=" " class="input-item__input" name="phone" type="tel"> <label for="inp-phone" class="input-item__label title-sm c-gray-x-dark">Контактный телефон</label> </div>
+										<div class="input-item"> <input required data-phone-mask data-inputmode="numeric" autocomplete="tel" id="inp-phone" placeholder=" " class="input-item__input" name="phone" type="tel"> <label for="inp-phone" class="input-item__label title-sm c-gray-x-dark">Контактный телефон *</label> </div>
 									</div>
 									<div class="main-form__input-body">
 										<div class="input-item"> <input autocomplete="email" id="inp-email" placeholder=" " class="input-item__input" name="email" type="email"> <label for="inp-email" class="input-item__label title-sm c-gray-x-dark">Email</label> </div>
@@ -790,8 +805,13 @@
 									<div class="main-form__input-body">
 										<div class="input-item"> <input autocomplete="off" id="inp-social" placeholder=" " class="input-item__input" name="social_link" type="text"> <label for="inp-social" class="input-item__label title-sm c-gray-x-dark">Социальная сеть</label> </div>
 									</div>
+								</div>
+								<div class="main-form__item main-form__item--full">
+									<div class="main-form__item-title text text--bold">Результат исследований, выписок, заключений</div>
 									<div class="main-form__input-body">
-										<div class="input-item"> <input autocomplete="off" id="inp-social-address" placeholder=" " class="input-item__input" name="social_url" type="text"> <label for="inp-social-address" class="input-item__label title-sm c-gray-x-dark">Адрес профиля</label> </div>
+										<div data-upload-file class="file">
+											<div class="file__item"> <input data-upload-file-input tabindex="-1" class="file__input" type="file" accept=".png,.jpg,.jpeg,.pdf" name="files[]" multiple="multiple" id="inp-files"> <label data-upload-file-label tabindex="0" for="inp-files" class="file__label btn btn--light _icon-plus"><span>Прикрепить файл</span></label> </div>
+										</div>
 									</div>
 								</div>
 								<div class="main-form__item main-form__item--full"> <label class="main-form__checkbox checkbox-item"> <input id="inp-add-comment" name="add_comment" type="checkbox"> <span>Добавить комментарий</span> </label> </div>
@@ -1211,6 +1231,32 @@
 					</div>
 				</section>
 			</div>
+			<div id="popup-form-submiting" data-no-close-outside role="dialog" inert aria-modal="true" aria-label="Отправка формы…" class="popup">
+				<div class="popup__wrapper">
+					<div class="popup__content popup-form-submiting">
+						<div class="popup-form-submiting__banner call-now">
+							<div class="call-now__title title-md">Получите консультацию уже сейчас</div> <a href="+180034234234" class="call-now__btn btn btn--light"> <span>+1(800)342-342-34</span> </a>
+						</div>
+						<div class="popup-form-submiting__actions">
+							<p class="popup-form-submiting__text text text--lh">Отправка формы…</p>
+							<div class="popup-form-submiting__prog-bar progress-bar">
+								<div data-progress-bar class="progress-bar__line"><span></span></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="popup-form-success-submission" role="dialog" inert aria-modal="true" aria-label="Запись успешно отправлена. Мы скоро свяжемся с вами." class="popup">
+				<div class="popup__wrapper">
+					<div class="popup__content popup-form-submited">
+						<div class="popup-form-submited__banner call-now">
+							<div class="call-now__title title-md">Получите консультацию уже сейчас</div> <a href="+180034234234" class="call-now__btn btn btn--light"> <span>+1(800)342-342-34</span> </a>
+						</div>
+						<div class="popup-form-submited__title title-md">Отправлено!</div>
+						<p class="popup-form-submited__text text text--lh">Запись успешно отправлена. Мы скоро свяжемся с вами.</p> <button data-close type="button" class="popup-form-submited__btn btn btn--dark btn--sm">Закрыть</button>
+					</div>
+				</div>
+			</div>
 		</main>
 		<footer class="footer w-full">
 			<div class="footer__container">
@@ -1316,7 +1362,7 @@
 			</div>
 		</footer>
 	</div>
-	<script async src="js/clinic-page.min.js?_v=20260216142446"></script>
+	<script async src="js/clinic-page.min.js?_v=20260219141752"></script>
 </body>
 
 </html>

@@ -67,7 +67,7 @@
                     document.documentElement.classList.toggle(menuOpenClass);
                     bodyLockToggle(300);
                 }
-                if (isOpen() && bodyLockStatus && !e.target.closest(menuIconSelector) && !e.target.closest(".header-menu-mobile")) {
+                if (isOpen() && bodyLockStatus && !e.target.closest(menuIconSelector) && !e.target.closest(".header-menu-mobile") && !e.target.closest(".header-mobile-float__search")) {
                     bodyUnlock(300);
                     document.documentElement.classList.remove(menuOpenClass);
                 }
@@ -249,7 +249,7 @@
             let direction = 1;
             let loaded = false;
             function renderFrame(timestamp) {
-                if (!isPlaying) return;
+                if (!isPlaying || video.readyState < 1) return;
                 if (!startTime) startTime = timestamp;
                 const elapsed = timestamp - startTime;
                 const delta = elapsed / 1e3 / duration;
@@ -396,4 +396,14 @@
         };
     }
     topLoader();
+    function mainSearch() {
+        const searchInputs = document.querySelectorAll("[data-main-search]");
+        if (!searchInputs.length) return;
+        searchInputs.forEach((searchInput => {
+            searchInput.addEventListener("input", (e => {
+                searchInput.parentElement.classList.toggle("_active", searchInput.value);
+            }));
+        }));
+    }
+    mainSearch();
 })();
