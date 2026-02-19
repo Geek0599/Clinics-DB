@@ -511,10 +511,10 @@
     function mainSearch() {
         const searchInputs = document.querySelectorAll("[data-main-search]");
         if (!searchInputs.length) return;
+        const onInput = input => input.parentElement.classList.toggle("_active", input.value);
         searchInputs.forEach((searchInput => {
-            searchInput.addEventListener("input", (e => {
-                searchInput.parentElement.classList.toggle("_active", searchInput.value);
-            }));
+            onInput(searchInput);
+            searchInput.addEventListener("input", (() => onInput(searchInput)));
         }));
     }
     mainSearch();
