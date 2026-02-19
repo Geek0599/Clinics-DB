@@ -2034,7 +2034,7 @@ textarea.input-item__input:not(:placeholder-shown):not(._no-validated) ~ label {
   outline: none;
 }
 .file__label.btn--gray-light:focus-visible, .main-form-page__form .file__label:focus-visible, .file__label.btn--light:focus-visible {
-  background-color: var(--gray-xx-light);
+  outline: 0.125rem solid var(--blue);
 }
 .file__label span {
   word-break: break-all;
