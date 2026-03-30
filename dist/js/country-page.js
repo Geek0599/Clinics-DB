@@ -253,15 +253,18 @@
             let direction = 1;
             let loaded = false;
             function renderFrame(timestamp) {
-                if (!isPlaying || video.readyState < 1) return;
+                if (!isPlaying) return;
                 if (!startTime) startTime = timestamp;
                 const elapsed = timestamp - startTime;
                 const delta = elapsed / 1e3 / duration;
                 currentProgress = startProgress + direction * delta;
                 if (currentProgress > 1) currentProgress = 1;
                 if (currentProgress < 0) currentProgress = 0;
-                video.currentTime = currentProgress * duration;
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                const newTime = currentProgress * duration;
+                if (isFinite(newTime)) {
+                    video.currentTime = newTime;
+                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                }
                 if (direction > 0 && currentProgress >= 1 || direction < 0 && currentProgress <= 0) {
                     stop();
                     return;
@@ -304,6 +307,7 @@
                     })));
                 }
                 if (!isHover()) return;
+                if (!isFinite(video.duration) || video.duration === 0) return;
                 stop();
                 direction = 1;
                 start();
