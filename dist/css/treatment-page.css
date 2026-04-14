@@ -2143,8 +2143,14 @@ select.btn--select-ic {
   height: 1.5rem;
   top: 100%;
   right: 2.5rem;
-  -webkit-mask: url("../img/icons/tail.svg") top/contain no-repeat;
-          mask: url("../img/icons/tail.svg") top/contain no-repeat;
+  -webkit-mask-image: url(../img/icons/tail.svg);
+          mask-image: url(../img/icons/tail.svg);
+  -webkit-mask-position: top center;
+          mask-position: top center;
+  -webkit-mask-size: contain;
+          mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
   background-color: var(--white-light-x);
 }
 .review-item--light, .review-item--light::before {
